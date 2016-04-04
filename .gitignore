@@ -1,1 +1,8 @@
 my_env/
+*__pycache__/
+*DS_Store
+*.pyc
+florist_app/static/node_modules/
+florist_app/static/.tmp
+florist_app/static/.sass-cache
+florist_app/static/dist/
