@@ -5,4 +5,7 @@ my_env/
 florist_app/static/node_modules/
 florist_app/static/.tmp
 florist_app/static/.sass-cache
-florist_app/static/dist/
+node_modules/
+.tmp/
+.sass-cache/
+.DS_Store
