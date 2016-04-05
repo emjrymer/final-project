@@ -1,15 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
- <div>
- <h1>Third-party authentication demo</h1>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '806449472821635',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
 
- <p>
-   {% if user and not user.is_anonymous %}
-     Hello {{ user.get_full_name|default:user.username }}!
-   {% else %}
-     I don’t think we’ve met before.
-   {% endif %}
- </p>
- </div>
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+<div>
+<h1>Third-party authentication demo</h1>
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+
+<p>
+  <ul>
+  {% if user and not user.is_anonymous %}
+    <li>
+      <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+    </li>
+    <li>
+      <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+    </li>
+  {% else %}
+    <li>
+      <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+    </li>
+    <li>
+      <a href="{% url 'social:begin' 'instagram' %}?next={{ request.path }}">Login with Instagram</a>
+    </li>
+    <li>
+      <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
+    </li>
+  {% endif %}
+  </ul>
+</p>
+</div>
 {% endblock %}

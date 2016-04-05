@@ -52,6 +52,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.request',
                 'django.core.context_processors.debug',
                 'django.core.context_processors.i18n',
                 'django.core.context_processors.media',
@@ -67,10 +68,16 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
-    'social.backends.linkedin.LinkedinOAuth2',
+    'social.backends.instagram.InstagramOAuth2',
     'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+SOCIAL_AUTH_FACEBOOK_KEY = '806449472821635'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'f37daaac0530843fb2c4b65780d5916e'
+SOCIAL_AUTH_TWITTER_KEY = 'L2FjsSwNJ5l4ZqdGSxEn8WUS4'
+SOCIAL_AUTH_TWITTER_SECRET = 'PojpjmXfrWp8EDRNgn6IgOvvPLRd4FjxapxQZXgXUCyN3KdzrL'
+
 
 WSGI_APPLICATION = 'florist.wsgi.application'
 

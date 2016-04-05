@@ -1,6 +1,5 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-admin.autodiscover()
 
 urlpatterns = [
     url(r'^$', 'florist_app.views.home', name='home'),
