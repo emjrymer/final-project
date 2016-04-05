@@ -1,1 +1,2 @@
-console.log("Hello World! Joel");
+var bootstrap = require('bootstrap');
+console.log(bootstrap);
