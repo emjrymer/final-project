@@ -12,6 +12,9 @@ class Basket(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
     arrangement = models.ManyToManyField(Arrangement)
 
+    def __str__(self):
+        return self.notes
+
 
 class Florist(models.Model):
     user = models.OneToOneField("auth.User")
@@ -24,3 +27,6 @@ class Buyer(models.Model):
     user = models.OneToOneField("auth.User")
     time_created = models.DateTimeField(auto_now_add=True)
     order_history = models.ManyToManyField(Basket)
+
+    def __str__(self):
+        return self.user
