@@ -5817,4 +5817,46 @@ button.close {
 img {
   max-width: 100%; }
 
+.login {
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid gray;
+  float: right; }
+
+.bouquet {
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid gray;
+  float: right; }
+
+.about {
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid #fff;
+  float: right; }
+
+.navigation {
+  background-color: grey; }
+
+.navbuttons {
+  list-style: none;
+  display: inline-block; }
+
+.header h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 90px;
+  text-align: center;
+  color: pink;
+  letter-spacing: 15px; }
+
+.header h3 {
+  font-family: 'Dancing Script', cursive;
+  font-family: 'Abel', sans-serif;
+  text-align: center;
+  font-size: 18px;
+  color: gray; }
+
+.header h3 span {
+  padding-left: 10px; }
+
 /*# sourceMappingURL=app.css.map */
