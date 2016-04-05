@@ -24,6 +24,7 @@ kombu==3.0.35
 materialize==0.1.1
 oauthlib==1.0.3
 pathspec==0.3.3
+Pillow==3.2.0
 PyJWT==1.4.0
 PySocks==1.5.6
 python-dateutil==2.5.1
