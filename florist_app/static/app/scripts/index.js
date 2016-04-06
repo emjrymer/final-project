@@ -1,2 +1,2 @@
-var bootstrap = require('bootstrap');
-console.log(bootstrap);
+// var bootstrap = require('bootstrap');
+// console.log(bootstrap);

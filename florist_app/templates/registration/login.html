@@ -1,9 +1,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" name="action" value="login">
-    </form>
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">Login <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></h3>
+  </div>
+  <div class="panel-body">
+      <p>
+        <ul>
+        {% if user and not user.is_anonymous %}
+          <li>
+            <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+          </li>
+          <li>
+            <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a>
+          </li>
+          <li>
+            <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
+          </li>
+        {% endif %}
+        </ul>
+      </p>
+      <form action="" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" class='login btn btn.btn-*-outline' name="action" value="login">
+      </form>
+  </div>
+</div>
+
 {% endblock %}

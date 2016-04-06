@@ -16,6 +16,17 @@ img {
   max-width: 100%;
 }
 
+.panel ul li{
+    list-style: none;
+    margin-left: 37px;
+}
+
+.panel {
+    margin-left: 35%;
+    margin-top: 30px;
+    width: 300px;
+}
+
 .login {
   background-color: transparent;
   border-radius: 5px;
