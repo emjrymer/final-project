@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.template.context import RequestContext
 from rest_framework import generics
 from florist_app.models import Arrangement, Basket, Florist, Buyer
-from florist_app.serializers import ArrangementSerializer, BasketSerializer, FloristSerializer, BuyerSerializer
+from florist_app.serializers import UserSerializer, ArrangementSerializer, BasketSerializer, FloristSerializer, BuyerSerializer
 
 
 def login(request):
@@ -24,6 +24,10 @@ def logout(request):
 
 
 #################  API Views  ####################
+
+
+class UserCreateAPIView(generics.CreateAPIView):
+    serializer_class = UserSerializer
 
 
 class ArrangementListCreateAPIView(generics.ListCreateAPIView):
