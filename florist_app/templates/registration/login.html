@@ -6,7 +6,7 @@
     <h3 class="panel-title">Login <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></h3>
   </div>
   <div class="panel-body">
-      <p>
+      <!--<p>
         <ul>
         {% if user and not user.is_anonymous %}
           <li>
@@ -24,7 +24,7 @@
           </li>
         {% endif %}
         </ul>
-      </p>
+      </p>-->
       <form action="" method="post">
           {% csrf_token %}
           {{ form.as_p }}
