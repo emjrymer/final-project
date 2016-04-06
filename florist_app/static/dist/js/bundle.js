@@ -1,11 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
-<<<<<<< 49bbba0561a4a1cb2d4d1f8ebe865ae430bd9d0d
-// var bootstrap = require('bootstrap');
-// console.log(bootstrap);
-
-},{}]},{},[1]);
-=======
 var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
@@ -67,6 +61,23 @@ var User = require('../models/models').User;
 
 var Backbone = require('backbone');
 console.log('login require');
+
+
+
+var csrftoken = $("input[name='csrfmiddlewaretoken']").val();
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
 var LoginPage = React.createClass({displayName: "LoginPage",
   handleSignUp: function(event){
     event.preventDefault();
@@ -103,7 +114,7 @@ var LoginPage = React.createClass({displayName: "LoginPage",
       React.createElement("div", {className: "row"}, 
          React.createElement("div", {className: "col-md-6 signup"}, 
            React.createElement("form", {id: "signup", onSubmit: this.handleSignUp, className: "form-signup"}, 
-             React.createElement("input", {id: "signup-name", type: "text", className: "form-control", placeholder: "name"}), 
+             React.createElement("input", {id: "signup-name", type: "text", name: "first_name", className: "form-control", placeholder: "firstname"}), 
              React.createElement("input", {id: "signup-email", type: "text", className: "form-control", placeholder: "email"}), 
              React.createElement("input", {id: "signup-username", type: "text", className: "form-control", placeholder: "username"}), 
              React.createElement("input", {id: "signup-password", type: "password", className: "form-control", placeholder: "password"}), 
@@ -170,13 +181,15 @@ var models = require('./../models/models');
 
 var LoginPage = require('./../components/login.jsx');
 var HeaderComponent = require('./../components/header.jsx');
+// var DashBoard = require('./../components/dashboard.jsx');
 
 var appContainer = document.getElementById('app');
 
 var Router = Backbone.Router.extend({
   routes:{
     '':'index',
-    'loginpage':'loginpage'
+    'loginpage':'loginpage',
+    // 'dashboard': 'dashboard'
     // 'adminscreen':'adminscreen'
   },
   index: function(){
@@ -188,12 +201,21 @@ var Router = Backbone.Router.extend({
     );
   },
   loginpage: function(){
-    console.log('login route');
+    ReactDOM.unmountComponentAtNode(appContainer);
+
     ReactDOM.render(
       React.createElement(LoginPage),
       appContainer
     );
   },
+  // loginpage: function(){
+  //   ReactDOM.unmountComponentAtNode(appContainer);
+  //
+  //   ReactDOM.render(
+  //     React.createElement(DashBoard),
+  //     appContainer
+  //   );
+  // },
 
 });
 
@@ -49689,4 +49711,3 @@ module.exports = warning;
 
 }).call(this,require('_process'))
 },{"_process":170}]},{},[3]);
->>>>>>> two pages working
