@@ -2,18 +2,18 @@ var Backbone = require('backbone');
 
 
 var Login = Backbone.Model.extend({
- idAttribute: 'cid'
+ idAttribute: 'cid',
+ urlRoot: '/login/',
 });
 
-var SellerCollection = Backbone.Collection.extend({
-  model: Login,
-  url: 'http://tiny-ring-server.herokuapp.com/',
-  parse: function(data){
-    return data;
-  }
+var User = Backbone.Model.extend({
+ idAttribute: 'cid',
+ urlRoot: '/signup/',
 });
+
+
 
 module.exports = {
   "Login": Login,
-  "SellerCollection": SellerCollection
+  "User": User
 }

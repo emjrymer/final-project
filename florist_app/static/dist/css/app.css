@@ -5817,6 +5817,19 @@ button.close {
 img {
   max-width: 100%; }
 
+body {
+  background-color: #D4CBD2; }
+
+.carousel-inner > .item > img {
+  width: 100%;
+  height: 350px;
+  margin: auto; }
+
+.carousel-inner > .item > a > img {
+  width: 100%;
+  height: 350px;
+  margin: auto; }
+
 .login {
   background-color: transparent;
   border-radius: 5px;
@@ -5835,9 +5848,6 @@ img {
   border: 2px solid #fff;
   float: right; }
 
-.navigation {
-  background-color: grey; }
-
 .navbuttons {
   list-style: none;
   display: inline-block; }
@@ -5846,7 +5856,7 @@ img {
   font-family: 'Dancing Script', cursive;
   font-size: 90px;
   text-align: center;
-  color: pink;
+  color: #fff;
   letter-spacing: 15px; }
 
 .header h3 {

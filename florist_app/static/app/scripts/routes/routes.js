@@ -5,38 +5,36 @@ var Backbone = require('backbone');
 require('backbone-react-component');
 
 var models = require('./../models/models');
-var jewelryCollection = new models.JewelryCollection();
 
-var SignupPage = require('./../components/admin-login.jsx');
-var HeaderComponent = require('./../components/index.jsx');
+
+var LoginPage = require('./../components/login.jsx');
+var HeaderComponent = require('./../components/header.jsx');
+
+var appContainer = document.getElementById('app');
 
 var Router = Backbone.Router.extend({
   routes:{
     '':'index',
-    'adminlogin':'adminloginpage',
+    'loginpage':'loginpage'
     // 'adminscreen':'adminscreen'
   },
   index: function(){
+    ReactDOM.unmountComponentAtNode(appContainer);
+
     ReactDOM.render(
       React.createElement(HeaderComponent),
-      document.getElementById('app')
+      appContainer
     );
   },
-  adminloginpage: function(){
+  loginpage: function(){
+    console.log('login route');
     ReactDOM.render(
-      React.createElement(SignupPage),
-      document.getElementById('app')
+      React.createElement(LoginPage),
+      appContainer
     );
   },
-  adminscreen: function(){
-    ReactDOM.render(
-      React.createElement(AdminScreenComponent),
-      document.getElementById('app')
-    );
-  }
+
 });
 
 var router = new Router();
 module.exports = router;
-jewelryCollection.fetch();
-console.log(jewelryCollection);
