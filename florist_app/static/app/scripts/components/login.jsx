@@ -5,6 +5,23 @@ var User = require('../models/models').User;
 
 var Backbone = require('backbone');
 console.log('login require');
+
+
+
+var csrftoken = $("input[name='csrfmiddlewaretoken']").val();
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
 var LoginPage = React.createClass({
   handleSignUp: function(event){
     event.preventDefault();
@@ -41,7 +58,7 @@ var LoginPage = React.createClass({
       <div className="row">
          <div className="col-md-6 signup">
            <form id="signup" onSubmit={this.handleSignUp} className="form-signup">
-             <input id='signup-name' type='text' className='form-control' placeholder='name'/>
+             <input id='signup-name' type='text' name='first_name'  className='form-control' placeholder='firstname'/>
              <input id='signup-email' type='text' className='form-control' placeholder='email'/>
              <input id='signup-username' type='text' className='form-control' placeholder='username'/>
              <input id='signup-password' type='password' className='form-control' placeholder='password'/>
