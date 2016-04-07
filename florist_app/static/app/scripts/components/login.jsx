@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
-var User = require('../models/models').User;
+var models = require('../models/models');
 
 var Backbone = require('backbone');
 console.log('login require');
@@ -27,36 +27,36 @@ var LoginPage = React.createClass({
     event.preventDefault();
     console.log('handleSignUp');
 
-      var user = new User();
+      var user = new models.User();
       user.set({
-        'username': $('#signup-email').val(),
+        'username': $('#signup-username').val(),
         'password': $('#signup-password').val()
       });
       user.save().then(function(results){
           console.log('results: ', results);
-          Backbone.history.navigate('loginpage', {trigger: true});
+          Backbone.history.navigate('dashboard', {trigger: true});
         })
   },
 
-  handleSignIn: function() {
+  handleSignIn: function(event) {
+    event.preventDefault();
     console.log('handleSignIn');
-    Parse.User
-      .logIn($('#login-email').val(), $('#login-password').val(), {
-        success: function(user) {
-          console.log(user);
-          Backbone.history.navigate('index', {trigger: true});
-        },
-        error: function(user, error) {
-          console.log(error)
-        }
-      });
-    console.log(Parse.User.current());
+
+    var login = new models.Login();
+    login.set({
+      'username': $('#signin-email').val(),
+      'password': $('#signin-password').val()
+    });
+
+    login.save().then(function(results){
+      Backbone.history.navigate('dashboard', {trigger: true});
+    });
   },
   render: function(){
     console.log('login page!');
     return(
       <div className="row">
-         <div className="col-md-6 signup">
+         <div className="col-sm-6 signup">
            <form id="signup" onSubmit={this.handleSignUp} className="form-signup">
              <input id='signup-name' type='text' name='first_name'  className='form-control' placeholder='firstname'/>
              <input id='signup-email' type='text' className='form-control' placeholder='email'/>
@@ -65,11 +65,11 @@ var LoginPage = React.createClass({
              <button type='submit' className='btn btn-default submit-button'>Sign Up</button>
            </form>
         </div>
-         <div className="col-md-6 signin">
+         <div className="col-sm-6 signin">
            <form id="signin" onSubmit={this.handleSignIn} className="form-signin">
              <input id='signin-username' type='text' className='form-control' placeholder='username'/>
              <input id='signin-password' type='password' className='form-control' placeholder='password'/>
-             <button type='submit' className='btn btn-default signin-button'>Sign In</button>
+             <button type='submit' className='btn btn-default signin-button'>Log In</button>
            </form>
 
          </div>
