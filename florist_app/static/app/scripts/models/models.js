@@ -11,13 +11,19 @@ var User = Backbone.Model.extend({
  urlRoot: '/signup/',
 });
 
-var Arrangment = Backbone.Model.extend({
-  urlRoot: '/arrangments/'
+var Arrangement = Backbone.Model.extend({
+  urlRoot: '/api/arrangements/'
+})
+
+var ArrangementCollection = Backbone.Collection.extend({
+  model: Arrangement,
+  url: '/api/arrangements/'
 })
 
 
 module.exports = {
   "Login": Login,
   "User": User,
-  "Arrangment" : Arrangment
+  "Arrangement" : Arrangement,
+  "ArrangementCollection": ArrangementCollection
 }

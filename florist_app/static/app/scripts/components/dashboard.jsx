@@ -2,45 +2,92 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var Backbone = require('backbone');
-var Arrangment = require('../models/models').Arrangment;
+var models = require('../models/models');
+
 
 var DashBoard = React.createClass({
+  handleFormSubmit: function(event){
+    event.preventDefault();
+
+    var arrangement = new models.Arrangement();
+
+
+    var image = $(".flowerPic").val();
+
+    
+    console.log(image);
+
+    arrangement.set({
+      'name': $('#name').val(),
+      'price': $('#price').val(),
+      'image': image
+    });
+
+    arrangement.save().then(function(results){
+      Backbone.history.navigate('index', {trigger: true});
+    })
+  },
+
+
+
+
+
+
+
+  handleImageSubmit: function(event){
+    event.preventDefault();
+
+    var image = new collection.Image();
+
+
+
+    image.set({
+
+
+    });
+
+    image.save().then(function(results){
+    Backbone.history.navigate('index', {trigger: true});
+    })
+  },
+
+
+
+
   render: function(){
     return (
-      <div>
-        <div class="container">
+
+        <div className="container">
+
          <div className="row">
+
            <div className="col-sm-12 signup">
-             <form id="signup" onSubmit={this.handleSignUp} className="form-signup">
-               <input id='signup-name' type='text' name='first_name'  className='form-control'  placeholder='name'/>
-                <input id='signup-email' type='text' className='form-control' placeholder='price'/>
+
+             <form id="signup" onSubmit={this.handleFormSubmit} className="form-signup">
+               <input id='name' type='text' name='name' className='form-control'  placeholder='name'/>
+                <input id='price' type='text'name='price' className='form-control' placeholder='price'/>
+
+                  <div className="row">
+                    <div className="col-sm-12">
+                     <textarea className="form-control" rows="3"></textarea>
+                    </div>
+                  </div>
+
+                <input className="flowerPic" type="file" name="pic" accept="image/*" />
+
                <button type='submit' className='btn btn-default submit-button'>Submit</button>
                <button type='submit' className='btn btn-default submit-button'>Add Image</button>
+
+
+
+
+
+
              </form>
           </div>
         </div>
-            <div className="row">
-              <div className="col-sm-12">
-               <textarea class="form-control" rows="3"></textarea>
-              </div>
-            </div>
+     </div>
 
-          <div className="media">
-            <div className="row">
-              <div className="col-sm-12">
-              <div className=" media-left">
-                <a href="#">
-                <img className="media-object" src="..." alt="..." />
-               </a>
-             </div>
-             <div className="media-body">
-              <h4 className="media-heading">Image</h4>
-            </div>
-         </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
     );

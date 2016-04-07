@@ -29,8 +29,9 @@ var LoginPage = React.createClass({
 
       var user = new models.User();
       user.set({
-        'username': $('#signup-username').val(),
-        'password': $('#signup-password').val()
+        'username': $('#username').val(),
+        'password': $('#password').val(),
+        'email': $('#email').val()
       });
       user.save().then(function(results){
           console.log('results: ', results);
@@ -44,7 +45,7 @@ var LoginPage = React.createClass({
 
     var login = new models.Login();
     login.set({
-      'username': $('#signin-email').val(),
+      'username': $('#signin-username').val(),
       'password': $('#signin-password').val()
     });
 
@@ -59,16 +60,16 @@ var LoginPage = React.createClass({
          <div className="col-sm-6 signup">
            <form id="signup" onSubmit={this.handleSignUp} className="form-signup">
              <input id='signup-name' type='text' name='first_name'  className='form-control' placeholder='firstname'/>
-             <input id='signup-email' type='text' className='form-control' placeholder='email'/>
-             <input id='signup-username' type='text' className='form-control' placeholder='username'/>
-             <input id='signup-password' type='password' className='form-control' placeholder='password'/>
+             <input id='email' type='text' className='form-control' name="email" placeholder='email'/>
+             <input id='username' type='text' className='form-control' name="username" placeholder='username'/>
+             <input id='password' type='password' className='form-control' name="password" placeholder='password'/>
              <button type='submit' className='btn btn-default submit-button'>Sign Up</button>
            </form>
         </div>
          <div className="col-sm-6 signin">
            <form id="signin" onSubmit={this.handleSignIn} className="form-signin">
-             <input id='signin-username' type='text' className='form-control' placeholder='username'/>
-             <input id='signin-password' type='password' className='form-control' placeholder='password'/>
+             <input id='signin-username' type='text' className='form-control'  name='signin-username' placeholder='username'/>
+             <input id='signin-password' type='password' className='form-control' name='signin-password' placeholder='password'/>
              <button type='submit' className='btn btn-default signin-button'>Log In</button>
            </form>
 

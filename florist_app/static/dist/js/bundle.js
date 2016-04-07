@@ -4,45 +4,92 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var Backbone = require('backbone');
-var Arrangment = require('../models/models').Arrangment;
+var models = require('../models/models');
+
 
 var DashBoard = React.createClass({displayName: "DashBoard",
+  handleFormSubmit: function(event){
+    event.preventDefault();
+
+    var arrangement = new models.Arrangement();
+
+
+    var image = $(".flowerPic").val();
+
+    
+    console.log(image);
+
+    arrangement.set({
+      'name': $('#name').val(),
+      'price': $('#price').val(),
+      'image': image
+    });
+
+    arrangement.save().then(function(results){
+      Backbone.history.navigate('index', {trigger: true});
+    })
+  },
+
+
+
+
+
+
+
+  handleImageSubmit: function(event){
+    event.preventDefault();
+
+    var image = new collection.Image();
+
+
+
+    image.set({
+
+
+    });
+
+    image.save().then(function(results){
+    Backbone.history.navigate('index', {trigger: true});
+    })
+  },
+
+
+
+
   render: function(){
     return (
-      React.createElement("div", null, 
-        React.createElement("div", {class: "container"}, 
+
+        React.createElement("div", {className: "container"}, 
+
          React.createElement("div", {className: "row"}, 
+
            React.createElement("div", {className: "col-sm-12 signup"}, 
-             React.createElement("form", {id: "signup", onSubmit: this.handleSignUp, className: "form-signup"}, 
-               React.createElement("input", {id: "signup-name", type: "text", name: "first_name", className: "form-control", placeholder: "name"}), 
-                React.createElement("input", {id: "signup-email", type: "text", className: "form-control", placeholder: "price"}), 
+
+             React.createElement("form", {id: "signup", onSubmit: this.handleFormSubmit, className: "form-signup"}, 
+               React.createElement("input", {id: "name", type: "text", name: "name", className: "form-control", placeholder: "name"}), 
+                React.createElement("input", {id: "price", type: "text", name: "price", className: "form-control", placeholder: "price"}), 
+
+                  React.createElement("div", {className: "row"}, 
+                    React.createElement("div", {className: "col-sm-12"}, 
+                     React.createElement("textarea", {className: "form-control", rows: "3"})
+                    )
+                  ), 
+
+                React.createElement("input", {className: "flowerPic", type: "file", name: "pic", accept: "image/*"}), 
+
                React.createElement("button", {type: "submit", className: "btn btn-default submit-button"}, "Submit"), 
                React.createElement("button", {type: "submit", className: "btn btn-default submit-button"}, "Add Image")
+
+
+
+
+
+
              )
           )
-        ), 
-            React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "col-sm-12"}, 
-               React.createElement("textarea", {class: "form-control", rows: "3"})
-              )
-            ), 
+        )
+     )
 
-          React.createElement("div", {className: "media"}, 
-            React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "col-sm-12"}, 
-              React.createElement("div", {className: " media-left"}, 
-                React.createElement("a", {href: "#"}, 
-                React.createElement("img", {className: "media-object", src: "...", alt: "..."})
-               )
-             ), 
-             React.createElement("div", {className: "media-body"}, 
-              React.createElement("h4", {className: "media-heading"}, "Image")
-            )
-         )
-      )
-    )
-  )
-)
 
 
     );
@@ -145,8 +192,9 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
       var user = new models.User();
       user.set({
-        'username': $('#signup-username').val(),
-        'password': $('#signup-password').val()
+        'username': $('#username').val(),
+        'password': $('#password').val(),
+        'email': $('#email').val()
       });
       user.save().then(function(results){
           console.log('results: ', results);
@@ -160,7 +208,7 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
     var login = new models.Login();
     login.set({
-      'username': $('#signin-email').val(),
+      'username': $('#signin-username').val(),
       'password': $('#signin-password').val()
     });
 
@@ -175,16 +223,16 @@ var LoginPage = React.createClass({displayName: "LoginPage",
          React.createElement("div", {className: "col-sm-6 signup"}, 
            React.createElement("form", {id: "signup", onSubmit: this.handleSignUp, className: "form-signup"}, 
              React.createElement("input", {id: "signup-name", type: "text", name: "first_name", className: "form-control", placeholder: "firstname"}), 
-             React.createElement("input", {id: "signup-email", type: "text", className: "form-control", placeholder: "email"}), 
-             React.createElement("input", {id: "signup-username", type: "text", className: "form-control", placeholder: "username"}), 
-             React.createElement("input", {id: "signup-password", type: "password", className: "form-control", placeholder: "password"}), 
+             React.createElement("input", {id: "email", type: "text", className: "form-control", name: "email", placeholder: "email"}), 
+             React.createElement("input", {id: "username", type: "text", className: "form-control", name: "username", placeholder: "username"}), 
+             React.createElement("input", {id: "password", type: "password", className: "form-control", name: "password", placeholder: "password"}), 
              React.createElement("button", {type: "submit", className: "btn btn-default submit-button"}, "Sign Up")
            )
         ), 
          React.createElement("div", {className: "col-sm-6 signin"}, 
            React.createElement("form", {id: "signin", onSubmit: this.handleSignIn, className: "form-signin"}, 
-             React.createElement("input", {id: "signin-username", type: "text", className: "form-control", placeholder: "username"}), 
-             React.createElement("input", {id: "signin-password", type: "password", className: "form-control", placeholder: "password"}), 
+             React.createElement("input", {id: "signin-username", type: "text", className: "form-control", name: "signin-username", placeholder: "username"}), 
+             React.createElement("input", {id: "signin-password", type: "password", className: "form-control", name: "signin-password", placeholder: "password"}), 
              React.createElement("button", {type: "submit", className: "btn btn-default signin-button"}, "Log In")
            )
 
@@ -221,15 +269,21 @@ var User = Backbone.Model.extend({
  urlRoot: '/signup/',
 });
 
-var Arrangment = Backbone.Model.extend({
-  urlRoot: '/arrangments/'
+var Arrangement = Backbone.Model.extend({
+  urlRoot: '/api/arrangements/'
+})
+
+var ArrangementCollection = Backbone.Collection.extend({
+  model: Arrangement,
+  url: '/api/arrangements/'
 })
 
 
 module.exports = {
   "Login": Login,
   "User": User,
-  "Arrangment" : Arrangment
+  "Arrangement" : Arrangement,
+  "ArrangementCollection": ArrangementCollection
 }
 
 },{"backbone":18}],6:[function(require,module,exports){
@@ -809,7 +863,7 @@ exports.__esModule = true;
 
 },{"backbone":18,"react":416,"react-dom":263,"underscore":420}],18:[function(require,module,exports){
 (function (global){
-//     Backbone.js 1.3.3
+//     Backbone.js 1.3.2
 
 //     (c) 2010-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Backbone may be freely distributed under the MIT license.
@@ -855,7 +909,7 @@ exports.__esModule = true;
   var slice = Array.prototype.slice;
 
   // Current version of the library. Keep in sync with `package.json`.
-  Backbone.VERSION = '1.3.3';
+  Backbone.VERSION = '1.3.2';
 
   // For Backbone's purposes, jQuery, Zepto, Ender, or My Library (kidding) owns
   // the `$` variable.
@@ -4909,7 +4963,7 @@ module.exports = invariant;
 }).call(this,require('_process'))
 },{"_process":171}],100:[function(require,module,exports){
 /*!
- * jQuery JavaScript Library v2.2.3
+ * jQuery JavaScript Library v2.2.2
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -4919,7 +4973,7 @@ module.exports = invariant;
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-04-05T19:26Z
+ * Date: 2016-03-17T17:51Z
  */
 
 (function( global, factory ) {
@@ -4975,7 +5029,7 @@ var support = {};
 
 
 var
-	version = "2.2.3",
+	version = "2.2.2",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -14385,7 +14439,7 @@ jQuery.fn.load = function( url, params, callback ) {
 		// If it fails, this function gets "jqXHR", "status", "error"
 		} ).always( callback && function( jqXHR, status ) {
 			self.each( function() {
-				callback.apply( this, response || [ jqXHR.responseText, status, jqXHR ] );
+				callback.apply( self, response || [ jqXHR.responseText, status, jqXHR ] );
 			} );
 		} );
 	}
