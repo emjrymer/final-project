@@ -6,6 +6,7 @@
 florist_app/static/node_modules/
 florist_app/static/.tmp
 florist_app/static/.sass-cache
+florst_app/static/dist/js/bundle.js
 node_modules/
 .tmp/
 .sass-cache/
