@@ -2,7 +2,6 @@
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
-var $ = require('jquery');
 var Backbone = require('backbone');
 var models = require('../models/models');
 
@@ -11,51 +10,38 @@ var DashBoard = React.createClass({displayName: "DashBoard",
   handleFormSubmit: function(event){
     event.preventDefault();
 
-    var arrangement = new models.Arrangement();
-
-
-    var image = $(".flowerPic").val();
-
-    
+    var image = $('#image')[0].files[0];
     console.log(image);
+    var data = new FormData();
+    data.append('photo', image);
+    // data.append('name', $('#name').val());
+    data.append('price', $('#price').val());
 
-    arrangement.set({
-      'name': $('#name').val(),
-      'price': $('#price').val(),
-      'image': image
+    $.ajax({
+      url: '/api/arrangements/',
+      data: data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      type: 'POST',
+      success: function(data){
+        alert(data);
+      },
+      error: function(data){
+        alert('no upload');
+      }
     });
 
-    arrangement.save().then(function(results){
-      Backbone.history.navigate('index', {trigger: true});
-    })
+    // var arrangement = new models.Arrangement();
+    // arrangement.set({
+    //   'name': $('#name').val(),
+    //   'price': $('#price').val(),
+    // });
+
+    // arrangement.save().then(function(results){
+    //   Backbone.history.navigate('index', {trigger: true});
+    // })
   },
-
-
-
-
-
-
-
-  handleImageSubmit: function(event){
-    event.preventDefault();
-
-    var image = new collection.Image();
-
-
-
-    image.set({
-
-
-    });
-
-    image.save().then(function(results){
-    Backbone.history.navigate('index', {trigger: true});
-    })
-  },
-
-
-
-
   render: function(){
     return (
 
@@ -70,12 +56,13 @@ var DashBoard = React.createClass({displayName: "DashBoard",
                 React.createElement("input", {id: "price", type: "text", name: "price", className: "form-control", placeholder: "price"}), 
 
                   React.createElement("div", {className: "row"}, 
-                    React.createElement("div", {className: "col-sm-12"}, 
-                     React.createElement("textarea", {className: "form-control", rows: "3"})
+                    React.createElement("div", {className: "col-sm-12 note-area"}, 
+                      React.createElement("h3", null, "notes"), 
+                     React.createElement("textarea", {className: "form-control notes", rows: "3"})
                     )
                   ), 
 
-                React.createElement("input", {className: "flowerPic", type: "file", name: "pic", accept: "image/*"}), 
+                React.createElement("input", {id: "image", className: "flowerPic", type: "file", name: "pic", accept: "image/*"}), 
 
                React.createElement("button", {type: "submit", className: "btn btn-default submit-button"}, "Submit"), 
                React.createElement("button", {type: "submit", className: "btn btn-default submit-button"}, "Add Image")
@@ -105,7 +92,7 @@ var DashBoard = React.createClass({displayName: "DashBoard",
 
   module.exports = DashBoard;
 
-},{"../models/models":5,"backbone":18,"jquery":100,"react":416,"react-dom":263}],2:[function(require,module,exports){
+},{"../models/models":5,"backbone":18,"react":416,"react-dom":263}],2:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -113,24 +100,21 @@ var $ = require('jquery');
 var Backbone = require('backbone');
 var HeaderComponent = require('react-bootstrap').HeaderComponent;
 var Carousel = require('react-bootstrap').Carousel;
-
+var Grid = require('react-bootstrap').Grid;
+var Row = require('react-bootstrap').Row;
+var Thumbnail = require('react-bootstrap').Thumbnail;
 
 
 var HeaderComponent = React.createClass({displayName: "HeaderComponent",
   render: function(){
     return (
       React.createElement("div", null, 
+
+
         React.createElement("div", {className: "header"}, 
            React.createElement("a", {href: "#loginpage", className: "login btn btn.btn-*-outline"}, "login"), 
            React.createElement("h1", null, "La Belle Fluer"), 
            React.createElement("h3", null, "\"I must have flowers always, and always.\"", React.createElement("span", null, "-Claude Monet"))
-        ), 
-
-        React.createElement("div", {className: "navigation"}, 
-           React.createElement("ul", {className: "navbuttons"}, 
-             React.createElement("li", null, React.createElement("button", {type: "button", className: "bouquet btn btn.btn-*-outline"}, "bouquets")), 
-             React.createElement("li", null, React.createElement("button", {type: "button", className: "about btn btn.btn-*-outline"}, "about us"))
-           )
         ), 
 
         React.createElement("div", {className: "container"}, 
@@ -146,7 +130,24 @@ var HeaderComponent = React.createClass({displayName: "HeaderComponent",
                 React.createElement(Carousel.Item, null, 
                   React.createElement("img", {width: 900, height: 500, alt: "900x500", src: "/static/dist/images/brightflorals.jpg"})
                 )
-              )
+              ), 
+
+
+
+                React.createElement(Grid, null, 
+                  React.createElement(Row, null, 
+                  React.createElement("div", {className: "Col xs={6} md={3}"}, 
+                    React.createElement(Thumbnail, {href: "#", alt: "171x180", src: "/assets/thumbnail.png"})
+                  ), 
+                  React.createElement("div", {className: "Col xs={6} md={3}"}, 
+                    React.createElement(Thumbnail, {href: "#", alt: "171x180", src: "/assets/thumbnail.png"})
+                  ), 
+                  React.createElement("div", {className: "Col xs={6} md={3}"}, 
+                    React.createElement(Thumbnail, {href: "#", alt: "171x180", src: "/assets/thumbnail.png"})
+                  )
+                  )
+                )
+
         )
       )
   )
@@ -163,7 +164,6 @@ module.exports = HeaderComponent;
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
-var $ = require('jquery');
 var models = require('../models/models');
 
 var Backbone = require('backbone');
@@ -244,9 +244,9 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
 module.exports = LoginPage;
 
-},{"../models/models":5,"backbone":18,"jquery":100,"react":416,"react-dom":263}],4:[function(require,module,exports){
+},{"../models/models":5,"backbone":18,"react":416,"react-dom":263}],4:[function(require,module,exports){
 "use strict";
-var $ = require('jquery');
+window.$ = window.jQuery = require('jquery');
 var Backbone = require('backbone');
 
 var router = require('./routes/routes');
@@ -282,8 +282,8 @@ var ArrangementCollection = Backbone.Collection.extend({
 module.exports = {
   "Login": Login,
   "User": User,
-  "Arrangement" : Arrangement,
-  "ArrangementCollection": ArrangementCollection
+  "Arrangement" : Arrangement
+
 }
 
 },{"backbone":18}],6:[function(require,module,exports){

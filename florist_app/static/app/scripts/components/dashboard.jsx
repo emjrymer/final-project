@@ -1,6 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var $ = require('jquery');
 var Backbone = require('backbone');
 var models = require('../models/models');
 
@@ -9,51 +8,38 @@ var DashBoard = React.createClass({
   handleFormSubmit: function(event){
     event.preventDefault();
 
-    var arrangement = new models.Arrangement();
-
-
-    var image = $(".flowerPic").val();
-
-    
+    var image = $('#image')[0].files[0];
     console.log(image);
+    var data = new FormData();
+    data.append('photo', image);
+    // data.append('name', $('#name').val());
+    data.append('price', $('#price').val());
 
-    arrangement.set({
-      'name': $('#name').val(),
-      'price': $('#price').val(),
-      'image': image
+    $.ajax({
+      url: '/api/arrangements/',
+      data: data,
+      cache: false,
+      contentType: false,
+      processData: false,
+      type: 'POST',
+      success: function(data){
+        alert(data);
+      },
+      error: function(data){
+        alert('no upload');
+      }
     });
 
-    arrangement.save().then(function(results){
-      Backbone.history.navigate('index', {trigger: true});
-    })
+    // var arrangement = new models.Arrangement();
+    // arrangement.set({
+    //   'name': $('#name').val(),
+    //   'price': $('#price').val(),
+    // });
+
+    // arrangement.save().then(function(results){
+    //   Backbone.history.navigate('index', {trigger: true});
+    // })
   },
-
-
-
-
-
-
-
-  handleImageSubmit: function(event){
-    event.preventDefault();
-
-    var image = new collection.Image();
-
-
-
-    image.set({
-
-
-    });
-
-    image.save().then(function(results){
-    Backbone.history.navigate('index', {trigger: true});
-    })
-  },
-
-
-
-
   render: function(){
     return (
 
@@ -68,12 +54,13 @@ var DashBoard = React.createClass({
                 <input id='price' type='text'name='price' className='form-control' placeholder='price'/>
 
                   <div className="row">
-                    <div className="col-sm-12">
-                     <textarea className="form-control" rows="3"></textarea>
+                    <div className="col-sm-12 note-area">
+                      <h3>notes</h3>
+                     <textarea className="form-control notes" rows="3"></textarea>
                     </div>
                   </div>
 
-                <input className="flowerPic" type="file" name="pic" accept="image/*" />
+                <input id="image" className="flowerPic" type="file" name="pic" accept="image/*" />
 
                <button type='submit' className='btn btn-default submit-button'>Submit</button>
                <button type='submit' className='btn btn-default submit-button'>Add Image</button>

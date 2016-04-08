@@ -24,6 +24,6 @@ var ArrangementCollection = Backbone.Collection.extend({
 module.exports = {
   "Login": Login,
   "User": User,
-  "Arrangement" : Arrangement,
-  "ArrangementCollection": ArrangementCollection
+  "Arrangement" : Arrangement
+
 }
