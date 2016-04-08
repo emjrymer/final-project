@@ -1,10 +1,13 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate
 from django.views.generic import TemplateView
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.template.context import RequestContext
 from rest_framework import generics
+from rest_framework.decorators import api_view
 from florist_app.models import Arrangement, Basket, Florist, Buyer
 from florist_app.serializers import UserSerializer, ArrangementSerializer, BasketSerializer, FloristSerializer, BuyerSerializer
 
@@ -21,6 +24,18 @@ def home(request):
 def logout(request):
     auth_logout(request)
     return redirect('/')
+
+
+@api_view(['POST'])
+def api_login(request):
+    username = request.data.get('username')
+    password = request.data.get('password')
+
+    user = authenticate(username, password)
+    if user is not None:
+        return "User is authenticated" #success:True
+    else:
+        return "The username and password were incorrect."
 
 
 #################  API Views  ####################

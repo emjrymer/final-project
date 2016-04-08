@@ -6,6 +6,9 @@ class Arrangement(models.Model):
     photo = models.ImageField(upload_to='uploads', null=True, blank=True)
     rating = models.IntegerField(null=True)
 
+    def __str__(self):
+        return self.price
+
 
 class Basket(models.Model):
     notes = models.TextField(blank=True)
@@ -21,6 +24,9 @@ class Florist(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
     rating = models.IntegerField(null=True)
     arrangement_history = models.ManyToManyField(Arrangement)
+
+    def __str__(self):
+        return "{} - {}".format(self.user, self.time_created)
 
 
 class Buyer(models.Model):

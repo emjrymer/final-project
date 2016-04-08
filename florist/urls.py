@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.auth import views as auth_views
-from florist_app.views import UserCreateAPIView, ArrangementListCreateAPIView, ArrangementRetrieveUpdateDestroyAPIView, FloristListCreateAPIView, FloristRetrieveUpdateDestroyAPIView, BasketListCreateAPIView, BasketRetrieveUpdateDestroyAPIView, BuyerListCreateAPIView, BuyerRetrieveUpdateDestroyAPIView
+from florist_app.views import api_login, UserCreateAPIView, ArrangementListCreateAPIView, ArrangementRetrieveUpdateDestroyAPIView, FloristListCreateAPIView, FloristRetrieveUpdateDestroyAPIView, BasketListCreateAPIView, BasketRetrieveUpdateDestroyAPIView, BuyerListCreateAPIView, BuyerRetrieveUpdateDestroyAPIView
 
 
 urlpatterns = [
@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^media/(?P<path>.*)', "django.views.static.serve", {"document_root": settings.MEDIA_ROOT}),
     #  API VIEWS
     url(r'^signup/$', UserCreateAPIView.as_view(), name='user_create_api_view'),
+    url(r'^api/login/$', api_login, name='user_api_login_view'),
     url(r'^api/florists/$', FloristListCreateAPIView.as_view(), name='florist_list_create_api_view'),
     url(r'^api/florists/(?P<pk>\d+)/$', FloristRetrieveUpdateDestroyAPIView.as_view()),
     url(r'^api/baskets/$', BasketListCreateAPIView.as_view(), name='basket_list_create_api_view'),
