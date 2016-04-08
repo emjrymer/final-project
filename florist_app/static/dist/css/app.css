@@ -5867,6 +5867,30 @@ body {
   color: gray; }
 
 .header h3 span {
-  padding-left: 10px; }
+  padding-left: 10px;
+  margin-bottom: 40px; }
+
+.signup {
+  padding-left: 250px;
+  padding-top: 70px; }
+
+.signin {
+  padding-right: 250px;
+  padding-top: 70px; }
+
+.submit-button {
+  margin-left: 125px;
+  margin-top: 25px; }
+
+.signin-button {
+  margin-left: 125px;
+  margin-top: 25px; }
+
+.flowerPic {
+  padding-left: 370px; }
+
+.notes {
+  height: 140px;
+  font-family: 'Dancing Script', cursive; }
 
 /*# sourceMappingURL=app.css.map */
