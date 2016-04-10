@@ -16,9 +16,7 @@ img {
   max-width: 100%;
 }
 
-body {
-  background-color: #D4CBD2;
-}
+
 
 .carousel-inner  > .item  > img{
     width: 100%;
@@ -38,51 +36,51 @@ body {
   float: right;
 }
 
-.bouquet {
-  background-color: transparent;
-  border-radius: 5px;
-  border: 2px solid gray;
-  float: right;
-}
+.header-content{
+  background-image: url("../images/daisy.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 550px;
+  .navbuttons{
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin-top: 20px;
+    li{
+      display: inline-block;
+      border-left: solid #dfac12;
+      padding: 3px 40px 3px 40px;
+    }
+    #login{
+      border-right: solid #dfac12;
+    }
+  }
 
-.about {
-  background-color: transparent;
-  border-radius: 5px;
-  border: 2px solid #fff;
-  float: right;
-}
+  .header {
+    display: inline-block;
+    margin-top: 50px;
+    h1{
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-size: 70px;
+      text-align: left;
+      margin-left: 75px;
+      color: #dfac12;
+      letter-spacing: 15px;
+    }
+  }
 
-// .navigation {
-//   background-color: grey;
-//   // border: solid black 2px;
-// }
+  .header h3 {
+    font-family: 'Open Sans Condensed', sans-serif;
+    text-align: left;
+    font-size: 16px;
+    margin-bottom: 30px;
+    margin-left: 160px;
+  }
 
-.navbuttons{
-  list-style: none;
-  display: inline-block;
-}
-
-
-.header h1 {
-  font-family: 'Dancing Script', cursive;
-  font-size: 90px;
-  text-align: center;
-  color: #fff;
-  letter-spacing: 15px;
-}
-
-.header h3 {
-  // display: inline-block;
-  font-family:  'Dancing Script', cursive;
-  font-family: 'Abel', sans-serif;
-  text-align: center;
-  font-size: 18px;
-  color: gray;
-
-}
-.header h3 span {
-  padding-left: 10px;
-  margin-bottom: 40px;
+  .header h3 span {
+    padding-left: 10px;
+    margin-bottom: 40px;
+  }
 }
 
 .signup {
@@ -109,8 +107,6 @@ body {
 }
 
 
-
-
 .flowerPic {
   padding-left: 370px;
 }
@@ -118,4 +114,37 @@ body {
 .notes {
   height: 140px;
   font-family: 'Dancing Script', cursive;
+}
+.social_media_links{
+
+  height: 100px;
+  background-color: #fff;
+
+}
+
+.image-1 {
+  h1{
+    font-size: 25px;
+    color: #dfac12;
+  }
+  border: solid 2px black;
+  text-align: center;
+}
+
+.image-2 {
+  h1{
+    font-size: 25px;
+    color: #dfac12;
+  }
+  border: solid 2px black;
+  text-align: center;
+}
+
+.image-3 {
+  h1{
+    font-size: 25px;
+    color: #dfac12;
+  }
+  border: solid 2px black;
+  text-align: center;
 }

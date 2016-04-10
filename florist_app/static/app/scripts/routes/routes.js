@@ -6,7 +6,7 @@ require('backbone-react-component');
 
 var models = require('./../models/models');
 
-
+var ImageComponent = require('./../components/imageboard.jsx');
 var LoginPage = require('./../components/login.jsx');
 var HeaderComponent = require('./../components/header.jsx');
 var DashBoard = require('./../components/dashboard.jsx');
@@ -17,7 +17,8 @@ var Router = Backbone.Router.extend({
   routes:{
     '':'index',
     'loginpage':'loginpage',
-    'dashboard': 'dashboard'
+    'dashboard': 'dashboard',
+    // 'imageboard': 'imageboard'
 
   },
   index: function(){
@@ -44,6 +45,14 @@ var Router = Backbone.Router.extend({
       appContainer
     );
   },
+  // imageboard: function(){
+  //   ReactDOM.unmountComponentAtNode(appContainer);
+  //
+  //   ReactDOM.render(
+  //     React.createElement(imageboard),
+  //     appContainer
+  //   );
+  // },
 
 });
 

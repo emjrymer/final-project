@@ -12,7 +12,7 @@ var DashBoard = React.createClass({
     console.log(image);
     var data = new FormData();
     data.append('photo', image);
-    // data.append('name', $('#name').val());
+    data.append('name', $('#name').val());
     data.append('price', $('#price').val());
 
     $.ajax({
