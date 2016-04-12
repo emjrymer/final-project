@@ -32,7 +32,7 @@ def logout(request):
 
 
 @api_view(['POST'])
-def api_login(request):
+def api_login(request, *args, **kwargs):
     username = request.data.get('username')
     password = request.data.get('password')
     user = authenticate(username=username, password=password)
