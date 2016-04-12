@@ -60,8 +60,8 @@ var DashBoard = React.createClass({
 
              <form id="signup" onSubmit={this.handleFormSubmit} className="form-signup dashboard">
                <input id='name' type='text' name='name' className='form-control'  placeholder='name'/>
-               <input id='name' type='text' name='name' className='form-control'  placeholder='description'/>
-                <input id='price' type='text'name='price' className='form-control' placeholder='price'/>
+               <input id='price' type='text' name='name' className='form-control'  placeholder='price'/>
+                <input id='description' type='text'name='price' className='form-control' placeholder='description'/>
                 <input id="image" className="flowerPic" type="file" name="pic" accept="image/*" />
                 <button type='submit' className='btn btn-default submit-button-1'>Submit</button>
                <button type='submit' className='btn btn-default submit-button-1'>Add Img</button>

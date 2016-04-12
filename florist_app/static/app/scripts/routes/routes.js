@@ -10,15 +10,19 @@ var ImageComponent = require('./../components/imageboard.jsx');
 var LoginPage = require('./../components/login.jsx');
 var HeaderComponent = require('./../components/header.jsx');
 var DashBoard = require('./../components/dashboard.jsx');
-
+var ImageComponent = require('./../components/imageboard.jsx');
+var CreateDataComponent = require('./../components/data.jsx');
 var appContainer = document.getElementById('app');
+var ModelArrangement = require('../models/models').ArrangementCollection;
+
 
 var Router = Backbone.Router.extend({
   routes:{
     '':'index',
     'loginpage':'loginpage',
     'dashboard': 'dashboard',
-    'arrangements': 'imageboard'
+    'arrangements': 'arrangements'
+
 
   },
   index: function(){
@@ -52,6 +56,17 @@ var Router = Backbone.Router.extend({
       React.createElement(ImageComponent),
       appContainer
     );
+  },
+  arrangements: function(){
+    ReactDOM.unmountComponentAtNode(appContainer);
+    var arrangementCollection = new ModelArrangement();
+    arrangementCollection.fetch().then(function(response){
+      ReactDOM.render(
+        React.createElement(CreateDataComponent, {collection: response}),
+        appContainer
+      );
+
+    })
   },
 
 });
