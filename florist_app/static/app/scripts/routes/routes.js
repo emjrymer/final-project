@@ -18,7 +18,7 @@ var Router = Backbone.Router.extend({
     '':'index',
     'loginpage':'loginpage',
     'dashboard': 'dashboard',
-    // 'imageboard': 'imageboard'
+    'arrangements': 'imageboard'
 
   },
   index: function(){
@@ -45,14 +45,14 @@ var Router = Backbone.Router.extend({
       appContainer
     );
   },
-  // imageboard: function(){
-  //   ReactDOM.unmountComponentAtNode(appContainer);
-  //
-  //   ReactDOM.render(
-  //     React.createElement(imageboard),
-  //     appContainer
-  //   );
-  // },
+  imageboard: function(){
+    ReactDOM.unmountComponentAtNode(appContainer);
+
+    ReactDOM.render(
+      React.createElement(ImageComponent),
+      appContainer
+    );
+  },
 
 });
 

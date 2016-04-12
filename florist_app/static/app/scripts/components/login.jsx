@@ -55,7 +55,19 @@ var LoginPage = React.createClass({
   render: function(){
     console.log('login page!');
     return(
-      <div className="row">
+      <div>
+
+        <div className="row header-content-login">
+          <ul className='navbuttons-login'>
+            <li><a href="imageboard">bouquets</a></li>
+            <li><a href="url">about us</a></li>
+            <li><a href="url">contact us</a></li>
+            <li id="loginl"><a href="#loginpage">login</a></li>
+          </ul>
+          <div className="header-login">
+            <h1>La Belle Fluer</h1>
+          </div>
+        <div className="row">
          <div className="col-sm-6 signup">
            <form id="signup" onSubmit={this.handleSignUp} className="form-signup">
              <input id='signup-name' type='text' name='first_name'  className='form-control' placeholder='firstname'/>
@@ -71,9 +83,10 @@ var LoginPage = React.createClass({
              <input id='signin-password' type='password' className='form-control' name='signin-password' placeholder='password'/>
              <button type='submit' className='btn btn-default signin-button'>Log In</button>
            </form>
-
-         </div>
+          </div>
        </div>
+     </div>
+   </div>
     );
   }
 });
