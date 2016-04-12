@@ -10,7 +10,7 @@ from django.template.context import RequestContext
 # rest_framework imports
 from rest_framework import generics
 from rest_framework.authentication import BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view
 # florist_app imports
 from florist_app.models import Arrangement, Basket, Florist, Buyer
