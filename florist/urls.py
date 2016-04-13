@@ -8,7 +8,7 @@ from florist_app.views import FloristSpecificArrangementListAPIView, api_login, 
 urlpatterns = [
     url(r'^$', 'florist_app.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^login/$', auth_views.login_social, name="login_view"),
+#    url(r'^login/$', auth_views.login_social, name="login_view"),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
     url(r'^media/(?P<path>.*)', "django.views.static.serve", {"document_root": settings.MEDIA_ROOT}),

@@ -17,7 +17,7 @@ from florist_app.models import Arrangement, Basket, Florist, Buyer
 from florist_app.serializers import UserSerializer, ArrangementSerializer, BasketSerializer, FloristSerializer, BuyerSerializer
 
 
-def login_social(request):
+def login_view(request):
     return render_to_response('login.html', context=RequestContext(request))
 
 
@@ -26,7 +26,7 @@ def home(request):
    return render_to_response('home.html', context_instance=context)
 
 
-def logout_social(request):
+def logout_view(request):
     auth_logout(request)
     return redirect('/')
 
