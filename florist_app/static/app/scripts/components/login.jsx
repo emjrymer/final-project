@@ -1,25 +1,11 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var models = require('../models/models.js');
+var NavBar  = require('./../components/nav.jsx');
 
 var Backbone = require('backbone');
 console.log('login require');
 
-
-
-var csrftoken = $("input[name='csrfmiddlewaretoken']").val();
-
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-$.ajaxSetup({
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
-    }
-});
 
 var LoginPage = React.createClass({
   handleSignUp: function(event){
@@ -64,15 +50,7 @@ var LoginPage = React.createClass({
       <div>
 
         <div className="row header-content-login">
-          <ul className='navbuttons-login'>
-            <li><a href="imageboard">bouquets</a></li>
-            <li><a href="url">about us</a></li>
-            <li><a href="url">contact us</a></li>
-            <li id="loginl"><a href="#loginpage">login</a></li>
-          </ul>
-          <div className="header-login">
-            <h1>La Belle Fluer</h1>
-          </div>
+          <NavBar/>
         <div className="row">
          <div className="col-sm-6 signup">
            <form id="signup" onSubmit={this.handleSignUp} className="form-signup">

@@ -1,14 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var $ = require('jquery');
 var Backbone = require('backbone');
-var models = require('../models/models.js');
-var ModelArrangement = require('../models/models.js').ArrangementCollection;
-
-var arrangementCollection = new ModelArrangement();
-
-
-
+var models = require('../models/models');
 
 
 var CreateDataComponent = React.createClass({
@@ -35,30 +28,32 @@ var CreateDataComponent = React.createClass({
     });
 
     console.log("are you here!");
-    return(
-      <div className="createproductspage">
-        <h3>Products</h3>
-        <a href="#addproduct" className="add-button">Add</a>
-          <table className="table">
-            <thead>
-              <tr>
-                <td>Name</td>
-                <td>Price</td>
-                <td>Description</td>
-                <td className="add-image">Photo</td>
-                <td>Actions</td>
-              </tr>
-            </thead>
-            <tbody>
-              {productRows}
-            </tbody>
-          </table>
+    return (
+
+        <div className="createproductspage">
+          <h3>Products</h3>
+           <a href="#addproduct" className="add-button">Add</a>
+            <table className="table">
+              <thead>
+                <tr>
+                  <td>Name</td>
+                  <td>Price</td>
+                  <td>Description</td>
+                  <td className="add-image">Photo</td>
+                  <td>Actions</td>
+                </tr>
+              </thead>
+              <tbody>
+                {productRows}
+              </tbody>
+            </table>
 
 
 
-      </div>
-    );
+        </div>
+    )
   }
-});
+})
 
-module.exports = CreateDataComponent;
+
+module.exports = CartComponent;

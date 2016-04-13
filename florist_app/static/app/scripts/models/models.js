@@ -20,11 +20,25 @@ var ArrangementCollection = Backbone.Collection.extend({
   url: '/api/arrangements/'
 })
 
+var Cart = Backbone.Model.extend({
+  urlRoot: '/api/baskets/'
+})
+
+
+var CartCollection = Backbone.Collection.extend({
+  model: Cart,
+  url: '/api/baskets/'
+})
+
+
 
 module.exports = {
   "Login": Login,
   "User": User,
   "Arrangement" : Arrangement,
-  'ArrangementCollection': ArrangementCollection
+  'ArrangementCollection': ArrangementCollection,
+  "Cart": Cart,
+  "CartCollection": CartCollection
+
 
 }

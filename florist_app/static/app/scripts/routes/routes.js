@@ -14,6 +14,7 @@ var ImageComponent = require('./../components/imageboard.jsx');
 var CreateDataComponent = require('./../components/data.jsx');
 var appContainer = document.getElementById('app');
 var ModelArrangement = require('../models/models').ArrangementCollection;
+var GalleryComponent = require('./../components/imageboard.jsx');
 
 
 var Router = Backbone.Router.extend({
@@ -21,7 +22,8 @@ var Router = Backbone.Router.extend({
     '':'index',
     'loginpage':'loginpage',
     'dashboard': 'dashboard',
-    'arrangements': 'arrangements'
+    'arrangements': 'arrangements',
+    "gallery": "gallery"
 
 
   },
@@ -49,11 +51,11 @@ var Router = Backbone.Router.extend({
       appContainer
     );
   },
-  imageboard: function(){
+  gallery: function(){
     ReactDOM.unmountComponentAtNode(appContainer);
 
     ReactDOM.render(
-      React.createElement(ImageComponent),
+      React.createElement(GalleryComponent),
       appContainer
     );
   },
