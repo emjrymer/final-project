@@ -2,10 +2,28 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var Backbone = require('backbone');
-var models = require('../models/models');
-var ModelArrangement = require('../models/models').ArrangementCollection;
+var models = require('../models/models.js');
+var ModelArrangement = require('../models/models.js').ArrangementCollection;
 
 var arrangementCollection = new ModelArrangement();
+
+
+var csrftoken = $("input[name='csrfmiddlewaretoken']").val();
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+
 
 var CreateDataComponent = React.createClass({
   mixins:[Backbone.React.Component.Mixin],
@@ -41,7 +59,7 @@ var CreateDataComponent = React.createClass({
                 <td>Name</td>
                 <td>Price</td>
                 <td>Description</td>
-                <td>Photo</td>
+                <td className="add-image">Photo</td>
                 <td>Actions</td>
               </tr>
             </thead>

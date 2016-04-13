@@ -5,7 +5,7 @@ from django.dispatch import receiver
 
 class Arrangement(models.Model):
     name = models.CharField(max_length=50)
-    description = models.TextField(max_length=250)
+    description = models.TextField(blank=True)
     price = models.FloatField()
     photo = models.ImageField(upload_to='uploads', null=True, blank=True)
     rating = models.IntegerField(null=True)

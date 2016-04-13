@@ -3,7 +3,7 @@ var Backbone = require('backbone');
 
 var Login = Backbone.Model.extend({
  idAttribute: 'cid',
- urlRoot: '/login/',
+ urlRoot: '/api/login/',
 });
 
 var User = Backbone.Model.extend({
