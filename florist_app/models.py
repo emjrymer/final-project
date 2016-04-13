@@ -9,7 +9,7 @@ class Arrangement(models.Model):
     price = models.FloatField()
     photo = models.ImageField(upload_to='uploads', null=True, blank=True)
     rating = models.IntegerField(null=True)
-    florist = models.ForeignKey('florist_app.Florist')
+    florist = models.ForeignKey('florist_app.Florist', null=True)
     time_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
