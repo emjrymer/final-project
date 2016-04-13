@@ -22,7 +22,7 @@ class Arrangement(models.Model):
 class Basket(models.Model):
     notes = models.TextField(blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
-    arrangement = models.ManyToManyField(Arrangement)
+    arrangement = models.ForeignKey(Arrangement)
 
     def __str__(self):
         return self.notes

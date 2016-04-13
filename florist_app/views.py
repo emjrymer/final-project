@@ -1,7 +1,7 @@
 # all the django imports
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -24,6 +24,10 @@ def login_view(request):
 def home(request):
    context = RequestContext(request,{'request': request,'user': request.user})
    return render_to_response('home.html', context_instance=context)
+
+
+class AboutUs(TemplateView):
+    template_name = 'about.html'
 
 
 def logout_view(request):
@@ -82,7 +86,17 @@ class ArrangementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIV
         return Arrangement.objects.filter(florist_id=self.request.user)
 
 
+class ArrangementDetailView(DetailView):
+    model = Arrangement
+
+    def get_context_data(self, **kwargs):
+       context = super().get_context_data(**kwargs)
+       context['arrangement'] = Arrangement.objects.filter(id=self.kwargs.get('pk'))
+       return context
+
+
 class BasketListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Arrangement.objects.all()
     serializer_class = BasketSerializer
     permission_classes = (IsAuthenticated,)
 
