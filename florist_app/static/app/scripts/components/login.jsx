@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var models = require('../models/models');
+var models = require('../models/models.js');
 
 var Backbone = require('backbone');
 console.log('login require');
@@ -48,8 +48,14 @@ var LoginPage = React.createClass({
       'password': $('#signin-password').val()
     });
 
-    login.save().then(function(results){
-      Backbone.history.navigate('dashboard', {trigger: true});
+    login.save(null, {
+        success: function(results){
+          console.log(results);
+          Backbone.history.navigate('dashboard', {trigger: true});
+        },
+        error: function(model, err){
+          console.log(err);
+        }
     });
   },
   render: function(){

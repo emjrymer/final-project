@@ -6,6 +6,39 @@ var Backbone = require('backbone');
 var models = require('../models/models');
 
 
+var csrftoken = $("input[name='csrfmiddlewaretoken']").val();
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+var Header = React.createClass({displayName: "Header",
+  render: function(){
+    return (
+      React.createElement("div", null, 
+        React.createElement("ul", {className: "navbuttons-login"}, 
+          React.createElement("li", null, React.createElement("a", {href: "imageboard"}, "bouquets")), 
+          React.createElement("li", null, React.createElement("a", {href: "url"}, "about us")), 
+          React.createElement("li", null, React.createElement("a", {href: "url"}, "contact us")), 
+          React.createElement("li", {id: "loginl"}, React.createElement("a", {href: "#loginpage"}, "login"))
+        ), 
+        React.createElement("div", {className: "header-login"}, 
+          React.createElement("h1", null, "La Belle Fluer")
+        )
+      )
+    )
+  }
+})
+
 var DashBoard = React.createClass({displayName: "DashBoard",
   handleFormSubmit: function(event){
     event.preventDefault();
@@ -46,15 +79,7 @@ var DashBoard = React.createClass({displayName: "DashBoard",
     return (
 
         React.createElement("div", {className: "row header-content-login"}, 
-          React.createElement("ul", {className: "navbuttons-login"}, 
-            React.createElement("li", null, React.createElement("a", {href: "imageboard"}, "bouquets")), 
-            React.createElement("li", null, React.createElement("a", {href: "url"}, "about us")), 
-            React.createElement("li", null, React.createElement("a", {href: "url"}, "contact us")), 
-            React.createElement("li", {id: "loginl"}, React.createElement("a", {href: "#loginpage"}, "login"))
-          ), 
-          React.createElement("div", {className: "header-login"}, 
-            React.createElement("h1", null, "La Belle Fluer")
-          ), 
+          React.createElement(Header, null), 
 
          React.createElement("div", {className: "row"}, 
 
@@ -78,6 +103,23 @@ var DashBoard = React.createClass({displayName: "DashBoard",
   }
 });
 
+var Header = React.createClass({displayName: "Header",
+  render: function(){
+    return (
+      React.createElement("div", null, 
+        React.createElement("ul", {className: "navbuttons-login"}, 
+          React.createElement("li", null, React.createElement("a", {href: "imageboard"}, "bouquets")), 
+          React.createElement("li", null, React.createElement("a", {href: "url"}, "about us")), 
+          React.createElement("li", null, React.createElement("a", {href: "url"}, "contact us")), 
+          React.createElement("li", {id: "loginl"}, React.createElement("a", {href: "#loginpage"}, "login"))
+        ), 
+        React.createElement("div", {className: "header-login"}, 
+          React.createElement("h1", null, "La Belle Fluer")
+        )
+      )
+    )
+  }
+})
 
 
 
@@ -93,10 +135,28 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var Backbone = require('backbone');
-var models = require('../models/models');
-var ModelArrangement = require('../models/models').ArrangementCollection;
+var models = require('../models/models.js');
+var ModelArrangement = require('../models/models.js').ArrangementCollection;
 
 var arrangementCollection = new ModelArrangement();
+
+
+var csrftoken = $("input[name='csrfmiddlewaretoken']").val();
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+
 
 var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
   mixins:[Backbone.React.Component.Mixin],
@@ -115,6 +175,7 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
           React.createElement("td", null, product.name), 
           React.createElement("td", null, product.price), 
           React.createElement("td", null, product.description), 
+          React.createElement("td", null, React.createElement("img", {src: product.photo})), 
           React.createElement("td", null, React.createElement("a", {href: "#addproduct"}, "Edit"))
         )
       )
@@ -131,6 +192,7 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
                 React.createElement("td", null, "Name"), 
                 React.createElement("td", null, "Price"), 
                 React.createElement("td", null, "Description"), 
+                React.createElement("td", {className: "add-image"}, "Photo"), 
                 React.createElement("td", null, "Actions")
               )
             ), 
@@ -148,7 +210,7 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
 
 module.exports = CreateDataComponent;
 
-},{"../models/models":7,"backbone":20,"jquery":102,"react":418,"react-dom":265}],3:[function(require,module,exports){
+},{"../models/models.js":7,"backbone":20,"jquery":102,"react":418,"react-dom":265}],3:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -167,9 +229,9 @@ var HeaderComponent = React.createClass({displayName: "HeaderComponent",
       React.createElement("div", {className: "container-fluid"}, 
          React.createElement("div", {className: "row header-content"}, 
            React.createElement("ul", {className: "navbuttons"}, 
-             React.createElement("li", null, React.createElement("a", {href: ""}, "bouquets")), 
-             React.createElement("li", null, React.createElement("a", {href: "url"}, "about us")), 
-             React.createElement("li", null, React.createElement("a", {href: "url"}, "contact us")), 
+             React.createElement("li", null, React.createElement("a", {href: "#arrangements"}, "bouquets")), 
+             React.createElement("li", null, React.createElement("a", {href: "#about"}, "about us")), 
+             React.createElement("li", null, React.createElement("a", {href: "#contact"}, "contact us")), 
              React.createElement("li", {id: "login"}, React.createElement("a", {href: "#loginpage"}, "login"))
            ), 
            React.createElement("div", {className: "header"}, 
@@ -347,7 +409,7 @@ module.exports = HeaderComponent;
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
-var models = require('../models/models');
+var models = require('../models/models.js');
 
 var Backbone = require('backbone');
 console.log('login require');
@@ -395,8 +457,14 @@ var LoginPage = React.createClass({displayName: "LoginPage",
       'password': $('#signin-password').val()
     });
 
-    login.save().then(function(results){
-      Backbone.history.navigate('dashboard', {trigger: true});
+    login.save(null, {
+        success: function(results){
+          console.log(results);
+          Backbone.history.navigate('dashboard', {trigger: true});
+        },
+        error: function(model, err){
+          console.log(err);
+        }
     });
   },
   render: function(){
@@ -440,7 +508,7 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
 module.exports = LoginPage;
 
-},{"../models/models":7,"backbone":20,"react":418,"react-dom":265}],6:[function(require,module,exports){
+},{"../models/models.js":7,"backbone":20,"react":418,"react-dom":265}],6:[function(require,module,exports){
 "use strict";
 window.$ = window.jQuery = require('jquery');
 var Backbone = require('backbone');
@@ -457,7 +525,7 @@ var Backbone = require('backbone');
 
 var Login = Backbone.Model.extend({
  idAttribute: 'cid',
- urlRoot: '/login/',
+ urlRoot: '/api/login/',
 });
 
 var User = Backbone.Model.extend({
@@ -545,10 +613,10 @@ var Router = Backbone.Router.extend({
     );
   },
   arrangements: function(){
-    ReactDOM.unmountComponentAtNode(appContainer);
-    var arrangementCollection = new ModelArrangement();
-    arrangementCollection.fetch().then(function(response){
-      ReactDOM.render(
+        ReactDOM.unmountComponentAtNode(appContainer);
+        var arrangementCollection = new ModelArrangement();
+        arrangementCollection.fetch().then(function(response){
+        ReactDOM.render(
         React.createElement(CreateDataComponent, {collection: response}),
         appContainer
       );

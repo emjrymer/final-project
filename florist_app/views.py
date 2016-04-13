@@ -33,6 +33,7 @@ def logout_view(request):
 
 @api_view(['POST'])
 def api_login(request, *args, **kwargs):
+    print("api login")
     username = request.data.get('username')
     password = request.data.get('password')
     user = authenticate(username=username, password=password)
@@ -65,7 +66,7 @@ class UserCreateAPIView(generics.CreateAPIView):
 class ArrangementListCreateAPIView(generics.ListCreateAPIView):
     queryset = Arrangement.objects.all()
     serializer_class = ArrangementSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
     def create(self, request, *args, **kwargs):
         request.data['florist'] = request.user.pk

@@ -15,9 +15,9 @@ var HeaderComponent = React.createClass({
       <div className='container-fluid'>
          <div className="row header-content">
            <ul className='navbuttons'>
-             <li><a href="">bouquets</a></li>
-             <li><a href="url">about us</a></li>
-             <li><a href="url">contact us</a></li>
+             <li><a href="#arrangements">bouquets</a></li>
+             <li><a href="#about">about us</a></li>
+             <li><a href="#contact">contact us</a></li>
              <li id="login"><a href="#loginpage">login</a></li>
            </ul>
            <div className="header">

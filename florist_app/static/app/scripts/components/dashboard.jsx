@@ -4,6 +4,39 @@ var Backbone = require('backbone');
 var models = require('../models/models');
 
 
+var csrftoken = $("input[name='csrfmiddlewaretoken']").val();
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
+
+var Header = React.createClass({
+  render: function(){
+    return (
+      <div>
+        <ul className='navbuttons-login'>
+          <li><a href="imageboard">bouquets</a></li>
+          <li><a href="url">about us</a></li>
+          <li><a href="url">contact us</a></li>
+          <li id="loginl"><a href="#loginpage">login</a></li>
+        </ul>
+        <div className="header-login">
+          <h1>La Belle Fluer</h1>
+        </div>
+      </div>
+    )
+  }
+})
+
 var DashBoard = React.createClass({
   handleFormSubmit: function(event){
     event.preventDefault();
@@ -44,15 +77,7 @@ var DashBoard = React.createClass({
     return (
 
         <div className="row header-content-login">
-          <ul className='navbuttons-login'>
-            <li><a href="imageboard">bouquets</a></li>
-            <li><a href="url">about us</a></li>
-            <li><a href="url">contact us</a></li>
-            <li id="loginl"><a href="#loginpage">login</a></li>
-          </ul>
-          <div className="header-login">
-            <h1>La Belle Fluer</h1>
-          </div>
+          <Header />
 
          <div className="row">
 
@@ -76,6 +101,23 @@ var DashBoard = React.createClass({
   }
 });
 
+var Header = React.createClass({
+  render: function(){
+    return (
+      <div>
+        <ul className='navbuttons-login'>
+          <li><a href="imageboard">bouquets</a></li>
+          <li><a href="url">about us</a></li>
+          <li><a href="url">contact us</a></li>
+          <li id="loginl"><a href="#loginpage">login</a></li>
+        </ul>
+        <div className="header-login">
+          <h1>La Belle Fluer</h1>
+        </div>
+      </div>
+    )
+  }
+})
 
 
 
