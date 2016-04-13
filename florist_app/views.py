@@ -65,7 +65,7 @@ class UserCreateAPIView(generics.CreateAPIView):
 class ArrangementListCreateAPIView(generics.ListCreateAPIView):
     queryset = Arrangement.objects.all()
     serializer_class = ArrangementSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated ,)
 
     def create(self, request, *args, **kwargs):
         request.data['florist'] = request.user.pk
