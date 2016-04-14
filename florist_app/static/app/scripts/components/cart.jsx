@@ -4,53 +4,54 @@ var Backbone = require('backbone');
 var models = require('../models/models');
 
 
-var CreateDataComponent = React.createClass({
-  mixins:[Backbone.React.Component.Mixin],
+var CartComponent = React.createClass({
   getInitialState: function(){
     return {'products': []};
   },
   componentDidMount: function(){
-    arrangementCollection.fetch();
-  },
-  render: function(){
-    console.log('arra collec: ', arrangementCollection.models);
-
-    var productRows = this.props.collection.map(function(product){
-      return (
-        <tr key={product.id}>
-          <td>{product.name}</td>
-          <td>{product.price}</td>
-          <td>{product.description}</td>
-          <td><img src={product.photo}/></td>
-          <td><a href={"#addproduct"}>Edit</a></td>
-        </tr>
-      )
+    var self = this;
+    var cart = new models.CartCollection();
+    console.log(cart);
+    cart.fetch().done(function(products){
+      console.log(products);
+      self.setState({ 'products': products});
     });
+  },
 
-    console.log("are you here!");
-    return (
+    render: function(){
+      var products = this.state.products.map(function(indivCart){
+        console.log(indivCart);
+        var imgUrl= indivCart.arrangement_photo;
+        return(
+            <tr key={indivCart.id}>
+              <td>{indivCart.arrangement_name}</td>
+                <td>{indivCart.arrangement_price}</td>
+              <td className="add-image"><img src={imgUrl} /></td>
+            </tr>
+          )
+      });
 
-        <div className="createproductspage">
-          <h3>Products</h3>
-           <a href="#addproduct" className="add-button">Add</a>
+
+
+
+      return (
+          <div className="createproductspage">
+            <h3>Basket</h3>
             <table className="table">
               <thead>
                 <tr>
                   <td>Name</td>
                   <td>Price</td>
-                  <td>Description</td>
-                  <td className="add-image">Photo</td>
-                  <td>Actions</td>
+                  <td>Photo</td>
                 </tr>
               </thead>
               <tbody>
-                {productRows}
+                {products}
               </tbody>
             </table>
+          </div>
 
 
-
-        </div>
     )
   }
 })

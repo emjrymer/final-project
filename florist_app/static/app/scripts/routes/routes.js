@@ -15,7 +15,8 @@ var CreateDataComponent = require('./../components/data.jsx');
 var appContainer = document.getElementById('app');
 var ModelArrangement = require('../models/models').ArrangementCollection;
 var GalleryComponent = require('./../components/imageboard.jsx');
-
+var CartComponent = require('./../components/cart.jsx');
+var DetailViewComponent = require('./../components/detailview.jsx');
 
 var Router = Backbone.Router.extend({
   routes:{
@@ -23,8 +24,9 @@ var Router = Backbone.Router.extend({
     'loginpage':'loginpage',
     'dashboard': 'dashboard',
     'arrangements': 'arrangements',
-    "gallery": "gallery"
-
+    "gallery": "gallery",
+    "cart": "cart",
+    "detailview" : "detailview"
 
   },
   index: function(){
@@ -69,6 +71,24 @@ var Router = Backbone.Router.extend({
       );
 
     })
+  },
+
+  cart: function(){
+    ReactDOM.unmountComponentAtNode(appContainer);
+
+    ReactDOM.render(
+      React.createElement(CartComponent),
+      appContainer
+    );
+  },
+
+  detailview: function(){
+    ReactDOM.unmountComponentAtNode(appContainer);
+
+    ReactDOM.render(
+      React.createElement(DetailViewComponent),
+      appContainer
+    );
   },
 
 });

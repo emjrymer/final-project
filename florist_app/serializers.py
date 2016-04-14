@@ -10,9 +10,22 @@ class ArrangementSerializer(serializers.ModelSerializer):
 
 
 class CartSerializer(serializers.ModelSerializer):
+    arrangement_name = serializers.SerializerMethodField()
+    arrangement_price = serializers.SerializerMethodField()
+    arrangement_photo = serializers.SerializerMethodField()
+
+    def get_arrangement_name(self, obj):
+        return obj.arrangement.name
+
+    def get_arrangement_price(self, obj):
+        return obj.arrangement.price
+
+    def get_arrangement_photo(self, obj):
+        return obj.arrangement.photo
 
     class Meta:
         model = Cart
+
 
 
 class FloristSerializer(serializers.ModelSerializer):

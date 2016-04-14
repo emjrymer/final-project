@@ -21,13 +21,13 @@ var ArrangementCollection = Backbone.Collection.extend({
 })
 
 var Cart = Backbone.Model.extend({
-  urlRoot: '/api/baskets/'
+  urlRoot: '/api/carts/'
 })
 
 
 var CartCollection = Backbone.Collection.extend({
   model: Cart,
-  url: '/api/baskets/'
+  url: '/api/carts/'
 })
 
 
@@ -39,6 +39,4 @@ module.exports = {
   'ArrangementCollection': ArrangementCollection,
   "Cart": Cart,
   "CartCollection": CartCollection
-
-
 }
