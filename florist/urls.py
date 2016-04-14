@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.auth import views as auth_views
-from florist_app.views import ArrangementListAPIView, AboutUs, FloristSpecificArrangementListAPIView, api_login, api_logout, UserCreateAPIView, ArrangementListCreateAPIView, ArrangementRetrieveUpdateDestroyAPIView, FloristListCreateAPIView, FloristRetrieveUpdateDestroyAPIView, BasketListCreateAPIView, BasketRetrieveUpdateDestroyAPIView, BuyerListCreateAPIView, BuyerRetrieveUpdateDestroyAPIView
+from florist_app.views import ArrangementListAPIView, AboutUs, FloristSpecificArrangementListAPIView, api_login, api_logout, UserCreateAPIView, ArrangementListCreateAPIView, ArrangementRetrieveUpdateDestroyAPIView, FloristListCreateAPIView, FloristRetrieveUpdateDestroyAPIView, CartListCreateAPIView, CartRetrieveUpdateDestroyAPIView, BuyerListCreateAPIView, BuyerRetrieveUpdateDestroyAPIView
 
 
 urlpatterns = [
@@ -20,15 +20,15 @@ urlpatterns = [
     url(r'^api/florists/$', FloristListCreateAPIView.as_view(), name='florist_list_create_api_view'),
     url(r'^api/florists/(?P<pk>\d+)/$', FloristRetrieveUpdateDestroyAPIView.as_view()),
     url(r'^api/florist/(?P<pk>\d+)/arrangements/$', FloristSpecificArrangementListAPIView.as_view(), name='florist_specific_arrangement_list_api_view'),
-    # cart/basket
-    url(r'^api/baskets/$', BasketListCreateAPIView.as_view(), name='basket_list_create_api_view'),
-    url(r'^api/baskets/(?P<pk>\d+)/$', BasketRetrieveUpdateDestroyAPIView.as_view()),
+    # cart/Cart
+    url(r'^api/carts/$', CartListCreateAPIView.as_view(), name='cart_list_create_api_view'),
+    url(r'^api/carts/(?P<pk>\d+)/$', CartRetrieveUpdateDestroyAPIView.as_view()),
     #arrangements/items
     url(r'^api/arrangements/$', ArrangementListCreateAPIView.as_view(), name='arrangement_list_create_api_view'),
     url(r'^api/arrangements/(?P<pk>\d+)/$', ArrangementRetrieveUpdateDestroyAPIView.as_view()),
     url(r'^api/arrangementdetail/(?P<pk>\d+)/$', ArrangementListAPIView.as_view(), name='individual_arrangement_detail_view'),
     # don't worry about buyers for now
-    # add a view to see previous orders(baskets) by specific buyer
+    # add a view to see previous orders(Carts) by specific buyer
     url(r'^api/buyers/$', BuyerListCreateAPIView.as_view(), name='buyer_list_create_api_view'),
     url(r'^api/buyers/(?P<pk>\d+)/$', BuyerRetrieveUpdateDestroyAPIView.as_view()),
 ]

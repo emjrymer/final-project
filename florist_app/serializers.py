@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from florist_app.models import Arrangement, Basket, Florist, Buyer
+from florist_app.models import Arrangement, Cart, Florist, Buyer
 
 
 class ArrangementSerializer(serializers.ModelSerializer):
@@ -9,10 +9,10 @@ class ArrangementSerializer(serializers.ModelSerializer):
         model = Arrangement
 
 
-class BasketSerializer(serializers.ModelSerializer):
+class CartSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Basket
+        model = Cart
 
 
 class FloristSerializer(serializers.ModelSerializer):
@@ -34,9 +34,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('first_name', 'email', 'username', 'password')
 
     def create(self, validated_data):
-        user = User(
-            username=validated_data['username']
-        )
+        user = User(username=validated_data['username'])
         user.set_password(validated_data['password'])
         user.save()
         return user

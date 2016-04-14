@@ -13,8 +13,8 @@ from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view
 # florist_app imports
-from florist_app.models import Arrangement, Basket, Florist, Buyer
-from florist_app.serializers import UserSerializer, ArrangementSerializer, BasketSerializer, FloristSerializer, BuyerSerializer
+from florist_app.models import Arrangement, Cart, Florist, Buyer
+from florist_app.serializers import UserSerializer, ArrangementSerializer, CartSerializer, FloristSerializer, BuyerSerializer
 
 
 def login_view(request):
@@ -78,36 +78,38 @@ class ArrangementListCreateAPIView(generics.ListCreateAPIView):
 
 
 class ArrangementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Arrangement.objects.all()
     serializer_class = ArrangementSerializer
     authentication_classes = (BasicAuthentication,)
     permission_classes = (IsAuthenticated, )
 
-    def queryset(self):
-        return Arrangement.objects.filter(florist_id=self.request.user)
+    # def get_queryset(self):
+        # return Arrangement.objects.filter(florist_id=self.request.user)
 
 
 class ArrangementListAPIView(generics.ListAPIView):
-    serializer_class = ArrangementSerializer
     authentication_classes = (BasicAuthentication,)
     permission_classes = (IsAuthenticated, )
 
-    def queryset(self):
-       return Arrangement.objects.filter(id=self.kwargs.get('pk'))
+    def get(self, *args, **kwargs):
+        arrangement = Arrangement.objects.get(id=self.kwargs.get('pk'))
+        serializer = ArrangementSerializer(arrangement)
+        return JsonResponse(serializer.data)
 
 
-class BasketListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Arrangement.objects.all()
-    serializer_class = BasketSerializer
+class CartListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Cart.objects.select_related('arrangement').all()
+    serializer_class = CartSerializer
     permission_classes = (IsAuthenticated,)
 
 
-class BasketRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = BasketSerializer
+class CartRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = CartSerializer
     authentication_classes = (BasicAuthentication,)
     permission_classes = (IsAuthenticated, )
 
     def queryset(self):
-        return Basket.objects.filter(user_id=self.request.user)
+        return Cart.objects.filter(user_id=self.request.user)
 
 
 class FloristListCreateAPIView(generics.ListCreateAPIView):

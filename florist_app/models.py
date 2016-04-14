@@ -19,13 +19,13 @@ class Arrangement(models.Model):
         ordering = ["-time_created"]
 
 
-class Basket(models.Model):
+class Cart(models.Model):
     notes = models.TextField(blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
     arrangement = models.ForeignKey(Arrangement)
 
     def __str__(self):
-        return self.notes
+        return self.name
 
     class Meta:
         ordering = ["-time_created"]
@@ -43,7 +43,7 @@ class Florist(models.Model):
 class Buyer(models.Model):
     user = models.OneToOneField("auth.User")
     time_created = models.DateTimeField(auto_now_add=True)
-    order_history = models.ManyToManyField(Basket)
+    order_history = models.ManyToManyField(Cart)
 
     def __str__(self):
         return self.user
