@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.auth import views as auth_views
-from florist_app.views import ArrangementDetailView, AboutUs, FloristSpecificArrangementListAPIView, api_login, api_logout, UserCreateAPIView, ArrangementListCreateAPIView, ArrangementRetrieveUpdateDestroyAPIView, FloristListCreateAPIView, FloristRetrieveUpdateDestroyAPIView, BasketListCreateAPIView, BasketRetrieveUpdateDestroyAPIView, BuyerListCreateAPIView, BuyerRetrieveUpdateDestroyAPIView
+from florist_app.views import ArrangementListAPIView, AboutUs, FloristSpecificArrangementListAPIView, api_login, api_logout, UserCreateAPIView, ArrangementListCreateAPIView, ArrangementRetrieveUpdateDestroyAPIView, FloristListCreateAPIView, FloristRetrieveUpdateDestroyAPIView, BasketListCreateAPIView, BasketRetrieveUpdateDestroyAPIView, BuyerListCreateAPIView, BuyerRetrieveUpdateDestroyAPIView
 
 
 urlpatterns = [
@@ -26,7 +26,7 @@ urlpatterns = [
     #arrangements/items
     url(r'^api/arrangements/$', ArrangementListCreateAPIView.as_view(), name='arrangement_list_create_api_view'),
     url(r'^api/arrangements/(?P<pk>\d+)/$', ArrangementRetrieveUpdateDestroyAPIView.as_view()),
-    url(r'^api/arrangement_detail/(?P<pk>\d+)/$', ArrangementDetailView.as_view(), name='individual_arrangement_detail_view'),
+    url(r'^api/arrangementdetail/(?P<pk>\d+)/$', ArrangementListAPIView.as_view(), name='individual_arrangement_detail_view'),
     # don't worry about buyers for now
     # add a view to see previous orders(baskets) by specific buyer
     url(r'^api/buyers/$', BuyerListCreateAPIView.as_view(), name='buyer_list_create_api_view'),

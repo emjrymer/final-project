@@ -73,7 +73,7 @@ class ArrangementListCreateAPIView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated ,)
 
     def create(self, request, *args, **kwargs):
-        request.data['florist'] = request.user.pk
+        request.data['florist'] = request.user.pk #maybe this should have self infront of it? self.request.user.pk
         return super().create(request, *args, **kwargs)
 
 
@@ -86,13 +86,13 @@ class ArrangementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIV
         return Arrangement.objects.filter(florist_id=self.request.user)
 
 
-class ArrangementDetailView(DetailView):
-    model = Arrangement
+class ArrangementListAPIView(generics.ListAPIView):
+    serializer_class = ArrangementSerializer
+    authentication_classes = (BasicAuthentication,)
+    permission_classes = (IsAuthenticated, )
 
-    def get_context_data(self, **kwargs):
-       context = super().get_context_data(**kwargs)
-       context['arrangement'] = Arrangement.objects.filter(id=self.kwargs.get('pk'))
-       return context
+    def queryset(self):
+       return Arrangement.objects.filter(id=self.kwargs.get('pk'))
 
 
 class BasketListCreateAPIView(generics.ListCreateAPIView):
