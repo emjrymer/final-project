@@ -98,7 +98,7 @@ class ArrangementListAPIView(generics.ListAPIView):
 
 
 class CartListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Cart.objects.select_related('arrangement').all()
+    queryset = Cart.objects.all()
     serializer_class = CartSerializer
     permission_classes = (IsAuthenticated,)
 

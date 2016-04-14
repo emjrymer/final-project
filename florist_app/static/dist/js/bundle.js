@@ -4,6 +4,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var models = require('../models/models');
+var CartCollection = require('../models/models.js').CartCollection;
 
 
 var CartComponent = React.createClass({displayName: "CartComponent",
@@ -27,7 +28,7 @@ var CartComponent = React.createClass({displayName: "CartComponent",
         return(
             React.createElement("tr", {key: indivCart.id}, 
               React.createElement("td", null, indivCart.arrangement_name), 
-                React.createElement("td", null, indivCart.arrangement_price), 
+                React.createElement("td", null, "$ ", indivCart.arrangement_price), 
               React.createElement("td", {className: "add-image"}, React.createElement("img", {src: imgUrl}))
             )
           )
@@ -38,7 +39,7 @@ var CartComponent = React.createClass({displayName: "CartComponent",
 
       return (
           React.createElement("div", {className: "createproductspage"}, 
-            React.createElement("h3", null, "Basket"), 
+            React.createElement("h3", null, "Cart"), 
             React.createElement("table", {className: "table"}, 
               React.createElement("thead", null, 
                 React.createElement("tr", null, 
@@ -50,7 +51,8 @@ var CartComponent = React.createClass({displayName: "CartComponent",
               React.createElement("tbody", null, 
                 products
               )
-            )
+            ), 
+            React.createElement("p", null, "Total Cart Price:  $ ")
           )
 
 
@@ -61,7 +63,7 @@ var CartComponent = React.createClass({displayName: "CartComponent",
 
 module.exports = CartComponent;
 
-},{"../models/models":10,"backbone":23,"react":421,"react-dom":268}],2:[function(require,module,exports){
+},{"../models/models":10,"../models/models.js":10,"backbone":23,"react":421,"react-dom":268}],2:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -350,7 +352,15 @@ var GalleryComponent = React.createClass({displayName: "GalleryComponent",
     var cart = new models.Cart({arrangement: product.id});
 
     // 3. Save the cart object
-    cart.save();
+    cart.save(null, {
+        success: function(results){
+          console.log(results);
+          Backbone.history.navigate('cart', {trigger: true});
+        },
+        error: function(model, err){
+          console.log(err);
+        }
+    });
 
     // 4. Update the cart icon to show number of items in the cart
 
@@ -486,7 +496,7 @@ var NavBar = React.createClass({displayName: "NavBar",
     return (
       React.createElement("div", null, 
         React.createElement("ul", {className: "navbuttons-login"}, 
-          React.createElement("li", null, React.createElement("a", {href: "imageboard"}, "bouquets")), 
+          React.createElement("li", null, React.createElement("a", {href: "#gallery"}, "bouquets")), 
           React.createElement("li", null, React.createElement("a", {href: "#"}, "home")), 
           React.createElement("li", null, React.createElement("a", {href: "#"}, "contact us")), 
           React.createElement("li", {id: "loginl"}, React.createElement("a", {href: "#loginpage"}, "login"))
@@ -1194,7 +1204,7 @@ exports.__esModule = true;
 
 },{"backbone":23,"react":421,"react-dom":268,"underscore":425}],23:[function(require,module,exports){
 (function (global){
-//     Backbone.js 1.3.2
+//     Backbone.js 1.3.3
 
 //     (c) 2010-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Backbone may be freely distributed under the MIT license.
@@ -1240,7 +1250,7 @@ exports.__esModule = true;
   var slice = Array.prototype.slice;
 
   // Current version of the library. Keep in sync with `package.json`.
-  Backbone.VERSION = '1.3.2';
+  Backbone.VERSION = '1.3.3';
 
   // For Backbone's purposes, jQuery, Zepto, Ender, or My Library (kidding) owns
   // the `$` variable.
@@ -5294,7 +5304,7 @@ module.exports = invariant;
 }).call(this,require('_process'))
 },{"_process":176}],105:[function(require,module,exports){
 /*!
- * jQuery JavaScript Library v2.2.2
+ * jQuery JavaScript Library v2.2.3
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -5304,7 +5314,7 @@ module.exports = invariant;
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-03-17T17:51Z
+ * Date: 2016-04-05T19:26Z
  */
 
 (function( global, factory ) {
@@ -5360,7 +5370,7 @@ var support = {};
 
 
 var
-	version = "2.2.2",
+	version = "2.2.3",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -14770,7 +14780,7 @@ jQuery.fn.load = function( url, params, callback ) {
 		// If it fails, this function gets "jqXHR", "status", "error"
 		} ).always( callback && function( jqXHR, status ) {
 			self.each( function() {
-				callback.apply( self, response || [ jqXHR.responseText, status, jqXHR ] );
+				callback.apply( this, response || [ jqXHR.responseText, status, jqXHR ] );
 			} );
 		} );
 	}

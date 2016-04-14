@@ -25,7 +25,15 @@ var GalleryComponent = React.createClass({
     var cart = new models.Cart({arrangement: product.id});
 
     // 3. Save the cart object
-    cart.save();
+    cart.save(null, {
+        success: function(results){
+          console.log(results);
+          Backbone.history.navigate('cart', {trigger: true});
+        },
+        error: function(model, err){
+          console.log(err);
+        }
+    });
 
     // 4. Update the cart icon to show number of items in the cart
 

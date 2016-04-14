@@ -9,7 +9,7 @@ var NavBar = React.createClass({
     return (
       <div>
         <ul className='navbuttons-login'>
-          <li><a href="imageboard">bouquets</a></li>
+          <li><a href="#gallery">bouquets</a></li>
           <li><a href="#">home</a></li>
           <li><a href="#">contact us</a></li>
           <li id="loginl"><a href="#loginpage">login</a></li>

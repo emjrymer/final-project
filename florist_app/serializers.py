@@ -21,7 +21,7 @@ class CartSerializer(serializers.ModelSerializer):
         return obj.arrangement.price
 
     def get_arrangement_photo(self, obj):
-        return obj.arrangement.photo
+        return obj.arrangement.photo.url if obj.arrangement.photo else ""
 
     class Meta:
         model = Cart

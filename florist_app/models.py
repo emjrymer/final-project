@@ -25,7 +25,7 @@ class Cart(models.Model):
     arrangement = models.ForeignKey(Arrangement)
 
     def __str__(self):
-        return self.name
+        return self.arrangement.name
 
     class Meta:
         ordering = ["-time_created"]

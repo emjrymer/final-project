@@ -2,6 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var models = require('../models/models');
+var CartCollection = require('../models/models.js').CartCollection;
 
 
 var CartComponent = React.createClass({
@@ -25,7 +26,7 @@ var CartComponent = React.createClass({
         return(
             <tr key={indivCart.id}>
               <td>{indivCart.arrangement_name}</td>
-                <td>{indivCart.arrangement_price}</td>
+                <td>$ {indivCart.arrangement_price}</td>
               <td className="add-image"><img src={imgUrl} /></td>
             </tr>
           )
@@ -36,7 +37,7 @@ var CartComponent = React.createClass({
 
       return (
           <div className="createproductspage">
-            <h3>Basket</h3>
+            <h3>Cart</h3>
             <table className="table">
               <thead>
                 <tr>
@@ -49,6 +50,7 @@ var CartComponent = React.createClass({
                 {products}
               </tbody>
             </table>
+            <p>Total Cart Price:  $ </p>
           </div>
 
 
