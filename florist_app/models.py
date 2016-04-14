@@ -37,7 +37,7 @@ class Florist(models.Model):
     rating = models.IntegerField(null=True)
 
     def __str__(self):
-        return "{} - {}".format(self.user, self.time_created)
+        return self.user
 
 
 class Buyer(models.Model):
