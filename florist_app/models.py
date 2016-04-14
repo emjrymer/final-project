@@ -37,7 +37,7 @@ class Florist(models.Model):
     rating = models.IntegerField(null=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 class Buyer(models.Model):
@@ -46,7 +46,7 @@ class Buyer(models.Model):
     order_history = models.ManyToManyField(Cart)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 
 # method for creating florist
