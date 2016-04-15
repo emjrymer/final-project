@@ -2,6 +2,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var models = require('../models/models.js');
+var NavBar  = require('./../components/nav.jsx');
+
 
 
 var GalleryComponent = React.createClass({
@@ -39,17 +41,18 @@ var GalleryComponent = React.createClass({
 
   },
   render: function(){
+      console.log('gallery page!');
     var self = this;
 
     var productRows = this.state.products.map(function(product){
 
       return (
-          <div className="col-xs-4 image" key={product.id}>
-            <img src={product.get("photo")} alt=""/>
-            <h1>{product.get("name")}</h1>
-            <p>L{product.get("description")} {product.get("price")}</p>
-            <button type='button' onClick={self.addToCart.bind(self,product)} className='btn btn-default'>Add bouquet </button>
-          </div>
+              <div className="col-xs-4 image" key={product.id}>
+                <img src={product.get("photo")} alt=""/>
+                <h1>{product.get("name")}</h1>
+                <p>{product.get("description")} - ${product.get("price")}</p>
+                <button type='button' onClick={self.addToCart.bind(self,product)} className='btn btn-default'>Add bouquet </button>
+              </div>
       )
     });
     return (
@@ -67,6 +70,7 @@ var GalleryComponent = React.createClass({
             {productRows}
           </div>
         </div>
+        <NavBar/>
       </div>
 
   );

@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var Backbone = require('backbone');
 var models = require('../models/models.js');
+var NavBar  = require('./../components/nav.jsx');
 var ModelArrangement = require('../models/models.js').ArrangementCollection;
 
 var arrangementCollection = new ModelArrangement();
@@ -26,7 +27,7 @@ var CreateDataComponent = React.createClass({
       return (
         <tr key={product.id}>
           <td>{product.name}</td>
-          <td>{product.price}</td>
+          <td>$ {product.price}</td>
           <td>{product.description}</td>
           <td><img src={product.photo}/></td>
           <td><a href={"#addproduct"}>Edit</a></td>
@@ -34,9 +35,10 @@ var CreateDataComponent = React.createClass({
       )
     });
 
-    console.log("are you here!");
+    console.log("arrangements!");
     return(
       <div className="createproductspage">
+          <NavBar/>
         <h3>Products</h3>
         <a href="#dashboard" className="add-button">Add</a>
           <table className="table">

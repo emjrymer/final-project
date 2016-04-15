@@ -2,7 +2,6 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var models = require('../models/models.js');
 var NavBar  = require('./../components/nav.jsx');
-
 var Backbone = require('backbone');
 console.log('login require');
 

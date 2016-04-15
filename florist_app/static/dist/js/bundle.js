@@ -4,6 +4,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var models = require('../models/models');
+var NavBar  = require('./../components/nav.jsx');
 var CartCollection = require('../models/models.js').CartCollection;
 
 
@@ -20,7 +21,6 @@ var CartComponent = React.createClass({displayName: "CartComponent",
       self.setState({ 'products': products});
     });
   },
-
     render: function(){
       var products = this.state.products.map(function(indivCart){
         console.log(indivCart);
@@ -28,7 +28,7 @@ var CartComponent = React.createClass({displayName: "CartComponent",
         return(
             React.createElement("tr", {key: indivCart.id}, 
               React.createElement("td", null, indivCart.arrangement_name), 
-                React.createElement("td", null, "$ ", indivCart.arrangement_price), 
+              React.createElement("td", null, "$ ", indivCart.arrangement_price), 
               React.createElement("td", {className: "add-image"}, React.createElement("img", {src: imgUrl}))
             )
           )
@@ -39,7 +39,8 @@ var CartComponent = React.createClass({displayName: "CartComponent",
 
       return (
           React.createElement("div", {className: "createproductspage"}, 
-            React.createElement("h3", null, "Cart"), 
+              React.createElement(NavBar, null), 
+            React.createElement("h3", null, "Checkout"), 
             React.createElement("table", {className: "table"}, 
               React.createElement("thead", null, 
                 React.createElement("tr", null, 
@@ -52,7 +53,14 @@ var CartComponent = React.createClass({displayName: "CartComponent",
                 products
               )
             ), 
-            React.createElement("p", null, "Total Cart Price:  $ ")
+            React.createElement("p", null, "Total Cart Price:  $15"), 
+                React.createElement("form", {method: "post", onSubmit:  this.handleSubmit}, 
+                  React.createElement("input", {size: "20", "data-stripe": "number", placeholder: "number"}), 
+                  React.createElement("input", {size: "4", "data-stripe": "cvc", placeholder: "cvc"}), 
+                  React.createElement("input", {size: "2", "data-stripe": "exp-month", placeholder: "exp-month"}), 
+                  React.createElement("input", {size: "4", "data-stripe": "exp-year", placeholder: "exp-year"}), 
+                  React.createElement("button", {type: "submit"}, "Pay")
+                )
           )
 
 
@@ -63,7 +71,7 @@ var CartComponent = React.createClass({displayName: "CartComponent",
 
 module.exports = CartComponent;
 
-},{"../models/models":10,"../models/models.js":10,"backbone":23,"react":421,"react-dom":268}],2:[function(require,module,exports){
+},{"../models/models":10,"../models/models.js":10,"./../components/nav.jsx":8,"backbone":23,"react":421,"react-dom":268}],2:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -155,6 +163,7 @@ var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var Backbone = require('backbone');
 var models = require('../models/models.js');
+var NavBar  = require('./../components/nav.jsx');
 var ModelArrangement = require('../models/models.js').ArrangementCollection;
 
 var arrangementCollection = new ModelArrangement();
@@ -178,7 +187,7 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
       return (
         React.createElement("tr", {key: product.id}, 
           React.createElement("td", null, product.name), 
-          React.createElement("td", null, product.price), 
+          React.createElement("td", null, "$ ", product.price), 
           React.createElement("td", null, product.description), 
           React.createElement("td", null, React.createElement("img", {src: product.photo})), 
           React.createElement("td", null, React.createElement("a", {href: "#addproduct"}, "Edit"))
@@ -186,9 +195,10 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
       )
     });
 
-    console.log("are you here!");
+    console.log("arrangements!");
     return(
       React.createElement("div", {className: "createproductspage"}, 
+          React.createElement(NavBar, null), 
         React.createElement("h3", null, "Products"), 
         React.createElement("a", {href: "#dashboard", className: "add-button"}, "Add"), 
           React.createElement("table", {className: "table"}, 
@@ -215,7 +225,7 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
 
 module.exports = CreateDataComponent;
 
-},{"../models/models.js":10,"backbone":23,"jquery":105,"react":421,"react-dom":268}],4:[function(require,module,exports){
+},{"../models/models.js":10,"./../components/nav.jsx":8,"backbone":23,"jquery":105,"react":421,"react-dom":268}],4:[function(require,module,exports){
 "use strict";
 // var React = require('react');
 // var ReactDOM = require('react-dom');
@@ -330,6 +340,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var models = require('../models/models.js');
+var NavBar  = require('./../components/nav.jsx');
+
 
 
 var GalleryComponent = React.createClass({displayName: "GalleryComponent",
@@ -367,17 +379,18 @@ var GalleryComponent = React.createClass({displayName: "GalleryComponent",
 
   },
   render: function(){
+      console.log('gallery page!');
     var self = this;
 
     var productRows = this.state.products.map(function(product){
 
       return (
-          React.createElement("div", {className: "col-xs-4 image", key: product.id}, 
-            React.createElement("img", {src: product.get("photo"), alt: ""}), 
-            React.createElement("h1", null, product.get("name")), 
-            React.createElement("p", null, "L", product.get("description"), " ", product.get("price")), 
-            React.createElement("button", {type: "button", onClick: self.addToCart.bind(self,product), className: "btn btn-default"}, "Add bouquet ")
-          )
+              React.createElement("div", {className: "col-xs-4 image", key: product.id}, 
+                React.createElement("img", {src: product.get("photo"), alt: ""}), 
+                React.createElement("h1", null, product.get("name")), 
+                React.createElement("p", null, product.get("description"), " - $", product.get("price")), 
+                React.createElement("button", {type: "button", onClick: self.addToCart.bind(self,product), className: "btn btn-default"}, "Add bouquet ")
+              )
       )
     });
     return (
@@ -394,7 +407,8 @@ var GalleryComponent = React.createClass({displayName: "GalleryComponent",
           React.createElement("div", {className: "row gallery-bouquets"}, 
             productRows
           )
-        )
+        ), 
+        React.createElement(NavBar, null)
       )
 
   );
@@ -403,13 +417,12 @@ var GalleryComponent = React.createClass({displayName: "GalleryComponent",
 
 module.exports = GalleryComponent;
 
-},{"../models/models.js":10,"backbone":23,"react":421,"react-dom":268}],7:[function(require,module,exports){
+},{"../models/models.js":10,"./../components/nav.jsx":8,"backbone":23,"react":421,"react-dom":268}],7:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
 var models = require('../models/models.js');
 var NavBar  = require('./../components/nav.jsx');
-
 var Backbone = require('backbone');
 console.log('login require');
 

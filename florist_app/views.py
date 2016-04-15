@@ -1,7 +1,7 @@
 # all the django imports
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, View
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
