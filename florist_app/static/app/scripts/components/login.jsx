@@ -17,10 +17,14 @@ var LoginPage = React.createClass({
         'password': $('#password').val(),
         'email': $('#email').val()
       });
-      user.save().then(function(results){
-          console.log('results: ', results);
-          Backbone.history.navigate('dashboard', {trigger: true});
-        })
+      user.save((null, {
+          success: function(results){
+            console.log(results);
+            Backbone.history.navigate('dashboard', {trigger: true});
+          },
+          error: function(model, err){
+            console.log(err);
+          })
   },
 
   handleSignIn: function(event) {

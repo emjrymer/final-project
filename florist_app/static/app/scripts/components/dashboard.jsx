@@ -26,7 +26,6 @@ var DashBoard = React.createClass({
       processData: false,
       type: 'POST',
       success: function(data){
-        alert(data);
         Backbone.history.navigate('arrangements', {trigger: true});
       },
       error: function(data){
