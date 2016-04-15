@@ -57,20 +57,16 @@ var GalleryComponent = React.createClass({
     });
     return (
       <div className="row">
+          <NavBar/>
         <div className='col-xs-3'>
-          <ul>
-            <li>Home</li>
-            <li>Gallery</li>
-            <li>About Us</li>
-            <li>Login</li>
-          </ul>
+            <div className='quote'><p>“She cast her fragrance and her radiance over me. I ought never to have run away from her... I ought to have guessed all the affection that lay behind her poor little stratagems. Flowers are so inconsistent! But I was too young to know how to love her...”
+            </p><p id="author">― Antoine de Saint-Exupéry, <br/>The Little Prince</p></div>
         </div>
         <div className='col-xs-9'>
           <div className='row gallery-bouquets'>
             {productRows}
           </div>
         </div>
-        <NavBar/>
       </div>
 
   );

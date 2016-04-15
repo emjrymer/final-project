@@ -15,12 +15,12 @@ var NavBar = React.createClass({
           <li id="loginl"><a href="#loginpage">login</a></li>
         </ul>
         <div className="header-login">
-          <h1>La Belle Fluer</h1>
+          <h1>La Belle Fleur</h1>
         </div>
       </div>
-    )
+    );
   }
-})
+});
 
 
 module.exports = NavBar;

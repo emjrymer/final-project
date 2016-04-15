@@ -21,7 +21,7 @@ var HeaderComponent = React.createClass({
              <li id="login"><a href="#loginpage">login</a></li>
            </ul>
            <div className="header">
-             <h1>La Belle Fluer</h1>
+             <h1>La Belle Fleur</h1>
              <h3>I must have flowers always, and always!<span>-Claude Monet</span></h3>
            </div>
          </div>

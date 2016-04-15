@@ -5817,6 +5817,17 @@ button.close {
 img {
   max-width: 100%; }
 
+#author {
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: right;
+  color: #4d4d4d; }
+
+.quote {
+  font-weight: lighter;
+  letter-spacing: 5px;
+  padding-left: 25px; }
+
 .header-content {
   background-image: url("../images/daisy.jpg");
   background-size: cover;

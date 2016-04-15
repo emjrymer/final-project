@@ -54,15 +54,37 @@ var CartComponent = React.createClass({displayName: "CartComponent",
               )
             ), 
             React.createElement("p", null, "Total Cart Price:  $15"), 
-                React.createElement("form", {method: "post", onSubmit:  this.handleSubmit}, 
-                  React.createElement("input", {size: "20", "data-stripe": "number", placeholder: "number"}), 
-                  React.createElement("input", {size: "4", "data-stripe": "cvc", placeholder: "cvc"}), 
-                  React.createElement("input", {size: "2", "data-stripe": "exp-month", placeholder: "exp-month"}), 
-                  React.createElement("input", {size: "4", "data-stripe": "exp-year", placeholder: "exp-year"}), 
-                  React.createElement("button", {type: "submit"}, "Pay")
+            React.createElement("div", null, 
+                React.createElement("form", {action: "", method: "POST", id: "payment-form", onSubmit:  this.handleSubmit}, 
+                      React.createElement("span", {class: "payment-errors"}), 
+
+                      React.createElement("div", {class: "form-row"}, 
+                        React.createElement("label", null, 
+                          React.createElement("span", null, "Card Number"), 
+                          React.createElement("input", {type: "text", size: "20", "data-stripe": "number"})
+                        )
+                      ), 
+
+                      React.createElement("div", {class: "form-row"}, 
+                        React.createElement("label", null, 
+                          React.createElement("span", null, "CVC"), 
+                          React.createElement("input", {type: "text", size: "4", "data-stripe": "cvc"})
+                        )
+                      ), 
+
+                      React.createElement("div", {class: "form-row"}, 
+                        React.createElement("label", null, 
+                          React.createElement("span", null, "Expiration (MM/YYYY)"), 
+                          React.createElement("input", {type: "text", size: "2", "data-stripe": "exp-month"})
+                        ), 
+                        React.createElement("span", null, " / "), 
+                        React.createElement("input", {type: "text", size: "4", "data-stripe": "exp-year"})
+                      ), 
+
+                      React.createElement("button", {type: "submit"}, "Submit Payment")
+                )
                 )
           )
-
 
     )
   }
@@ -190,7 +212,7 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
           React.createElement("td", null, "$ ", product.price), 
           React.createElement("td", null, product.description), 
           React.createElement("td", null, React.createElement("img", {src: product.photo})), 
-          React.createElement("td", null, React.createElement("a", {href: "#addproduct"}, "Edit"))
+          React.createElement("td", null, React.createElement("a", {href: "#editarrangement/" + product.id + "/"}, "Edit"))
         )
       )
     });
@@ -199,7 +221,7 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
     return(
       React.createElement("div", {className: "createproductspage"}, 
           React.createElement(NavBar, null), 
-        React.createElement("h3", null, "Products"), 
+        React.createElement("h3", null, "Current Products"), 
         React.createElement("a", {href: "#dashboard", className: "add-button"}, "Add"), 
           React.createElement("table", {className: "table"}, 
             React.createElement("thead", null, 
@@ -296,7 +318,7 @@ var HeaderComponent = React.createClass({displayName: "HeaderComponent",
              React.createElement("li", {id: "login"}, React.createElement("a", {href: "#loginpage"}, "login"))
            ), 
            React.createElement("div", {className: "header"}, 
-             React.createElement("h1", null, "La Belle Fluer"), 
+             React.createElement("h1", null, "La Belle Fleur"), 
              React.createElement("h3", null, "I must have flowers always, and always!", React.createElement("span", null, "-Claude Monet"))
            )
          ), 
@@ -395,20 +417,16 @@ var GalleryComponent = React.createClass({displayName: "GalleryComponent",
     });
     return (
       React.createElement("div", {className: "row"}, 
+          React.createElement(NavBar, null), 
         React.createElement("div", {className: "col-xs-3"}, 
-          React.createElement("ul", null, 
-            React.createElement("li", null, "Home"), 
-            React.createElement("li", null, "Gallery"), 
-            React.createElement("li", null, "About Us"), 
-            React.createElement("li", null, "Login")
-          )
+            React.createElement("div", {className: "quote"}, React.createElement("p", null, "“She cast her fragrance and her radiance over me. I ought never to have run away from her... I ought to have guessed all the affection that lay behind her poor little stratagems. Flowers are so inconsistent! But I was too young to know how to love her...”"
+            ), React.createElement("p", {id: "author"}, "― Antoine de Saint-Exupéry, ", React.createElement("br", null), "The Little Prince"))
         ), 
         React.createElement("div", {className: "col-xs-9"}, 
           React.createElement("div", {className: "row gallery-bouquets"}, 
             productRows
           )
-        ), 
-        React.createElement(NavBar, null)
+        )
       )
 
   );
@@ -516,12 +534,12 @@ var NavBar = React.createClass({displayName: "NavBar",
           React.createElement("li", {id: "loginl"}, React.createElement("a", {href: "#loginpage"}, "login"))
         ), 
         React.createElement("div", {className: "header-login"}, 
-          React.createElement("h1", null, "La Belle Fluer")
+          React.createElement("h1", null, "La Belle Fleur")
         )
       )
-    )
+    );
   }
-})
+});
 
 
 module.exports = NavBar;
@@ -625,7 +643,8 @@ var Router = Backbone.Router.extend({
     'arrangements': 'arrangements',
     "gallery": "gallery",
     "cart": "cart",
-    "detailview" : "detailview"
+    "detailview" : "detailview",
+    "editarrangement" : "editarrangement"
 
   },
   index: function(){
@@ -670,6 +689,16 @@ var Router = Backbone.Router.extend({
       );
 
     })
+  },
+
+  editarrangement: function(){
+        ReactDOM.unmountComponentAtNode(appContainer);
+
+        ReactDOM.render(
+        React.createElement(DashBoard, {router: self, productId: id}),
+        appContainer
+      );
+
   },
 
   cart: function(){

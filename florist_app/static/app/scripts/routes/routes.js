@@ -26,7 +26,8 @@ var Router = Backbone.Router.extend({
     'arrangements': 'arrangements',
     "gallery": "gallery",
     "cart": "cart",
-    "detailview" : "detailview"
+    "detailview" : "detailview",
+    "editarrangement" : "editarrangement"
 
   },
   index: function(){
@@ -71,6 +72,16 @@ var Router = Backbone.Router.extend({
       );
 
     })
+  },
+
+  editarrangement: function(){
+        ReactDOM.unmountComponentAtNode(appContainer);
+
+        ReactDOM.render(
+        React.createElement(DashBoard, {router: self, productId: id}),
+        appContainer
+      );
+
   },
 
   cart: function(){
