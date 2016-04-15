@@ -27,6 +27,7 @@ var DashBoard = React.createClass({
       type: 'POST',
       success: function(data){
         alert(data);
+        Backbone.history.navigate('arrangements', {trigger: true});
       },
       error: function(data){
         alert('no upload');

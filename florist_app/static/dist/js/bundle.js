@@ -94,6 +94,7 @@ var DashBoard = React.createClass({displayName: "DashBoard",
       type: 'POST',
       success: function(data){
         alert(data);
+        Backbone.history.navigate('arrangements', {trigger: true});
       },
       error: function(data){
         alert('no upload');
@@ -189,7 +190,7 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
     return(
       React.createElement("div", {className: "createproductspage"}, 
         React.createElement("h3", null, "Products"), 
-        React.createElement("a", {href: "#addproduct", className: "add-button"}, "Add"), 
+        React.createElement("a", {href: "#dashboard", className: "add-button"}, "Add"), 
           React.createElement("table", {className: "table"}, 
             React.createElement("thead", null, 
               React.createElement("tr", null, 

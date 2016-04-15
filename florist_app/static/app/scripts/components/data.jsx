@@ -38,7 +38,7 @@ var CreateDataComponent = React.createClass({
     return(
       <div className="createproductspage">
         <h3>Products</h3>
-        <a href="#addproduct" className="add-button">Add</a>
+        <a href="#dashboard" className="add-button">Add</a>
           <table className="table">
             <thead>
               <tr>
