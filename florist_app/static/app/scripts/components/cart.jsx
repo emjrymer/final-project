@@ -18,7 +18,8 @@ var CartComponent = React.createClass({
       console.log(products);
       self.setState({ 'products': products});
     });
-  },
+},
+
     render: function(){
       var products = this.state.products.map(function(indivCart){
         console.log(indivCart);
@@ -28,8 +29,9 @@ var CartComponent = React.createClass({
               <td>{indivCart.arrangement_name}</td>
               <td>$ {indivCart.arrangement_price}</td>
               <td className="add-image"><img src={imgUrl} /></td>
+              <td><a href={"#carts/" + indivCart.id + "/"}>Remove</a></td>
             </tr>
-          )
+        )
       });
 
 
@@ -45,13 +47,14 @@ var CartComponent = React.createClass({
                   <td>Name</td>
                   <td>Price</td>
                   <td>Photo</td>
+                  <td>Actions</td>
                 </tr>
               </thead>
               <tbody>
                 {products}
               </tbody>
             </table>
-            <p>Total Cart Price:  $15</p>
+            <p>Total Cart Price:  $ ______</p>
             <div>
                 <form action="" method="POST" id="payment-form" onSubmit={ this.handleSubmit }>
                       <span className="payment-errors"></span>
@@ -85,7 +88,7 @@ var CartComponent = React.createClass({
 
     )
   }
-})
+});
 
 
 module.exports = CartComponent;

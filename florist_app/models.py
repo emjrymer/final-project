@@ -20,6 +20,7 @@ class Arrangement(models.Model):
 
 
 class Cart(models.Model):
+    consumer = models.ForeignKey('auth.User', null=True)
     notes = models.TextField(blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
     arrangement = models.ForeignKey(Arrangement)

@@ -12,7 +12,7 @@ var User = Backbone.Model.extend({
 });
 
 var Arrangement = Backbone.Model.extend({
-  urlRoot: '/api/arrangements/'
+  urlRoot: '/api/arrangements/' //+ id
 })
 
 var ArrangementCollection = Backbone.Collection.extend({

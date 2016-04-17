@@ -8,7 +8,7 @@ var models = require('./../models/models');
 
 var ImageComponent = require('./../components/imageboard.jsx');
 var LoginPage = require('./../components/login.jsx');
-var HeaderComponent = require('./../components/header.jsx');
+var HeaderComponent = require('./../components/homepage.jsx');
 var DashBoard = require('./../components/dashboard.jsx');
 var ImageComponent = require('./../components/imageboard.jsx');
 var CreateDataComponent = require('./../components/data.jsx');
@@ -17,18 +17,17 @@ var ModelArrangement = require('../models/models').ArrangementCollection;
 var GalleryComponent = require('./../components/imageboard.jsx');
 var CartComponent = require('./../components/cart.jsx');
 var DetailViewComponent = require('./../components/detailview.jsx');
-
+var notfound = require('./../components/notfound.jsx');
 var Router = Backbone.Router.extend({
   routes:{
     '':'index',
     'loginpage':'loginpage',
     'dashboard': 'dashboard',
-    'arrangements': 'arrangements',
+    'arrangements' : 'arrangements',
     "gallery": "gallery",
     "cart": "cart",
     "detailview" : "detailview",
-    "editarrangement" : "editarrangement"
-
+    "*notFound": "notfound"
   },
   index: function(){
     ReactDOM.unmountComponentAtNode(appContainer);
@@ -37,6 +36,13 @@ var Router = Backbone.Router.extend({
       React.createElement(HeaderComponent),
       appContainer
     );
+  },
+  notfound: function(){
+      ReactDOM.unmountComponentAtNode(appContainer);
+      ReactDOM.render(
+        React.createElement(notfound),
+        appContainer
+      );
   },
   loginpage: function(){
     ReactDOM.unmountComponentAtNode(appContainer);
@@ -73,17 +79,6 @@ var Router = Backbone.Router.extend({
 
     })
   },
-
-  editarrangement: function(){
-        ReactDOM.unmountComponentAtNode(appContainer);
-
-        ReactDOM.render(
-        React.createElement(DashBoard, {router: self, productId: id}),
-        appContainer
-      );
-
-  },
-
   cart: function(){
     ReactDOM.unmountComponentAtNode(appContainer);
 

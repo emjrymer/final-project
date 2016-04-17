@@ -1,5 +1,4 @@
 # all the django imports
-from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import TemplateView, DetailView, View
 from django.shortcuts import render_to_response, redirect
@@ -70,7 +69,7 @@ class UserCreateAPIView(generics.CreateAPIView):
 class ArrangementListCreateAPIView(generics.ListCreateAPIView):
     queryset = Arrangement.objects.all()
     serializer_class = ArrangementSerializer
-    permission_classes = (IsAuthenticated ,)
+    permission_classes = (AllowAny ,)
 
     def create(self, request, *args, **kwargs):
         request.data['florist'] = request.user.pk #maybe this should have self infront of it? self.request.user.pk
@@ -101,6 +100,13 @@ class CartListCreateAPIView(generics.ListCreateAPIView):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
     permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return Cart.objects.filter(consumer_id=self.request.user)
+
+    def create(self, request, *args, **kwargs):
+        request.data['consumer'] = request.user.pk #maybe this should have self infront of it? self.request.user.pk
+        return super().create(request, *args, **kwargs)
 
 
 class CartRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):

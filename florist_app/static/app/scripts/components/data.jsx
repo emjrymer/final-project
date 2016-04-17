@@ -30,7 +30,7 @@ var CreateDataComponent = React.createClass({
           <td>$ {product.price}</td>
           <td>{product.description}</td>
           <td><img src={product.photo}/></td>
-          <td><a href={"#editarrangement/" + product.id + "/"}>Edit</a></td>
+          <td><a href={"#arrangements/" + product.id + "/"}>Edit</a></td>
         </tr>
       )
     });
