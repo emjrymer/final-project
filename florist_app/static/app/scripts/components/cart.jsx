@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var models = require('../models/models');
 var NavBar  = require('./../components/nav.jsx');
+var Footer = require('./../components/footer.jsx');
 var CartCollection = require('../models/models.js').CartCollection;
 
 
@@ -38,10 +39,12 @@ var CartComponent = React.createClass({
 
 
       return (
-          <div className="createproductspage">
+        <div>
+          <div className="carts-page">
               <NavBar/>
             <h3>Checkout</h3>
-            <table className="table">
+            <div className="shopping-cart">
+            <table className="table table-hover">
               <thead>
                 <tr>
                   <td>Name</td>
@@ -55,7 +58,8 @@ var CartComponent = React.createClass({
               </tbody>
             </table>
             <p>Total Cart Price:  $ ______</p>
-            <div>
+        </div>
+            <div className="payment">
                 <form action="" method="POST" id="payment-form" onSubmit={ this.handleSubmit }>
                       <span className="payment-errors"></span>
 
@@ -83,8 +87,10 @@ var CartComponent = React.createClass({
                       </div>
                       <button type="submit">Submit Payment</button>
                 </form>
-                </div>
+                <Footer/>
+
           </div>
+        </div>
 
     )
   }

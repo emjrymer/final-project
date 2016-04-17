@@ -3,7 +3,9 @@ var ReactDOM = require('react-dom');
 var models = require('../models/models.js');
 var NavBar  = require('./../components/nav.jsx');
 var Backbone = require('backbone');
+var Footer = require('./../components/footer.jsx');
 console.log('login require');
+
 
 
 var LoginPage = React.createClass({
@@ -24,10 +26,16 @@ var LoginPage = React.createClass({
           },
           error: function(model, err){
             console.log(err);
+<<<<<<< d2feba3c5c5eb0d92e95592efa991c0908bc8532
         }
 
   });
   },
+=======
+          }
+  })
+},
+>>>>>>> styling changes
 
   handleSignIn: function(event) {
     event.preventDefault();
@@ -74,10 +82,15 @@ var LoginPage = React.createClass({
            </form>
           </div>
        </div>
+     <div className="footer">
+
      </div>
+     <Footer/>
+
    </div>
-    );
-  }
+ </div>
+  );
+ }
 });
 
 module.exports = LoginPage;

@@ -3,6 +3,8 @@ var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var models = require('../models/models.js');
 var NavBar  = require('./../components/nav.jsx');
+var Footer = require('./../components/footer.jsx');
+
 
 
 
@@ -58,15 +60,12 @@ var GalleryComponent = React.createClass({
     return (
       <div className="row">
           <NavBar/>
-        <div className='col-xs-3'>
-            <div className='quote'><p>“She cast her fragrance and her radiance over me. I ought never to have run away from her... I ought to have guessed all the affection that lay behind her poor little stratagems. Flowers are so inconsistent! But I was too young to know how to love her...”
-            </p><p id="author">― Antoine de Saint-Exupéry, <br/>The Little Prince</p></div>
-        </div>
-        <div className='col-xs-9'>
+        <div className='col-xs-12'>
           <div className='row gallery-bouquets'>
             {productRows}
           </div>
         </div>
+        <Footer/>
       </div>
 
   );
