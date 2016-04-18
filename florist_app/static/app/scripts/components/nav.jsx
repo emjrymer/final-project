@@ -15,11 +15,6 @@ var NavBar = React.createClass({
           <li id="login"><a href="#loginpage">login</a></li>
         </ul>
         </div>
-        // <div className="header-login">
-        //   // <h1>La Belle Fleur</h1>
-        // </div>
-
-      </div>
     );
   }
 });

@@ -92,6 +92,7 @@ var CartComponent = React.createClass({
 
           </div>
         </div>
+      </div>
 
     )
   }

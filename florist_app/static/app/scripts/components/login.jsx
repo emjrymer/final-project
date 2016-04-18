@@ -26,16 +26,9 @@ var LoginPage = React.createClass({
           },
           error: function(model, err){
             console.log(err);
-<<<<<<< d2feba3c5c5eb0d92e95592efa991c0908bc8532
-        }
-
-  });
-  },
-=======
           }
-  })
-},
->>>>>>> styling changes
+      });
+    },
 
   handleSignIn: function(event) {
     event.preventDefault();
