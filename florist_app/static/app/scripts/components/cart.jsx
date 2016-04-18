@@ -87,6 +87,7 @@ var CartComponent = React.createClass({
                       </div>
                       <button type="submit">Submit Payment</button>
                 </form>
+                <div className="yellowborder"></div>
                 <Footer/>
 
           </div>

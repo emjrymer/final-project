@@ -9,9 +9,9 @@ var Footer = React.createClass({
     return (
       <div>
         <ul className='navbuttons-login-1'>
-          <li><a href="#gallery">facebook</a></li>
-          <li><a href="#">twitter</a></li>
-          <li><a href="#">instagram</a></li>
+          <li><a href="https://www.facebook.com/">facebook</a></li>
+          <li><a href="https://twitter.com/">twitter</a></li>
+          <li><a href="https://www.instagram.com/">instagram</a></li>
         </ul>
     </div>
     );

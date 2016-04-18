@@ -5871,7 +5871,8 @@ img {
     margin-bottom: 40px; }
 
 .image-1 {
-  background-image: url("../images/handtiedbouquet.jpg");
+  background-image: url("../images/brightyellowflowers.jpg");
+  background-position: 30%;
   border-right: 2px solid #dfac12;
   border-bottom: 4px solid #dfac12;
   text-align: center;
@@ -5886,7 +5887,8 @@ img {
     color: #dfac12; }
 
 .image-2 {
-  background-image: url("../images/handtiedbouquet.jpg");
+  background-image: url("../images/middlebrightimage.jpg");
+  background-position: 30%;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   border-bottom: 4px solid #dfac12;
@@ -5900,16 +5902,16 @@ img {
     color: #dfac12; }
 
 .image-3 {
-  background-image: url("../images/handtiedbouquet.jpg");
+  background-image: url("../images/brightyellow2.jpg");
+  background-position: 30%;
+  width: 100%;
   border-left: 2px solid #dfac12;
   border-bottom: 4px solid #dfac12;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   height: 300px; }
   .image-3 img {
-    margin-top: 20px;
-    height: 72px;
-    width: 77px; }
+    margin-top: 20px; }
   .image-3 h1 {
     font-size: 25px;
     color: #dfac12; }

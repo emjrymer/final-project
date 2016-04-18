@@ -14,10 +14,12 @@ var NavBar = React.createClass({
           <li><a href="#contact">contact us</a></li>
           <li id="login"><a href="#loginpage">login</a></li>
         </ul>
-        <div className="header-login">
-          <h1>La Belle Fleur</h1>
         </div>
-        </div>
+        // <div className="header-login">
+        //   // <h1>La Belle Fleur</h1>
+        // </div>
+
+      </div>
     );
   }
 });

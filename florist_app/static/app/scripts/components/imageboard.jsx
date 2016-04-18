@@ -65,6 +65,7 @@ var GalleryComponent = React.createClass({
             {productRows}
           </div>
         </div>
+        <div className='footer'></div>
         <Footer/>
       </div>
 

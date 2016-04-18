@@ -92,7 +92,8 @@ img {
     font-size: 25px;
     color: #dfac12;
   }
-  background-image: url("../images/handtiedbouquet.jpg");
+  background-image: url("../images/brightyellowflowers.jpg");
+  background-position: 30%;
   border-right: 2px solid #dfac12;
   border-bottom: 4px solid #dfac12;
   text-align: center;
@@ -113,7 +114,8 @@ img {
     font-size: 25px;
     color: #dfac12;
   }
-  background-image: url("../images/handtiedbouquet.jpg");
+  background-image: url("../images/middlebrightimage.jpg");
+  background-position: 30%;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   border-bottom: 4px solid #dfac12;
@@ -123,19 +125,22 @@ img {
 .image-3 {
   img {
     margin-top: 20px;
-    height:72px;
-    width:77px;
+    // height:72px;
+    // width:77px;
   }
   h1{
     font-size: 25px;
     color: #dfac12;
   }
-  background-image: url("../images/handtiedbouquet.jpg");
+  background-image: url("../images/brightyellow2.jpg");
+  background-position: 30%;
+  width: 100%;
   border-left: 2px solid #dfac12;
   border-bottom: 4px solid #dfac12;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   height: 300px;
+
 }
 
 /*login Page*/
