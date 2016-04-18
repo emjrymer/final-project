@@ -10,7 +10,7 @@ node_modules/
 .tmp/
 .sass-cache/
 .DS_Store
-
+uploads/
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

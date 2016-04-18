@@ -12,6 +12,7 @@ colorama==0.3.3
 defusedxml==0.4.1
 Django==1.9.4
 django-bootstrap-form==3.2
+django-debug-toolbar==1.4
 djangorestframework==3.3.3
 docker-py==1.1.0
 dockerpty==0.3.4
@@ -25,6 +26,7 @@ materialize==0.1.1
 oauthlib==1.0.3
 pathspec==0.3.3
 Pillow==3.2.0
+psycopg2==2.6.1
 PyJWT==1.4.0
 PySocks==1.5.6
 python-dateutil==2.5.1
@@ -35,6 +37,7 @@ PyYAML==3.11
 requests==2.9.1
 requests-oauthlib==0.6.1
 six==1.10.0
+sqlparse==0.1.19
 stripe==1.31.0
 texttable==0.8.4
 twilio==5.4.0
