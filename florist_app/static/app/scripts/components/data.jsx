@@ -32,7 +32,7 @@ var CreateDataComponent = React.createClass({
           <td>$ {product.price}</td>
           <td>{product.description}</td>
           <td><img src={product.photo}/></td>
-          <td><a href={"#arrangements/" + product.id + "/"}>Edit</a></td>
+          <td><a href={"#dashboard/" + product.id + "/"}>Edit</a></td>
         </tr>
       )
     });
@@ -41,7 +41,8 @@ var CreateDataComponent = React.createClass({
     return(
       <div className="createproductspage">
           <NavBar/>
-        <h3>Current Products</h3>
+        <h3>current products</h3>
+        <div className='current-products'>
         <a href="#dashboard" className="add-button">Add</a>
           <table className="table">
             <thead>
@@ -57,6 +58,7 @@ var CreateDataComponent = React.createClass({
               {productRows}
             </tbody>
           </table>
+        </div>
           <div className='yellowborder'>
 
           </div>

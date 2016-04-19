@@ -200,12 +200,11 @@ img {
   padding-top: 70px;
 }
 
-// .header-content-login {
-//   // background-image: url("../images/daisy.jpg");
-//   // background-size: cover;
-//   // background-repeat: no-repeat;
-//   // height: 600px;
-//   // border-bottom: 8px solid #dfac12;
+.header-content-login h3 {
+  text-align: center;
+  font-family: 'Open Sans Condensed', sans-serif;
+  }
+
   .navbuttons-login {
     a {
       text-decoration: none;
@@ -317,9 +316,13 @@ img {
 }
 
 .floristform {
-  #description {
+  #price {
     margin-top: 15px;
   }
+}
+.floristform{
+  margin-left: 110px;
+  padding-right: 235px;
 }
 
 /* gallery */
@@ -402,10 +405,8 @@ h3 {
 }
 
 .carts-page h3 {
-  margin-left: 45px;
-  text-align: center;
+  margin-left: 155px;
   font-family: 'Open Sans Condensed', sans-serif;
-  color: #dfac12;
 
 }
 
@@ -415,4 +416,12 @@ h3 {
   margin-bottom: 30px;
   margin-top: 20px;
   margin-left: 53px;
+}
+
+.createproductspage {
+  h3{
+    margin-left: 155px;
+  }
+  margin-left: 150px;
+  margin-right: 150px;
 }

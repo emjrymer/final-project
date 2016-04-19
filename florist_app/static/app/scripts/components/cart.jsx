@@ -120,10 +120,11 @@ removeItem: function(item){
                       </div>
                       <button type="submit">Submit Payment</button>
                 </form>
+              </div>
                 <div className="yellowborder"></div>
                 <Footer/>
 
-          </div>
+
         </div>
       </div>
 

@@ -5965,6 +5965,10 @@ img {
   padding-right: 445px;
   padding-top: 70px; }
 
+.header-content-login h3 {
+  text-align: center;
+  font-family: 'Open Sans Condensed', sans-serif; }
+
 .navbuttons-login {
   list-style: none;
   text-align: center;
@@ -6039,8 +6043,12 @@ img {
 .floristform #name {
   margin-top: 15px; }
 
-.floristform #description {
+.floristform #price {
   margin-top: 15px; }
+
+.floristform {
+  margin-left: 110px;
+  padding-right: 235px; }
 
 /* gallery */
 .imageboard {
@@ -6102,10 +6110,8 @@ h3 {
   margin-left: 45px; }
 
 .carts-page h3 {
-  margin-left: 45px;
-  text-align: center;
-  font-family: 'Open Sans Condensed', sans-serif;
-  color: #dfac12; }
+  margin-left: 155px;
+  font-family: 'Open Sans Condensed', sans-serif; }
 
 .yellowborder {
   border-bottom: solid 5px #dfac12;
@@ -6113,5 +6119,11 @@ h3 {
   margin-bottom: 30px;
   margin-top: 20px;
   margin-left: 53px; }
+
+.createproductspage {
+  margin-left: 150px;
+  margin-right: 150px; }
+  .createproductspage h3 {
+    margin-left: 155px; }
 
 /*# sourceMappingURL=app.css.map */

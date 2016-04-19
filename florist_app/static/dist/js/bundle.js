@@ -121,11 +121,12 @@ removeItem: function(item){
                         React.createElement("input", {type: "text", size: "4", "data-stripe": "exp-year"})
                       ), 
                       React.createElement("button", {type: "submit"}, "Submit Payment")
-                ), 
+                )
+              ), 
                 React.createElement("div", {className: "yellowborder"}), 
                 React.createElement(Footer, null)
 
-          )
+
         )
       )
 
@@ -151,22 +152,29 @@ var Footer = require('./../components/footer.jsx');
 var DashBoard = React.createClass({displayName: "DashBoard",
   handleFormSubmit: function(event){
     event.preventDefault();
-
-    var image = $('#image')[0].files[0];
-    console.log(image);
     var data = new FormData();
-    data.append('photo', image);
+    if (this.props.model){
+      // Update View (we are updating existing arrangement)
+      var type = 'PUT';
+      var url = '/api/arrangements/' + this.props.model.id + '/';
+    } else {
+      // Create View (we are creating a new arranagment)
+      var type = 'POST';
+      var image = $('#image')[0].files[0];
+      data.append('photo', image);
+      var url = '/api/arrangements/';
+    }
     data.append('name', $('#name').val());
     data.append('price', $('#price').val());
     data.append('description' ,$('#description').val());
 
     $.ajax({
-      url: '/api/arrangements/',
+      url: url,
       data: data,
       cache: false,
       contentType: false,
       processData: false,
-      type: 'POST',
+      type: type,
       success: function(data){
         Backbone.history.navigate('arrangements', {trigger: true});
       },
@@ -186,26 +194,42 @@ var DashBoard = React.createClass({displayName: "DashBoard",
     // })
   },
   render: function(){
+    var arrangementName, price, description, imageField = '';
+    if (this.props.model){
+      arrangementName = this.props.model.name;
+      price = this.props.model.price;
+      description = this.props.model.description;
+      imageField = (
+        React.createElement("img", {src: this.props.model.photo, alt: description})
+      )
+    } else {
+      imageField = (
+        React.createElement("input", {id: "image", className: "flowerPic", type: "file", name: "pic", accept: "image/*"})
+      )
+    }
     return (
 
         React.createElement("div", {className: "row header-content-login"}, 
           React.createElement(NavBar, null), 
+            React.createElement("h3", null, "dashboard"), 
 
          React.createElement("div", {className: "row"}, 
 
            React.createElement("div", {className: "col-sm-12 floristform"}, 
 
              React.createElement("form", {id: "signup", onSubmit: this.handleFormSubmit, className: "form-signup dashboard"}, 
-               React.createElement("input", {id: "name", type: "text", name: "name", className: "form-control", placeholder: "name"}), 
-               React.createElement("input", {id: "price", type: "text", name: "name", className: "form-control", placeholder: "price"}), 
-                React.createElement("input", {id: "description", type: "text", name: "price", className: "form-control", placeholder: "description"}), 
-                React.createElement("input", {id: "image", className: "flowerPic", type: "file", name: "pic", accept: "image/*"}), 
+               React.createElement("input", {id: "name", type: "text", name: "name", className: "form-control", placeholder: "name", defaultValue: arrangementName}), 
+               React.createElement("input", {id: "price", type: "text", name: "name", className: "form-control", placeholder: "price", defaultValue: price}), 
+                React.createElement("input", {id: "description", type: "text", name: "price", className: "form-control", placeholder: "description", defaultValue: description}), 
+                imageField, 
                 React.createElement("button", {type: "submit", className: "btn btn-default submit-button-1"}, "Submit"), 
-               React.createElement("button", {type: "submit", className: "btn btn-default submit-button-1"}, "Browse Gallery")
+                React.createElement("a", {href: "#gallery", className: "browse-option"})
             )
-          ), 
-          React.createElement(Footer, null)
-        )
+          )
+        ), 
+        React.createElement("div", {className: "yellowborder"}), 
+        React.createElement(Footer, null)
+
      )
 
 
@@ -259,7 +283,7 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
           React.createElement("td", null, "$ ", product.price), 
           React.createElement("td", null, product.description), 
           React.createElement("td", null, React.createElement("img", {src: product.photo})), 
-          React.createElement("td", null, React.createElement("a", {href: "#arrangements/" + product.id + "/"}, "Edit"))
+          React.createElement("td", null, React.createElement("a", {href: "#dashboard/" + product.id + "/"}, "Edit"))
         )
       )
     });
@@ -268,7 +292,8 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
     return(
       React.createElement("div", {className: "createproductspage"}, 
           React.createElement(NavBar, null), 
-        React.createElement("h3", null, "Current Products"), 
+        React.createElement("h3", null, "current products"), 
+        React.createElement("div", {className: "current-products"}, 
         React.createElement("a", {href: "#dashboard", className: "add-button"}, "Add"), 
           React.createElement("table", {className: "table"}, 
             React.createElement("thead", null, 
@@ -283,7 +308,8 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
             React.createElement("tbody", null, 
               productRows
             )
-          ), 
+          )
+        ), 
           React.createElement("div", {className: "yellowborder"}
 
           ), 
@@ -751,7 +777,8 @@ var DashBoard = require('./../components/dashboard.jsx');
 var ImageComponent = require('./../components/gallery.jsx');
 var CreateDataComponent = require('./../components/data.jsx');
 var appContainer = document.getElementById('app');
-var ModelArrangement = require('../models/models').ArrangementCollection;
+var ArrangementCollection = require('../models/models').ArrangementCollection;
+var Arrangement = require('../models/models').Arrangement;
 var GalleryComponent = require('./../components/gallery.jsx');
 var CartComponent = require('./../components/cart.jsx');
 var DetailViewComponent = require('./../components/detailview.jsx');
@@ -761,6 +788,7 @@ var Router = Backbone.Router.extend({
     '':'index',
     'loginpage':'loginpage',
     'dashboard': 'dashboard',
+    'dashboard/:productId/': 'dashboardEdit',
     'arrangements' : 'arrangements',
     "gallery": "gallery",
     "cart": "cart",
@@ -798,7 +826,17 @@ var Router = Backbone.Router.extend({
       appContainer
     );
   },
-  gallery: function(){
+  dashboardEdit: function(arrangementId){
+    ReactDOM.unmountComponentAtNode(appContainer);
+    var arrangementModel = new Arrangement({id: arrangementId});
+    arrangementModel.fetch().then(function(arrangement){
+      ReactDOM.render(
+        React.createElement(DashBoard, {model: arrangement}),
+        appContainer
+      );
+    })
+  },
+  gallery: function() {
     ReactDOM.unmountComponentAtNode(appContainer);
 
     ReactDOM.render(
@@ -808,7 +846,7 @@ var Router = Backbone.Router.extend({
   },
   arrangements: function(){
         ReactDOM.unmountComponentAtNode(appContainer);
-        var arrangementCollection = new ModelArrangement();
+        var arrangementCollection = new ArrangementCollection();
         arrangementCollection.fetch().then(function(response){
         ReactDOM.render(
         React.createElement(CreateDataComponent, {collection: response}),
