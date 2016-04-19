@@ -54,9 +54,7 @@ removeItem: function(item){
 
     render: function(){
       var self = this;
-      console.log('state products',this.state.products);
       var products = this.state.products.map(function(indivCart){
-        console.log(indivCart);
         var imgUrl= indivCart.arrangement_photo;
         return(
             <tr key={indivCart.id}>
@@ -68,8 +66,10 @@ removeItem: function(item){
         )
       });
 
-
-
+      var runningTotal = 0;
+      this.state.products.forEach(function(product){
+          runningTotal += product.arrangement_price;
+      })
 
       return (
         <div>
@@ -90,7 +90,7 @@ removeItem: function(item){
                 {products}
               </tbody>
             </table>
-            <p>Total Cart Price:  $ ______</p>
+            <p>Total Cart Price:  $ {runningTotal}</p>
         </div>
             <div className="payment">
                 <form action="" method="POST" id="payment-form" onSubmit={ this.handleSubmit }>

@@ -56,9 +56,7 @@ removeItem: function(item){
 
     render: function(){
       var self = this;
-      console.log('state products',this.state.products);
       var products = this.state.products.map(function(indivCart){
-        console.log(indivCart);
         var imgUrl= indivCart.arrangement_photo;
         return(
             React.createElement("tr", {key: indivCart.id}, 
@@ -70,8 +68,10 @@ removeItem: function(item){
         )
       });
 
-
-
+      var runningTotal = 0;
+      this.state.products.forEach(function(product){
+          runningTotal += product.arrangement_price;
+      })
 
       return (
         React.createElement("div", null, 
@@ -92,7 +92,7 @@ removeItem: function(item){
                 products
               )
             ), 
-            React.createElement("p", null, "Total Cart Price:  $ ______")
+            React.createElement("p", null, "Total Cart Price:  $ ", runningTotal)
         ), 
             React.createElement("div", {className: "payment"}, 
                 React.createElement("form", {action: "", method: "POST", id: "payment-form", onSubmit:  this.handleSubmit}, 

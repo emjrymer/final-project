@@ -2,13 +2,17 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.auth import views as auth_views
-from florist_app.views import ArrangementListAPIView, AboutUs, FloristSpecificArrangementListAPIView, api_login, api_logout, UserCreateAPIView, ArrangementListCreateAPIView, ArrangementRetrieveUpdateDestroyAPIView, FloristListCreateAPIView, FloristRetrieveUpdateDestroyAPIView, CartListCreateAPIView, CartRetrieveUpdateDestroyAPIView, BuyerListCreateAPIView, BuyerRetrieveUpdateDestroyAPIView
+from florist_app.views import ArrangementListAPIView, AboutUs, FloristSpecificArrangementListAPIView, api_login, \
+    api_logout, UserCreateAPIView, ArrangementListCreateAPIView, ArrangementRetrieveUpdateDestroyAPIView, \
+    FloristListCreateAPIView, FloristRetrieveUpdateDestroyAPIView, CartListCreateAPIView, CartRetrieveUpdateDestroyAPIView, \
+    BuyerListCreateAPIView, BuyerRetrieveUpdateDestroyAPIView, Charge
 
 
 urlpatterns = [
     url(r'^$', 'florist_app.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^about_us/$', AboutUs.as_view(), name='about_us_view'),
+    url(r'^charge/$', Charge.as_view(), name='charge_view'),
 #    url(r'^login/$', auth_views.login_social, name="login_view"),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),

@@ -14,6 +14,8 @@ from rest_framework.decorators import api_view
 # florist_app imports
 from florist_app.models import Arrangement, Cart, Florist, Buyer
 from florist_app.serializers import UserSerializer, ArrangementSerializer, CartSerializer, FloristSerializer, BuyerSerializer
+import stripe
+from django.shortcuts import render
 
 
 def login_view(request):
@@ -149,3 +151,22 @@ class BuyerRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Buyer.objects.all()
     serializer_class = BuyerSerializer
     permission_classes = (IsAuthenticated,)
+
+
+################# stripe integration #####################
+class Charge(View):
+
+    def post(self, request):
+        stripe.api_key = 'sk_test_XeHx9P8aspTb67eQiiMZx6w1'
+        amount = 1000
+        customer = stripe.Customer.create(
+            email=request.POST["stripeEmail"],
+            card=request.POST['stripeToken']
+        )
+        charge = stripe.Charge.create(
+            customer=customer.id,
+            amount=amount,
+            currency="usd",
+            description="Unlimited Questions"
+        )
+        return render(request, 'about.html')
