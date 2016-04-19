@@ -69,7 +69,7 @@ class UserCreateAPIView(generics.CreateAPIView):
 class ArrangementListCreateAPIView(generics.ListCreateAPIView):
     queryset = Arrangement.objects.all()
     serializer_class = ArrangementSerializer
-    permission_classes = (AllowAny ,)
+    permission_classes = (IsAuthenticated ,)
 
     def create(self, request, *args, **kwargs):
         request.data['florist'] = request.user.pk #maybe this should have self infront of it? self.request.user.pk
@@ -77,13 +77,13 @@ class ArrangementListCreateAPIView(generics.ListCreateAPIView):
 
 
 class ArrangementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Arrangement.objects.all()
+
     serializer_class = ArrangementSerializer
     authentication_classes = (BasicAuthentication,)
     permission_classes = (IsAuthenticated, )
 
-    # def get_queryset(self):
-        # return Arrangement.objects.filter(florist_id=self.request.user)
+    def get_queryset(self):
+        return Arrangement.objects.filter(florist_id=self.request.user.id)
 
 
 class ArrangementListAPIView(generics.ListAPIView):
@@ -97,7 +97,6 @@ class ArrangementListAPIView(generics.ListAPIView):
 
 
 class CartListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Cart.objects.all()
     serializer_class = CartSerializer
     permission_classes = (IsAuthenticated,)
 
@@ -114,7 +113,8 @@ class CartRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = (BasicAuthentication,)
     permission_classes = (IsAuthenticated, )
 
-    def queryset(self):
+
+    def get_queryset(self):
         return Cart.objects.filter(consumer_id=self.request.user)
 
 
@@ -134,7 +134,7 @@ class FloristSpecificArrangementListAPIView(generics.ListAPIView):
     serializer_class = ArrangementSerializer
     permission_classes = (IsAuthenticated,)
 
-    def queryset(self):
+    def get_queryset(self):
         return Arrangement.objects.filter(florist_id=self.kwargs['pk'])
 
 

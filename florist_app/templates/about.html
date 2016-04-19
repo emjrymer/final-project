@@ -3,4 +3,17 @@
 {% block title %}About Us{% endblock %}
 {% block content %}
 <h1>About Us</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_knjiOyi3uHqK8Ae8eOtS6QRa"
+    data-amount="999"
+    data-zip-code="true"
+    data-name="La Belle Fleur"
+    data-description="$$$$ money please $$$$"
+    data-image="https://s-media-cache-ak0.pinimg.com/originals/2f/c2/c9/2fc2c92e864119ceca47ff4c574b84b6.jpg"
+    data-locale="auto">
+  </script>
+</form>
 {% endblock %}

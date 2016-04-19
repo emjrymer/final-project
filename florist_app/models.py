@@ -50,9 +50,9 @@ class Buyer(models.Model):
         return self.user.username
 
 
-# method for creating florist
+# method for creating buyer
 @receiver(post_save, sender='auth.User')
-def create_florist(sender, **kwargs):
+def create_buyer(sender, **kwargs):
     user_instance = kwargs.get('instance')
     if kwargs.get('created'):
-       Florist.objects.create(user=user_instance)
+       Buyer.objects.create(user=user_instance)
