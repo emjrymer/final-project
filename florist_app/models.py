@@ -9,7 +9,7 @@ class Arrangement(models.Model):
     price = models.FloatField()
     photo = models.ImageField(upload_to='uploads', null=True, blank=True)
     rating = models.IntegerField(null=True)
-    posting_user = models.ForeignKey('auth.User', null=True)
+    posting_user = models.ForeignKey('auth.User')
     time_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -20,7 +20,7 @@ class Arrangement(models.Model):
 
 
 class Cart(models.Model):
-    buyer = models.ForeignKey('auth.User', null=True)
+    buyer = models.ForeignKey('auth.User')
     notes = models.TextField(blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
     arrangement = models.ForeignKey(Arrangement)

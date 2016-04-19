@@ -20,9 +20,28 @@ var CartComponent = React.createClass({
     this.cart.fetch().done(function(products){
       console.log(products);
       self.setState({'products': products});
+
+      // configure the stripe button script tag
+      var stripeButton = document.createElement('script');
+      stripeButton.src = "https://checkout.stripe.com/checkout.js";
+      stripeButton.setAttribute("class", "stripe-button");
+      stripeButton.setAttribute("data-key", "pk_test_knjiOyi3uHqK8Ae8eOtS6QRa");
+      stripeButton.setAttribute("data-amount", _.reduce(products, function(memo, product){
+          return memo + (product.arrangement_price * 100);
+      }, 0));
+      stripeButton.setAttribute('data-name', "La Belle Fleur");
+      stripeButton.setAttribute('data-description', "$$$$ money please $$$$");
+      stripeButton.setAttribute('data-image', "https://s-media-cache-ak0.pinimg.com/originals/2f/c2/c9/2fc2c92e864119ceca47ff4c574b84b6.jpg");
+      stripeButton.setAttribute('data-locale', "auto");
+
+      $('#payment-button').html(stripeButton);
     });
 },
+redirectSuccess: function(event){
+    event.preventDefault();
 
+    Backbone.history.navigate('', {trigger: true});
+},
 removeItem: function(item){
   console.log(item);
   var key = item.id;
@@ -84,43 +103,19 @@ removeItem: function(item){
                   <td>Price</td>
                   <td>Photo</td>
                   <td>Actions</td>
-                </tr>
-              </thead>
+                  </tr>
+                  </thead>
               <tbody>
                 {products}
               </tbody>
             </table>
-            <p>Total Cart Price:  $ {runningTotal}</p>
+            <p>Total Cart Price:  $ {run ningTotal}</p>
         </div>
             <div className="payment">
-                <form action="" method="POST" id="payment-form" onSubmit={ this.handleSubmit }>
-                      <span className="payment-errors"></span>
 
-                      <div className="form-row">
-                        <label>
-                          <span>Card Number</span>
-                          <input type="text" size="20" data-stripe="number"/>
-                        </label>
-                      </div>
 
-                      <div className="form-row">
-                        <label>
-                          <span>CVC</span>
-                          <input type="text" size="4" data-stripe="cvc"/>
-                        </label>
-                      </div>
+                <form onSubmit={this.redirectSuccess} action="/charge/" method="POST" id="payment-button"/>
 
-                      <div className="form-row">
-                        <label>
-                          <span>Expiration (MM/YYYY)</span>
-                          <input type="text" size="2" data-stripe="exp-month"/>
-                        </label>
-                        <span> / </span>
-                        <input type="text" size="4" data-stripe="exp-year"/>
-                      </div>
-                      <button type="submit">Submit Payment</button>
-                </form>
-              </div>
                 <div className="yellowborder"></div>
                 <Footer/>
 

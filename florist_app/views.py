@@ -95,7 +95,7 @@ class ArrangementListAPIView(generics.ListAPIView):
     permission_classes = (IsAuthenticated, )
 
     def get(self, *args, **kwargs):
-        arrangement = Arrangement.objects.get(id=self.kwargs.get('pk'))
+        arrangement_list = Arrangement.objects.filter(posting_user_id=self.kwargs.get('pk'))
         serializer = ArrangementSerializer(arrangement)
         return JsonResponse(serializer.data)
 ############################################################
