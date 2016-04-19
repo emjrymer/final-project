@@ -115,7 +115,7 @@ class CartRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, )
 
     def queryset(self):
-        return Cart.objects.filter(user_id=self.request.user)
+        return Cart.objects.filter(consumer_id=self.request.user)
 
 
 class FloristListCreateAPIView(generics.ListCreateAPIView):

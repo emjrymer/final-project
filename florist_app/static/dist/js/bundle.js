@@ -7,6 +7,7 @@ var models = require('../models/models');
 var NavBar  = require('./../components/nav.jsx');
 var Footer = require('./../components/footer.jsx');
 var CartCollection = require('../models/models.js').CartCollection;
+var CartDelete = require('../models/models.js').CartDelete;
 
 
 var CartComponent = React.createClass({displayName: "CartComponent",
@@ -15,15 +16,41 @@ var CartComponent = React.createClass({displayName: "CartComponent",
   },
   componentDidMount: function(){
     var self = this;
-    var cart = new models.CartCollection();
-    console.log(cart);
-    cart.fetch().done(function(products){
+    this.cart = new models.CartCollection();
+
+    this.cart.fetch().done(function(products){
       console.log(products);
-      self.setState({ 'products': products});
+      self.setState({'products': products});
     });
 },
 
+removeItem: function(item){
+  console.log(item);
+  var key = item.id;
+  // console.log('key', key);
+  // var objectId = key;
+  // console.log(key);
+  // key = key.toString();
+  // // CartDelete.set(key);
+  // // CartDelete.save();
+  // //
+  $.ajax({
+    url: '/api/carts/' + key + "/",
+    type: 'DELETE',
+    success: function(msg){
+      console.log('worked!');
+    }
+
+  });
+  // // var products = this.cart;
+  // products.remove(model);
+  // this.setState({'products': products})
+
+},
+
     render: function(){
+      var self = this;
+      console.log('state products',this.state.products);
       var products = this.state.products.map(function(indivCart){
         console.log(indivCart);
         var imgUrl= indivCart.arrangement_photo;
@@ -32,7 +59,7 @@ var CartComponent = React.createClass({displayName: "CartComponent",
               React.createElement("td", null, indivCart.arrangement_name), 
               React.createElement("td", null, "$ ", indivCart.arrangement_price), 
               React.createElement("td", {className: "add-image"}, React.createElement("img", {src: imgUrl})), 
-              React.createElement("td", null, React.createElement("a", {href: "#carts/" + indivCart.id + "/"}, "Remove"))
+              React.createElement("td", {onClick: self.removeItem.bind(self,indivCart)}, "Remove")
             )
         )
       });
@@ -110,6 +137,8 @@ var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var models = require('../models/models');
 var NavBar  = require('./../components/nav.jsx');
+var Footer = require('./../components/footer.jsx');
+
 
 
 
@@ -166,9 +195,10 @@ var DashBoard = React.createClass({displayName: "DashBoard",
                 React.createElement("input", {id: "description", type: "text", name: "price", className: "form-control", placeholder: "description"}), 
                 React.createElement("input", {id: "image", className: "flowerPic", type: "file", name: "pic", accept: "image/*"}), 
                 React.createElement("button", {type: "submit", className: "btn btn-default submit-button-1"}, "Submit"), 
-               React.createElement("button", {type: "submit", className: "btn btn-default submit-button-1"}, "Add Img")
+               React.createElement("button", {type: "submit", className: "btn btn-default submit-button-1"}, "Browse Gallery")
             )
-          )
+          ), 
+          React.createElement(Footer, null)
         )
      )
 
@@ -187,7 +217,7 @@ var DashBoard = React.createClass({displayName: "DashBoard",
 
   module.exports = DashBoard;
 
-},{"../models/models":12,"./../components/nav.jsx":9,"backbone":25,"react":423,"react-dom":270}],3:[function(require,module,exports){
+},{"../models/models":12,"./../components/footer.jsx":5,"./../components/nav.jsx":9,"backbone":25,"react":423,"react-dom":270}],3:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -266,15 +296,23 @@ module.exports = CreateDataComponent;
 //
 // var DetailViewComponent = React.createClass({
 //   getInitialState: function(){
-//     return { 'product', []},
+//     return { 'product': []};
 //   },
-//   componentDidMount: function(){
+//   componentWillMount: function(){
 //     var self = this;
-//     var product = new models.CartCollection();
+//     var product = new models.Bouquet.();
 //
-//     this.products.fetch
-//   }
+//     product.fetch(this.props.productId,{
+//     success: function(product){
+//     done(function(product){
+//     self.setState({ 'product': product});
+//   },
+//   error: function(error){
+//     alert("Error: " +  error.code + "" + error.message);
+//   }:
+//   },
 //   render: function(){
+//     var
 //     return (
 //       <div>
 //         <div className="detailpage">
@@ -283,17 +321,17 @@ module.exports = CreateDataComponent;
 //             <img src="" className="detail-img" alt=""/>
 //           </div>
 //             <div className="col-xs-6">
-//               <h3 className="floral-name">Roses</h3>
-//               <span className="price">$300</span>
-//               <p className="floral-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+//               <h3 className="floral-name" key={product.id}>{product.get('name')</h3>
+//               <span className="price">${product.get('price')}</span>
+//               <p className="floral-description">{product.get('description')}</p>
 //               <span>Quantity:</span>
 //               <input type="text" className="form-control quantity-input" placeholder=""/>
 //               <span>Size:</span>
 //               <input type="text" className="form-control size-input" placeholder=""/>
 //               <a href="#" className="add-to-cart">Add to Cart</a>
 //             </div>
+//          </div>
 //         </div>
-//       </div>
 //       </div>
 //     )
 //   }
@@ -328,69 +366,6 @@ var Footer = React.createClass({displayName: "Footer",
 module.exports = Footer;
 
 },{"../models/models":12,"backbone":25,"react":423,"react-dom":270}],6:[function(require,module,exports){
-"use strict";
-
-var React = require('react');
-var ReactDOM = require('react-dom');
-var $ = require('jquery');
-var Backbone = require('backbone');
-var HeaderComponent = require('react-bootstrap').HeaderComponent;
-
-
-
-
-
-var HeaderComponent = React.createClass({displayName: "HeaderComponent",
-  render: function(){
-    return (
-      React.createElement("div", {className: "container-fluid"}, 
-         React.createElement("div", {className: "row header-content"}, 
-           React.createElement("ul", {className: "navbuttons"}, 
-             React.createElement("li", null, React.createElement("a", {href: "#arrangements"}, "bouquets")), 
-             React.createElement("li", null, React.createElement("a", {href: "#about"}, "about us")), 
-             React.createElement("li", null, React.createElement("a", {href: "#contact"}, "contact us")), 
-             React.createElement("li", {id: "login"}, React.createElement("a", {href: "#loginpage"}, "login"))
-           ), 
-           React.createElement("div", {className: "header"}, 
-             React.createElement("h1", null, "La Belle Fluer"), 
-             React.createElement("h3", null, "I must have flowers always, and always!", React.createElement("span", null, "-Claude Monet"))
-           )
-         ), 
-         React.createElement("div", {className: "row"}, 
-           React.createElement("div", {className: "col-xs-4 image-1"}, 
-             React.createElement("img", {className: "image-circle", src: "/static/app/images/brightflorals.jpg", alt: ""}), 
-               React.createElement("div", null, 
-                 React.createElement("h1", null, "Flower Pic 1"), 
-                 React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-               )
-           ), 
-           React.createElement("div", {className: "col-xs-4 image-2"}, 
-             React.createElement("img", {className: "image-circle", src: "/static/app/images/brightflorals.jpg", alt: ""}), 
-               React.createElement("div", null, 
-                 React.createElement("h1", null, "Flower Pic 2"), 
-                 React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-               )
-           ), 
-           React.createElement("div", {className: "col-xs-4 image-3"}, 
-             React.createElement("img", {className: "image-circle", src: "/static/app/images/brightflorals.jpg", alt: ""}), 
-             React.createElement("div", null, 
-               React.createElement("h1", null, "Flower Pic 3"), 
-               React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-             )
-           )
-         )
-       )
-
-
-
-
-    );
-  }
-});
-
-module.exports = HeaderComponent;
-
-},{"backbone":25,"jquery":107,"react":423,"react-bootstrap":259,"react-dom":270}],7:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -452,8 +427,9 @@ var GalleryComponent = React.createClass({displayName: "GalleryComponent",
       )
     });
     return (
-      React.createElement("div", {className: "row"}, 
+      React.createElement("div", {className: "row galleryheader"}, 
           React.createElement(NavBar, null), 
+          React.createElement("h1", null, "bouquets"), 
         React.createElement("div", {className: "col-xs-12"}, 
           React.createElement("div", {className: "row gallery-bouquets"}, 
             productRows
@@ -469,7 +445,70 @@ var GalleryComponent = React.createClass({displayName: "GalleryComponent",
 
 module.exports = GalleryComponent;
 
-},{"../models/models.js":12,"./../components/footer.jsx":5,"./../components/nav.jsx":9,"backbone":25,"react":423,"react-dom":270}],8:[function(require,module,exports){
+},{"../models/models.js":12,"./../components/footer.jsx":5,"./../components/nav.jsx":9,"backbone":25,"react":423,"react-dom":270}],7:[function(require,module,exports){
+"use strict";
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+var $ = require('jquery');
+var Backbone = require('backbone');
+var HeaderComponent = require('react-bootstrap').HeaderComponent;
+var Footer = require('./../components/footer.jsx');
+
+
+
+
+
+
+var HeaderComponent = React.createClass({displayName: "HeaderComponent",
+  render: function(){
+    return (
+      React.createElement("div", {className: "container-fluid"}, 
+         React.createElement("div", {className: "row header-content"}, 
+           React.createElement("ul", {className: "navbuttons"}, 
+             React.createElement("li", null, React.createElement("a", {href: "#gallery"}, "bouquets")), 
+             React.createElement("li", null, React.createElement("a", {href: "#"}, "home")), 
+             React.createElement("li", null, React.createElement("a", {href: "#cart"}, "cart")), 
+             React.createElement("li", {id: "login"}, React.createElement("a", {href: "#loginpage"}, "login"))
+           ), 
+           React.createElement("div", {className: "header"}, 
+             React.createElement("h1", null, "La Belle Fluer"), 
+             React.createElement("h3", null, "I must have flowers always, and always!", React.createElement("span", null, "-Claude Monet"))
+           )
+         ), 
+         React.createElement("div", {className: "row"}, 
+           React.createElement("div", {className: "col-xs-4 image-1"}, 
+               React.createElement("div", null, 
+                 React.createElement("h1", null, "Flower Pic 1"), 
+                 React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+               )
+           ), 
+           React.createElement("div", {className: "col-xs-4 image-2"}, 
+               React.createElement("div", null, 
+                 React.createElement("h1", null, "Flower Pic 2"), 
+                 React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+               )
+           ), 
+           React.createElement("div", {className: "col-xs-4 image-3"}, 
+             React.createElement("div", null, 
+               React.createElement("h1", null, "Flower Pic 3"), 
+               React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+             )
+           ), 
+           React.createElement(Footer, null)
+         )
+       )
+
+
+
+
+    );
+  }
+});
+
+module.exports = HeaderComponent;
+
+},{"./../components/footer.jsx":5,"backbone":25,"jquery":107,"react":423,"react-bootstrap":259,"react-dom":270}],8:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -548,9 +587,9 @@ var LoginPage = React.createClass({displayName: "LoginPage",
            )
           )
        ), 
-     React.createElement("div", {className: "footer"}
-
-     ), 
+    "//  ", React.createElement("div", {className: "footer"}, 
+     "//" + ' ' +
+    "//  "), 
      React.createElement(Footer, null)
 
    )
@@ -572,14 +611,14 @@ var models = require('../models/models');
 var NavBar = React.createClass({displayName: "NavBar",
   render: function(){
     return (
-        React.createElement("div", null, 
+      React.createElement("div", null, 
         React.createElement("ul", {className: "navbuttons-login"}, 
-          React.createElement("li", null, React.createElement("a", {href: "#arrangements"}, "bouquets")), 
-          React.createElement("li", null, React.createElement("a", {href: "#about"}, "about us")), 
-          React.createElement("li", null, React.createElement("a", {href: "#contact"}, "contact us")), 
+          React.createElement("li", null, React.createElement("a", {href: "#gallery"}, "bouquets")), 
+          React.createElement("li", null, React.createElement("a", {href: "#"}, "home")), 
+          React.createElement("li", null, React.createElement("a", {href: "#cart"}, "cart")), 
           React.createElement("li", {id: "login"}, React.createElement("a", {href: "#loginpage"}, "login"))
         )
-        )
+      )
     );
   }
 });
@@ -662,6 +701,11 @@ var Cart = Backbone.Model.extend({
 var CartCollection = Backbone.Collection.extend({
   model: Cart,
   url: '/api/carts/'
+});
+
+
+var Bouquet = Backbone.Model.extend({
+  // urlRoot: '/api/arrangements/'+ bouquetId + '/'
 })
 
 
@@ -672,7 +716,8 @@ module.exports = {
   "Arrangement" : Arrangement,
   'ArrangementCollection': ArrangementCollection,
   "Cart": Cart,
-  "CartCollection": CartCollection
+  "CartCollection": CartCollection,
+  "Bouquet" : Bouquet
 }
 
 },{"backbone":25}],13:[function(require,module,exports){
@@ -685,15 +730,15 @@ require('backbone-react-component');
 
 var models = require('./../models/models');
 
-var ImageComponent = require('./../components/imageboard.jsx');
+var ImageComponent = require('./../components/gallery.jsx');
 var LoginPage = require('./../components/login.jsx');
 var HeaderComponent = require('./../components/homepage.jsx');
 var DashBoard = require('./../components/dashboard.jsx');
-var ImageComponent = require('./../components/imageboard.jsx');
+var ImageComponent = require('./../components/gallery.jsx');
 var CreateDataComponent = require('./../components/data.jsx');
 var appContainer = document.getElementById('app');
 var ModelArrangement = require('../models/models').ArrangementCollection;
-var GalleryComponent = require('./../components/imageboard.jsx');
+var GalleryComponent = require('./../components/gallery.jsx');
 var CartComponent = require('./../components/cart.jsx');
 var DetailViewComponent = require('./../components/detailview.jsx');
 var notfound = require('./../components/notfound.jsx');
@@ -781,7 +826,7 @@ var Router = Backbone.Router.extend({
 var router = new Router();
 module.exports = router;
 
-},{"../models/models":12,"./../components/cart.jsx":1,"./../components/dashboard.jsx":2,"./../components/data.jsx":3,"./../components/detailview.jsx":4,"./../components/homepage.jsx":6,"./../components/imageboard.jsx":7,"./../components/login.jsx":8,"./../components/notfound.jsx":10,"./../models/models":12,"backbone":25,"backbone-react-component":24,"react":423,"react-dom":270,"underscore":427}],14:[function(require,module,exports){
+},{"../models/models":12,"./../components/cart.jsx":1,"./../components/dashboard.jsx":2,"./../components/data.jsx":3,"./../components/detailview.jsx":4,"./../components/gallery.jsx":6,"./../components/homepage.jsx":7,"./../components/login.jsx":8,"./../components/notfound.jsx":10,"./../models/models":12,"backbone":25,"backbone-react-component":24,"react":423,"react-dom":270,"underscore":427}],14:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/assign"), __esModule: true };
 },{"core-js/library/fn/object/assign":27}],15:[function(require,module,exports){
 module.exports = { "default": require("core-js/library/fn/object/create"), __esModule: true };

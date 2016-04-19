@@ -28,6 +28,11 @@ var Cart = Backbone.Model.extend({
 var CartCollection = Backbone.Collection.extend({
   model: Cart,
   url: '/api/carts/'
+});
+
+
+var Bouquet = Backbone.Model.extend({
+  // urlRoot: '/api/arrangements/'+ bouquetId + '/'
 })
 
 
@@ -38,5 +43,6 @@ module.exports = {
   "Arrangement" : Arrangement,
   'ArrangementCollection': ArrangementCollection,
   "Cart": Cart,
-  "CartCollection": CartCollection
+  "CartCollection": CartCollection,
+  "Bouquet" : Bouquet
 }

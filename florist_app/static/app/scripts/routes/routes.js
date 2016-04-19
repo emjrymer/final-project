@@ -6,15 +6,15 @@ require('backbone-react-component');
 
 var models = require('./../models/models');
 
-var ImageComponent = require('./../components/imageboard.jsx');
+var ImageComponent = require('./../components/gallery.jsx');
 var LoginPage = require('./../components/login.jsx');
 var HeaderComponent = require('./../components/homepage.jsx');
 var DashBoard = require('./../components/dashboard.jsx');
-var ImageComponent = require('./../components/imageboard.jsx');
+var ImageComponent = require('./../components/gallery.jsx');
 var CreateDataComponent = require('./../components/data.jsx');
 var appContainer = document.getElementById('app');
 var ModelArrangement = require('../models/models').ArrangementCollection;
-var GalleryComponent = require('./../components/imageboard.jsx');
+var GalleryComponent = require('./../components/gallery.jsx');
 var CartComponent = require('./../components/cart.jsx');
 var DetailViewComponent = require('./../components/detailview.jsx');
 var notfound = require('./../components/notfound.jsx');

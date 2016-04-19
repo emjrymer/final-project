@@ -5,6 +5,7 @@ var models = require('../models/models');
 var NavBar  = require('./../components/nav.jsx');
 var Footer = require('./../components/footer.jsx');
 var CartCollection = require('../models/models.js').CartCollection;
+var CartDelete = require('../models/models.js').CartDelete;
 
 
 var CartComponent = React.createClass({
@@ -13,15 +14,41 @@ var CartComponent = React.createClass({
   },
   componentDidMount: function(){
     var self = this;
-    var cart = new models.CartCollection();
-    console.log(cart);
-    cart.fetch().done(function(products){
+    this.cart = new models.CartCollection();
+
+    this.cart.fetch().done(function(products){
       console.log(products);
-      self.setState({ 'products': products});
+      self.setState({'products': products});
     });
 },
 
+removeItem: function(item){
+  console.log(item);
+  var key = item.id;
+  // console.log('key', key);
+  // var objectId = key;
+  // console.log(key);
+  // key = key.toString();
+  // // CartDelete.set(key);
+  // // CartDelete.save();
+  // //
+  $.ajax({
+    url: '/api/carts/' + key + "/",
+    type: 'DELETE',
+    success: function(msg){
+      console.log('worked!');
+    }
+
+  });
+  // // var products = this.cart;
+  // products.remove(model);
+  // this.setState({'products': products})
+
+},
+
     render: function(){
+      var self = this;
+      console.log('state products',this.state.products);
       var products = this.state.products.map(function(indivCart){
         console.log(indivCart);
         var imgUrl= indivCart.arrangement_photo;
@@ -30,7 +57,7 @@ var CartComponent = React.createClass({
               <td>{indivCart.arrangement_name}</td>
               <td>$ {indivCart.arrangement_price}</td>
               <td className="add-image"><img src={imgUrl} /></td>
-              <td><a href={"#carts/" + indivCart.id + "/"}>Remove</a></td>
+              <td onClick={self.removeItem.bind(self,indivCart)}>Remove</td>
             </tr>
         )
       });

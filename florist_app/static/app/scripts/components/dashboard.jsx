@@ -3,6 +3,8 @@ var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var models = require('../models/models');
 var NavBar  = require('./../components/nav.jsx');
+var Footer = require('./../components/footer.jsx');
+
 
 
 
@@ -59,9 +61,10 @@ var DashBoard = React.createClass({
                 <input id='description' type='text'name='price' className='form-control' placeholder='description'/>
                 <input id="image" className="flowerPic" type="file" name="pic" accept="image/*" />
                 <button type='submit' className='btn btn-default submit-button-1'>Submit</button>
-               <button type='submit' className='btn btn-default submit-button-1'>Add Img</button>
+               <button type='submit' className='btn btn-default submit-button-1'>Browse Gallery</button>
             </form>
           </div>
+          <Footer/>
         </div>
      </div>
 

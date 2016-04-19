@@ -7,14 +7,14 @@ var models = require('../models/models');
 var NavBar = React.createClass({
   render: function(){
     return (
-        <div>
+      <div>
         <ul className='navbuttons-login'>
-          <li><a href="#arrangements">bouquets</a></li>
-          <li><a href="#about">about us</a></li>
-          <li><a href="#contact">contact us</a></li>
+          <li><a href="#gallery">bouquets</a></li>
+          <li><a href="#">home</a></li>
+          <li><a href="#cart">cart</a></li>
           <li id="login"><a href="#loginpage">login</a></li>
         </ul>
-        </div>
+      </div>
     );
   }
 });

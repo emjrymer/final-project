@@ -58,8 +58,9 @@ var GalleryComponent = React.createClass({
       )
     });
     return (
-      <div className="row">
+      <div className="row galleryheader">
           <NavBar/>
+          <h1>bouquets</h1>
         <div className='col-xs-12'>
           <div className='row gallery-bouquets'>
             {productRows}
