@@ -12,8 +12,8 @@ from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view
 # florist_app imports
-from florist_app.models import Arrangement, Cart, Florist, Buyer
-from florist_app.serializers import UserSerializer, ArrangementSerializer, CartSerializer, FloristSerializer, BuyerSerializer
+from florist_app.models import Arrangement, Cart, Enjoyer
+from florist_app.serializers import UserSerializer, ArrangementSerializer, CartSerializer, EnjoyerSerializer
 import stripe
 from django.shortcuts import render
 
@@ -68,26 +68,28 @@ class UserCreateAPIView(generics.CreateAPIView):
     permission_classes = (AllowAny,)
 
 
+######## #gallery view permission_classes = (AllowAny, ) ########
 class ArrangementListCreateAPIView(generics.ListCreateAPIView):
     queryset = Arrangement.objects.all()
     serializer_class = ArrangementSerializer
-    permission_classes = (IsAuthenticated ,)
+    permission_classes = (AllowAny ,)
 
     def create(self, request, *args, **kwargs):
-        request.data['florist'] = request.user.pk #maybe this should have self infront of it? self.request.user.pk
+        request.data['posting_user'] = request.user.pk
         return super().create(request, *args, **kwargs)
+################################################################
 
 
 class ArrangementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-
     serializer_class = ArrangementSerializer
     authentication_classes = (BasicAuthentication,)
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
-        return Arrangement.objects.filter(florist_id=self.request.user.id)
+        return Arrangement.objects.filter(posting_user_id=self.request.user.id)
 
 
+####### Maybe this can be for the #arrangements view ########
 class ArrangementListAPIView(generics.ListAPIView):
     authentication_classes = (BasicAuthentication,)
     permission_classes = (IsAuthenticated, )
@@ -96,6 +98,7 @@ class ArrangementListAPIView(generics.ListAPIView):
         arrangement = Arrangement.objects.get(id=self.kwargs.get('pk'))
         serializer = ArrangementSerializer(arrangement)
         return JsonResponse(serializer.data)
+############################################################
 
 
 class CartListCreateAPIView(generics.ListCreateAPIView):
@@ -103,10 +106,10 @@ class CartListCreateAPIView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return Cart.objects.filter(consumer_id=self.request.user)
+        return Cart.objects.filter(buyer_id=self.request.user)
 
     def create(self, request, *args, **kwargs):
-        request.data['consumer'] = request.user.pk #maybe this should have self infront of it? self.request.user.pk
+        request.data['buyer'] = request.user.pk
         return super().create(request, *args, **kwargs)
 
 
@@ -115,42 +118,28 @@ class CartRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     authentication_classes = (BasicAuthentication,)
     permission_classes = (IsAuthenticated, )
 
-
     def get_queryset(self):
-        return Cart.objects.filter(consumer_id=self.request.user)
+        return Cart.objects.filter(buyer_id=self.request.user)
 
 
-class FloristListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Florist.objects.all()
-    serializer_class = FloristSerializer
+class EnjoyerListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Enjoyer.objects.all()
+    serializer_class = EnjoyerSerializer
     permission_classes = (IsAuthenticated,)
 
 
-class FloristRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Florist.objects.all()
-    serializer_class = FloristSerializer
+class EnjoyerRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Enjoyer.objects.all()
+    serializer_class = EnjoyerSerializer
     permission_classes = (IsAuthenticated,)
 
 
-class FloristSpecificArrangementListAPIView(generics.ListAPIView):
+class EnjoyerSpecificArrangementListAPIView(generics.ListAPIView):
     serializer_class = ArrangementSerializer
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return Arrangement.objects.filter(florist_id=self.kwargs['pk'])
-
-
-# ignore this information for now
-class BuyerListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Buyer.objects.all()
-    serializer_class = BuyerSerializer
-    permission_classes = (IsAuthenticated,)
-
-
-class BuyerRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Buyer.objects.all()
-    serializer_class = BuyerSerializer
-    permission_classes = (IsAuthenticated,)
+        return Arrangement.objects.filter(posting_user_id=self.kwargs['pk'])
 
 
 ################# stripe integration #####################

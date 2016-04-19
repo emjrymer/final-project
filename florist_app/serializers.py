@@ -1,12 +1,18 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from florist_app.models import Arrangement, Cart, Florist, Buyer
+from florist_app.models import Arrangement, Cart, Enjoyer
 
 
 class ArrangementSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Arrangement
+
+
+class EnjoyerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Enjoyer
 
 
 class CartSerializer(serializers.ModelSerializer):
@@ -25,19 +31,6 @@ class CartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-
-
-
-class FloristSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Florist
-
-
-class BuyerSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Buyer
 
 
 class UserSerializer(serializers.ModelSerializer):
