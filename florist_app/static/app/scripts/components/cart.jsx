@@ -6,6 +6,7 @@ var NavBar  = require('./../components/nav.jsx');
 var Footer = require('./../components/footer.jsx');
 var CartCollection = require('../models/models.js').CartCollection;
 var CartDelete = require('../models/models.js').CartDelete;
+var _ = require('underscore');
 
 
 var CartComponent = React.createClass({
@@ -25,6 +26,7 @@ var CartComponent = React.createClass({
 removeItem: function(item){
   console.log(item);
   var key = item.id;
+  var self = this;
   // console.log('key', key);
   // var objectId = key;
   // console.log(key);
@@ -32,6 +34,7 @@ removeItem: function(item){
   // // CartDelete.set(key);
   // // CartDelete.save();
   // //
+  //
   $.ajax({
     url: '/api/carts/' + key + "/",
     type: 'DELETE',
@@ -40,9 +43,12 @@ removeItem: function(item){
     }
 
   });
+  var items = self.state.products;
+  var newProducts = _.without(items, _.findWhere(items, {id: item.id}));
+
+  self.setState({'products': newProducts});
   // // var products = this.cart;
   // products.remove(model);
-  // this.setState({'products': products})
 
 },
 

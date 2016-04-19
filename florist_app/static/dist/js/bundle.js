@@ -8,6 +8,7 @@ var NavBar  = require('./../components/nav.jsx');
 var Footer = require('./../components/footer.jsx');
 var CartCollection = require('../models/models.js').CartCollection;
 var CartDelete = require('../models/models.js').CartDelete;
+var _ = require('underscore');
 
 
 var CartComponent = React.createClass({displayName: "CartComponent",
@@ -27,6 +28,7 @@ var CartComponent = React.createClass({displayName: "CartComponent",
 removeItem: function(item){
   console.log(item);
   var key = item.id;
+  var self = this;
   // console.log('key', key);
   // var objectId = key;
   // console.log(key);
@@ -34,6 +36,7 @@ removeItem: function(item){
   // // CartDelete.set(key);
   // // CartDelete.save();
   // //
+  //
   $.ajax({
     url: '/api/carts/' + key + "/",
     type: 'DELETE',
@@ -42,9 +45,12 @@ removeItem: function(item){
     }
 
   });
+  var items = self.state.products;
+  var newProducts = _.without(items, _.findWhere(items, {id: item.id}));
+
+  self.setState({'products': newProducts});
   // // var products = this.cart;
   // products.remove(model);
-  // this.setState({'products': products})
 
 },
 
@@ -130,7 +136,7 @@ removeItem: function(item){
 
 module.exports = CartComponent;
 
-},{"../models/models":12,"../models/models.js":12,"./../components/footer.jsx":5,"./../components/nav.jsx":9,"backbone":25,"react":423,"react-dom":270}],2:[function(require,module,exports){
+},{"../models/models":12,"../models/models.js":12,"./../components/footer.jsx":5,"./../components/nav.jsx":9,"backbone":25,"react":423,"react-dom":270,"underscore":427}],2:[function(require,module,exports){
 "use strict";
 var React = require('react');
 var ReactDOM = require('react-dom');
@@ -1349,7 +1355,7 @@ exports.__esModule = true;
 
 },{"backbone":25,"react":423,"react-dom":270,"underscore":427}],25:[function(require,module,exports){
 (function (global){
-//     Backbone.js 1.3.2
+//     Backbone.js 1.3.3
 
 //     (c) 2010-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Backbone may be freely distributed under the MIT license.
@@ -1395,7 +1401,7 @@ exports.__esModule = true;
   var slice = Array.prototype.slice;
 
   // Current version of the library. Keep in sync with `package.json`.
-  Backbone.VERSION = '1.3.2';
+  Backbone.VERSION = '1.3.3';
 
   // For Backbone's purposes, jQuery, Zepto, Ender, or My Library (kidding) owns
   // the `$` variable.
@@ -5449,7 +5455,7 @@ module.exports = invariant;
 }).call(this,require('_process'))
 },{"_process":178}],107:[function(require,module,exports){
 /*!
- * jQuery JavaScript Library v2.2.2
+ * jQuery JavaScript Library v2.2.3
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -5459,7 +5465,7 @@ module.exports = invariant;
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-03-17T17:51Z
+ * Date: 2016-04-05T19:26Z
  */
 
 (function( global, factory ) {
@@ -5515,7 +5521,7 @@ var support = {};
 
 
 var
-	version = "2.2.2",
+	version = "2.2.3",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -14925,7 +14931,7 @@ jQuery.fn.load = function( url, params, callback ) {
 		// If it fails, this function gets "jqXHR", "status", "error"
 		} ).always( callback && function( jqXHR, status ) {
 			self.each( function() {
-				callback.apply( self, response || [ jqXHR.responseText, status, jqXHR ] );
+				callback.apply( this, response || [ jqXHR.responseText, status, jqXHR ] );
 			} );
 		} );
 	}
