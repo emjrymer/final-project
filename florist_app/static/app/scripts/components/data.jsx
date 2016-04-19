@@ -5,6 +5,8 @@ var Backbone = require('backbone');
 var models = require('../models/models.js');
 var NavBar  = require('./../components/nav.jsx');
 var ModelArrangement = require('../models/models.js').ArrangementCollection;
+var Footer = require('./../components/footer.jsx');
+
 
 var arrangementCollection = new ModelArrangement();
 
@@ -55,6 +57,10 @@ var CreateDataComponent = React.createClass({
               {productRows}
             </tbody>
           </table>
+          <div className='yellowborder'>
+
+          </div>
+          <Footer/>
 
 
 

@@ -77,7 +77,7 @@ removeItem: function(item){
         React.createElement("div", null, 
           React.createElement("div", {className: "carts-page"}, 
               React.createElement(NavBar, null), 
-            React.createElement("h3", null, "Checkout"), 
+            React.createElement("h3", null, "checkout"), 
             React.createElement("div", {className: "shopping-cart"}, 
             React.createElement("table", {className: "table table-hover"}, 
               React.createElement("thead", null, 
@@ -193,7 +193,7 @@ var DashBoard = React.createClass({displayName: "DashBoard",
 
          React.createElement("div", {className: "row"}, 
 
-           React.createElement("div", {className: "col-sm-12 florist-form"}, 
+           React.createElement("div", {className: "col-sm-12 floristform"}, 
 
              React.createElement("form", {id: "signup", onSubmit: this.handleFormSubmit, className: "form-signup dashboard"}, 
                React.createElement("input", {id: "name", type: "text", name: "name", className: "form-control", placeholder: "name"}), 
@@ -232,6 +232,8 @@ var Backbone = require('backbone');
 var models = require('../models/models.js');
 var NavBar  = require('./../components/nav.jsx');
 var ModelArrangement = require('../models/models.js').ArrangementCollection;
+var Footer = require('./../components/footer.jsx');
+
 
 var arrangementCollection = new ModelArrangement();
 
@@ -281,7 +283,11 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
             React.createElement("tbody", null, 
               productRows
             )
-          )
+          ), 
+          React.createElement("div", {className: "yellowborder"}
+
+          ), 
+          React.createElement(Footer, null)
 
 
 
@@ -292,7 +298,7 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
 
 module.exports = CreateDataComponent;
 
-},{"../models/models.js":12,"./../components/nav.jsx":9,"backbone":25,"jquery":107,"react":423,"react-dom":270}],4:[function(require,module,exports){
+},{"../models/models.js":12,"./../components/footer.jsx":5,"./../components/nav.jsx":9,"backbone":25,"jquery":107,"react":423,"react-dom":270}],4:[function(require,module,exports){
 "use strict";
 // var React = require('react');
 // var ReactDOM = require('react-dom');
@@ -306,7 +312,7 @@ module.exports = CreateDataComponent;
 //   },
 //   componentWillMount: function(){
 //     var self = this;
-//     var product = new models.Bouquet.();
+//     var product = new models.();
 //
 //     product.fetch(this.props.productId,{
 //     success: function(product){
@@ -324,7 +330,7 @@ module.exports = CreateDataComponent;
 //         <div className="detailpage">
 //         <div className="row">
 //           <div className="col-xs-6">
-//             <img src="" className="detail-img" alt=""/>
+//             <img src={product.get("photo")} className="detail-img" alt=""/>
 //           </div>
 //             <div className="col-xs-6">
 //               <h3 className="floral-name" key={product.id}>{product.get('name')</h3>
@@ -433,17 +439,19 @@ var GalleryComponent = React.createClass({displayName: "GalleryComponent",
       )
     });
     return (
-      React.createElement("div", {className: "row galleryheader"}, 
-          React.createElement(NavBar, null), 
-          React.createElement("h1", null, "bouquets"), 
-        React.createElement("div", {className: "col-xs-12"}, 
-          React.createElement("div", {className: "row gallery-bouquets"}, 
-            productRows
-          )
-        ), 
-        React.createElement("div", {className: "footer"}), 
-        React.createElement(Footer, null)
-      )
+            React.createElement("div", null, 
+              React.createElement("div", {className: "row galleryheader"}, 
+                  React.createElement(NavBar, null), 
+                  React.createElement("h1", null, "bouquets"), 
+                React.createElement("div", {className: "col-xs-12"}, 
+                  React.createElement("div", {className: "row gallery-bouquets"}, 
+                    productRows
+                  )
+                )
+              ), 
+            React.createElement("div", {className: "yellowborder"}), 
+            React.createElement(Footer, null)
+            )
 
   );
  }
@@ -593,9 +601,7 @@ var LoginPage = React.createClass({displayName: "LoginPage",
            )
           )
        ), 
-    "//  ", React.createElement("div", {className: "footer"}, 
-     "//" + ' ' +
-    "//  "), 
+       React.createElement("div", {className: "yellowborder"}), 
      React.createElement(Footer, null)
 
    )
@@ -639,7 +645,9 @@ var React = require('react');
 var notfound = React.createClass({displayName: "notfound",
     render: function(){
         return (
-            React.createElement("div", null, React.createElement("img", {src: "https://openclipart.org/image/2400px/svg_to_png/130795/Trollface.png"}))
+            React.createElement("div", {className: "workprogress"}, 
+              React.createElement("h1", null, "We are a work in progress...coming soon!")
+            )
         )
     }
 });
@@ -1355,7 +1363,7 @@ exports.__esModule = true;
 
 },{"backbone":25,"react":423,"react-dom":270,"underscore":427}],25:[function(require,module,exports){
 (function (global){
-//     Backbone.js 1.3.3
+//     Backbone.js 1.3.2
 
 //     (c) 2010-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Backbone may be freely distributed under the MIT license.
@@ -1401,7 +1409,7 @@ exports.__esModule = true;
   var slice = Array.prototype.slice;
 
   // Current version of the library. Keep in sync with `package.json`.
-  Backbone.VERSION = '1.3.3';
+  Backbone.VERSION = '1.3.2';
 
   // For Backbone's purposes, jQuery, Zepto, Ender, or My Library (kidding) owns
   // the `$` variable.
@@ -5455,7 +5463,7 @@ module.exports = invariant;
 }).call(this,require('_process'))
 },{"_process":178}],107:[function(require,module,exports){
 /*!
- * jQuery JavaScript Library v2.2.3
+ * jQuery JavaScript Library v2.2.2
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -5465,7 +5473,7 @@ module.exports = invariant;
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2016-04-05T19:26Z
+ * Date: 2016-03-17T17:51Z
  */
 
 (function( global, factory ) {
@@ -5521,7 +5529,7 @@ var support = {};
 
 
 var
-	version = "2.2.3",
+	version = "2.2.2",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -14931,7 +14939,7 @@ jQuery.fn.load = function( url, params, callback ) {
 		// If it fails, this function gets "jqXHR", "status", "error"
 		} ).always( callback && function( jqXHR, status ) {
 			self.each( function() {
-				callback.apply( this, response || [ jqXHR.responseText, status, jqXHR ] );
+				callback.apply( self, response || [ jqXHR.responseText, status, jqXHR ] );
 			} );
 		} );
 	}

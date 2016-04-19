@@ -75,9 +75,7 @@ var LoginPage = React.createClass({
            </form>
           </div>
        </div>
-    //  <div className="footer">
-     //
-    //  </div>
+       <div className="yellowborder"></div>
      <Footer/>
 
    </div>

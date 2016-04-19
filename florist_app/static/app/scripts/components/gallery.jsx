@@ -58,17 +58,19 @@ var GalleryComponent = React.createClass({
       )
     });
     return (
-      <div className="row galleryheader">
-          <NavBar/>
-          <h1>bouquets</h1>
-        <div className='col-xs-12'>
-          <div className='row gallery-bouquets'>
-            {productRows}
-          </div>
-        </div>
-        <div className='footer'></div>
-        <Footer/>
-      </div>
+            <div>
+              <div className="row galleryheader">
+                  <NavBar/>
+                  <h1>bouquets</h1>
+                <div className='col-xs-12'>
+                  <div className='row gallery-bouquets'>
+                    {productRows}
+                  </div>
+                </div>
+              </div>
+            <div className='yellowborder'></div>
+            <Footer/>
+            </div>
 
   );
  }

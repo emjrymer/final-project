@@ -6007,8 +6007,7 @@ img {
     display: inline-block;
     padding: 3px 20px 3px 20px;
     font-size: 15px;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 15px; }
+    font-family: 'Open Sans Condensed', sans-serif; }
 
 /*dashboard page*/
 .submit-button-1 {
@@ -6037,6 +6036,12 @@ img {
   color: #dfac12;
   float: left; }
 
+.floristform #name {
+  margin-top: 15px; }
+
+.floristform #description {
+  margin-top: 15px; }
+
 /* gallery */
 .imageboard {
   text-align: center;
@@ -6051,14 +6056,16 @@ img {
   height: 85px;
   width: 85px; }
 
-.gallery-bouquets .image {
-  text-align: center;
-  border: 1px solid #dfac12;
-  padding: 15px 0 15px 0;
-  margin-bottom: 40px; }
-  .gallery-bouquets .image img {
-    height: 300px;
-    width: 300px; }
+.gallery-bouquets {
+  margin-left: 15px;
+  margin-right: 15px; }
+  .gallery-bouquets .image {
+    text-align: center;
+    border: 1px solid #dfac12;
+    padding: 15px 0 15px 0; }
+    .gallery-bouquets .image img {
+      height: 300px;
+      width: 300px; }
 
 .socialButtons {
   list-style: none; }
@@ -6085,8 +6092,8 @@ img {
       color: #000; }
 
 .shopping-cart {
-  margin-left: 35px;
-  margin-right: 35px; }
+  margin-left: 150px;
+  margin-right: 150px; }
 
 h3 {
   font-size: 36px; }
@@ -6095,6 +6102,16 @@ h3 {
   margin-left: 45px; }
 
 .carts-page h3 {
-  margin-left: 45px; }
+  margin-left: 45px;
+  text-align: center;
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #dfac12; }
+
+.yellowborder {
+  border-bottom: solid 5px #dfac12;
+  margin-right: 53px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-left: 53px; }
 
 /*# sourceMappingURL=app.css.map */

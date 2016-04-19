@@ -53,7 +53,7 @@ var DashBoard = React.createClass({
 
          <div className="row">
 
-           <div className="col-sm-12 florist-form">
+           <div className="col-sm-12 floristform">
 
              <form id="signup" onSubmit={this.handleFormSubmit} className="form-signup dashboard">
                <input id='name' type='text' name='name' className='form-control'  placeholder='name'/>

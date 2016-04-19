@@ -10,7 +10,7 @@
 //   },
 //   componentWillMount: function(){
 //     var self = this;
-//     var product = new models.Bouquet.();
+//     var product = new models.();
 //
 //     product.fetch(this.props.productId,{
 //     success: function(product){
@@ -28,7 +28,7 @@
 //         <div className="detailpage">
 //         <div className="row">
 //           <div className="col-xs-6">
-//             <img src="" className="detail-img" alt=""/>
+//             <img src={product.get("photo")} className="detail-img" alt=""/>
 //           </div>
 //             <div className="col-xs-6">
 //               <h3 className="floral-name" key={product.id}>{product.get('name')</h3>

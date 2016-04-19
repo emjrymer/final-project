@@ -166,7 +166,6 @@ img {
   }
   padding-left: 450px;
   padding-top: 70px;
-  // padding-right: 300px;
 }
 #email {
   margin-top: 15px;
@@ -255,13 +254,14 @@ img {
   list-style: none;
   text-align: center;
   padding: 0;
+
   li{
     display: inline-block;
     // border-left: solid #dfac12;
     padding: 3px 20px 3px 20px;
     font-size: 15px;
     font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 15px;
+
   }
 }
 
@@ -310,6 +310,18 @@ img {
 
 }
 
+.floristform{
+  #name {
+    margin-top: 15px;
+  }
+}
+
+.floristform {
+  #description {
+    margin-top: 15px;
+  }
+}
+
 /* gallery */
 
 .imageboard {
@@ -331,11 +343,12 @@ img {
 
 
 .gallery-bouquets{
+  margin-left: 15px;
+  margin-right: 15px;
   .image{
       text-align: center;
       border: 1px solid #dfac12;
       padding: 15px 0 15px 0;
-      margin-bottom: 40px;
       img{
         height:300px;
         width: 300px;
@@ -376,8 +389,8 @@ img {
 }
 
 .shopping-cart {
-  margin-left: 35px;
-  margin-right: 35px;
+  margin-left: 150px;
+  margin-right: 150px;
 }
 
 h3 {
@@ -390,4 +403,16 @@ h3 {
 
 .carts-page h3 {
   margin-left: 45px;
+  text-align: center;
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: #dfac12;
+
+}
+
+.yellowborder {
+  border-bottom: solid 5px #dfac12;
+  margin-right: 53px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-left: 53px;
 }

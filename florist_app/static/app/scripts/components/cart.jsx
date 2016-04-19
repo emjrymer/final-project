@@ -75,7 +75,7 @@ removeItem: function(item){
         <div>
           <div className="carts-page">
               <NavBar/>
-            <h3>Checkout</h3>
+            <h3>checkout</h3>
             <div className="shopping-cart">
             <table className="table table-hover">
               <thead>
