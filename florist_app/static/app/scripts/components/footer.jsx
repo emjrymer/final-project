@@ -7,8 +7,8 @@ var models = require('../models/models');
 var Footer = React.createClass({
   render: function(){
     return (
-      <div>
-        <ul className='navbuttons-login-1'>
+      <div className='row'>
+        <ul className='navbuttons-login-1 col-md-12'>
           <li><a href="https://www.facebook.com/">facebook</a></li>
           <li><a href="https://twitter.com/">twitter</a></li>
           <li><a href="https://www.instagram.com/">instagram</a></li>

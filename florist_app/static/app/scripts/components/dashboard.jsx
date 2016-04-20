@@ -81,8 +81,7 @@ var DashBoard = React.createClass({
                <input id='price' type='text' name='name' className='form-control'  placeholder='price' defaultValue={price}/>
                 <input id='description' type='text'name='price' className='form-control' placeholder='description' defaultValue={description}/>
                 {imageField}
-                <button type='submit' className='btn btn-default submit-button-1'>Submit</button>
-                <a href='#gallery' className='browse-option'></a>
+                <button type='submit' className='btn btn-default submit-button-1'>submit</button>
             </form>
           </div>
         </div>

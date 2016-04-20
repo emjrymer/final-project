@@ -39,11 +39,10 @@ var CreateDataComponent = React.createClass({
 
     console.log("arrangements!");
     return(
-      <div className="createproductspage">
+      <div className="createproductspage col-sm-10 col-sm-offset-1">
           <NavBar/>
         <h3>current products</h3>
         <div className='current-products'>
-        <a href="#dashboard" className="add-button">Add</a>
           <table className="table">
             <thead>
               <tr>
@@ -59,10 +58,13 @@ var CreateDataComponent = React.createClass({
             </tbody>
           </table>
         </div>
-          <div className='yellowborder'>
+        <a href="#dashboard" className="add-button">add item</a>
 
-          </div>
-          <Footer/>
+      <div className='yellowborder'>
+
+    </div>
+
+  <Footer/>
 
 
 

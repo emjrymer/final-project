@@ -57,29 +57,31 @@ var LoginPage = React.createClass({
 
         <div className="row header-content-login">
           <NavBar/>
-        <div className="row">
-         <div className="col-sm-6 signup">
+          <h3>get started...</h3>
+         <div className="col-sm-12 signup">
            <form id="signup" onSubmit={this.handleSignUp} className="form-signup">
              <input id='signup-name' type='text' name='first_name'  className='form-control' placeholder='firstname'/>
              <input id='email' type='text' className='form-control' name="email" placeholder='email'/>
              <input id='username' type='text' className='form-control' name="username" placeholder='username'/>
              <input id='password' type='password' className='form-control' name="password" placeholder='password'/>
-             <button type='submit' className='btn btn-default submit-button'>Sign Up</button>
+             <button type='submit' className='btn btn-default submit-button'>sign up</button>
            </form>
         </div>
-         <div className="col-sm-6 signin">
+        <div className='row col-sm-12 option'>
+          <h3>already have an account?</h3>
+        </div>
+         <div className="col-sm-12 signin">
            <form id="signin" onSubmit={this.handleSignIn} className="form-signin">
              <input id='signin-username' type='text' className='form-control'  name='signin-username' placeholder='username'/>
              <input id='signin-password' type='password' className='form-control' name='signin-password' placeholder='password'/>
-             <button type='submit' className='btn btn-default signin-button'>Log In</button>
+             <button type='submit' className='btn btn-default signin-button'>log in</button>
            </form>
           </div>
        </div>
        <div className="yellowborder"></div>
      <Footer/>
+    </div>
 
-   </div>
- </div>
   );
  }
 });

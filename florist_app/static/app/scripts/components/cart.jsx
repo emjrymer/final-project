@@ -92,34 +92,33 @@ removeItem: function(item){
 
       return (
         <div>
-          <div className="carts-page">
+          <div className="carts-page col-sm-10 col-sm-offset-1">
               <NavBar/>
             <h3>checkout</h3>
-            <div className="shopping-cart">
-            <table className="table table-hover">
-              <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>Price</td>
-                  <td>Photo</td>
-                  <td>Actions</td>
+            <div className="shopping-cart col-sm-10 col-sm-offset-1">
+              <table className="table table-hover">
+                <thead>
+                  <tr>
+                    <td>Name</td>
+                    <td>Price</td>
+                    <td>Photo</td>
+                    <td>Actions</td>
                   </tr>
-                  </thead>
-              <tbody>
-                {products}
-              </tbody>
-            </table>
-            <p>Total Cart Price:  $ {run ningTotal}</p>
-        </div>
+                </thead>
+                <tbody>
+                  {products}
+                </tbody>
+              </table>
+            <div className='midsection'>
+              <p>Total Cart Price:  $ {runningTotal}</p>
+              <a href='#gallery' className='col-xs-12'>Continue Shopping</a>
+            </div>
             <div className="payment">
-
-
                 <form onSubmit={this.redirectSuccess} action="/charge/" method="POST" id="payment-button"/>
-
                 <div className="yellowborder"></div>
-                <Footer/>
-
-
+            </div>
+            <Footer/>
+          </div>
         </div>
       </div>
 

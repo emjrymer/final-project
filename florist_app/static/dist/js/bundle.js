@@ -75,58 +75,29 @@ removeItem: function(item){
 
       return (
         React.createElement("div", null, 
-          React.createElement("div", {className: "carts-page"}, 
+          React.createElement("div", {className: "carts-page col-sm-10 col-sm-offset-1"}, 
               React.createElement(NavBar, null), 
             React.createElement("h3", null, "checkout"), 
-            React.createElement("div", {className: "shopping-cart"}, 
-            React.createElement("table", {className: "table table-hover"}, 
-              React.createElement("thead", null, 
-                React.createElement("tr", null, 
-                  React.createElement("td", null, "Name"), 
-                  React.createElement("td", null, "Price"), 
-                  React.createElement("td", null, "Photo"), 
-                  React.createElement("td", null, "Actions")
+            React.createElement("div", {className: "shopping-cart col-sm-10 col-sm-offset-1"}, 
+              React.createElement("table", {className: "table table-hover"}, 
+                React.createElement("thead", null, 
+                  React.createElement("tr", null, 
+                    React.createElement("td", null, "Name"), 
+                    React.createElement("td", null, "Price"), 
+                    React.createElement("td", null, "Photo"), 
+                    React.createElement("td", null, "Actions")
+                  )
+                ), 
+                React.createElement("tbody", null, 
+                  products
                 )
               ), 
-              React.createElement("tbody", null, 
-                products
-              )
-            ), 
-            React.createElement("p", null, "Total Cart Price:  $ ", runningTotal)
-        ), 
-            React.createElement("div", {className: "payment"}, 
-                React.createElement("form", {action: "", method: "POST", id: "payment-form", onSubmit:  this.handleSubmit}, 
-                      React.createElement("span", {className: "payment-errors"}), 
-
-                      React.createElement("div", {className: "form-row"}, 
-                        React.createElement("label", null, 
-                          React.createElement("span", null, "Card Number"), 
-                          React.createElement("input", {type: "text", size: "20", "data-stripe": "number"})
-                        )
-                      ), 
-
-                      React.createElement("div", {className: "form-row"}, 
-                        React.createElement("label", null, 
-                          React.createElement("span", null, "CVC"), 
-                          React.createElement("input", {type: "text", size: "4", "data-stripe": "cvc"})
-                        )
-                      ), 
-
-                      React.createElement("div", {className: "form-row"}, 
-                        React.createElement("label", null, 
-                          React.createElement("span", null, "Expiration (MM/YYYY)"), 
-                          React.createElement("input", {type: "text", size: "2", "data-stripe": "exp-month"})
-                        ), 
-                        React.createElement("span", null, " / "), 
-                        React.createElement("input", {type: "text", size: "4", "data-stripe": "exp-year"})
-                      ), 
-                      React.createElement("button", {type: "submit"}, "Submit Payment")
-                )
-              ), 
-                React.createElement("div", {className: "yellowborder"}), 
-                React.createElement(Footer, null)
-
-
+            React.createElement("div", {className: "midsection"}, 
+              React.createElement("p", null, "Total Cart Price:  $ ", runningTotal), 
+              React.createElement("a", {href: "#gallery", className: "col-xs-12"}, "Continue Shopping")
+            )
+          ), 
+          React.createElement(Footer, null)
         )
       )
 
@@ -222,8 +193,7 @@ var DashBoard = React.createClass({displayName: "DashBoard",
                React.createElement("input", {id: "price", type: "text", name: "name", className: "form-control", placeholder: "price", defaultValue: price}), 
                 React.createElement("input", {id: "description", type: "text", name: "price", className: "form-control", placeholder: "description", defaultValue: description}), 
                 imageField, 
-                React.createElement("button", {type: "submit", className: "btn btn-default submit-button-1"}, "Submit"), 
-                React.createElement("a", {href: "#gallery", className: "browse-option"})
+                React.createElement("button", {type: "submit", className: "btn btn-default submit-button-1"}, "submit")
             )
           )
         ), 
@@ -290,11 +260,10 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
 
     console.log("arrangements!");
     return(
-      React.createElement("div", {className: "createproductspage"}, 
+      React.createElement("div", {className: "createproductspage col-sm-10 col-sm-offset-1"}, 
           React.createElement(NavBar, null), 
         React.createElement("h3", null, "current products"), 
         React.createElement("div", {className: "current-products"}, 
-        React.createElement("a", {href: "#dashboard", className: "add-button"}, "Add"), 
           React.createElement("table", {className: "table"}, 
             React.createElement("thead", null, 
               React.createElement("tr", null, 
@@ -310,10 +279,13 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
             )
           )
         ), 
-          React.createElement("div", {className: "yellowborder"}
+        React.createElement("a", {href: "#dashboard", className: "add-button"}, "add item"), 
 
-          ), 
-          React.createElement(Footer, null)
+      React.createElement("div", {className: "yellowborder"}
+
+    ), 
+
+  React.createElement(Footer, null)
 
 
 
@@ -389,8 +361,8 @@ var models = require('../models/models');
 var Footer = React.createClass({displayName: "Footer",
   render: function(){
     return (
-      React.createElement("div", null, 
-        React.createElement("ul", {className: "navbuttons-login-1"}, 
+      React.createElement("div", {className: "row"}, 
+        React.createElement("ul", {className: "navbuttons-login-1 col-md-12"}, 
           React.createElement("li", null, React.createElement("a", {href: "https://www.facebook.com/"}, "facebook")), 
           React.createElement("li", null, React.createElement("a", {href: "https://twitter.com/"}, "twitter")), 
           React.createElement("li", null, React.createElement("a", {href: "https://www.instagram.com/"}, "instagram"))
@@ -609,29 +581,31 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
         React.createElement("div", {className: "row header-content-login"}, 
           React.createElement(NavBar, null), 
-        React.createElement("div", {className: "row"}, 
-         React.createElement("div", {className: "col-sm-6 signup"}, 
+          React.createElement("h3", null, "get started..."), 
+         React.createElement("div", {className: "col-sm-12 signup"}, 
            React.createElement("form", {id: "signup", onSubmit: this.handleSignUp, className: "form-signup"}, 
              React.createElement("input", {id: "signup-name", type: "text", name: "first_name", className: "form-control", placeholder: "firstname"}), 
              React.createElement("input", {id: "email", type: "text", className: "form-control", name: "email", placeholder: "email"}), 
              React.createElement("input", {id: "username", type: "text", className: "form-control", name: "username", placeholder: "username"}), 
              React.createElement("input", {id: "password", type: "password", className: "form-control", name: "password", placeholder: "password"}), 
-             React.createElement("button", {type: "submit", className: "btn btn-default submit-button"}, "Sign Up")
+             React.createElement("button", {type: "submit", className: "btn btn-default submit-button"}, "sign up")
            )
         ), 
-         React.createElement("div", {className: "col-sm-6 signin"}, 
+        React.createElement("div", {className: "row col-sm-12 option"}, 
+          React.createElement("h3", null, "already have an account?")
+        ), 
+         React.createElement("div", {className: "col-sm-12 signin"}, 
            React.createElement("form", {id: "signin", onSubmit: this.handleSignIn, className: "form-signin"}, 
              React.createElement("input", {id: "signin-username", type: "text", className: "form-control", name: "signin-username", placeholder: "username"}), 
              React.createElement("input", {id: "signin-password", type: "password", className: "form-control", name: "signin-password", placeholder: "password"}), 
-             React.createElement("button", {type: "submit", className: "btn btn-default signin-button"}, "Log In")
+             React.createElement("button", {type: "submit", className: "btn btn-default signin-button"}, "log in")
            )
           )
        ), 
        React.createElement("div", {className: "yellowborder"}), 
      React.createElement(Footer, null)
+    )
 
-   )
- )
   );
  }
 });

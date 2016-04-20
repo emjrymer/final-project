@@ -50,6 +50,7 @@ img {
       text-decoration: none;
       color: black;
       font-family: 'Open Sans Condensed', sans-serif;
+      letter-spacing: 3px;
     }
     #login{
       border-right: solid #dfac12;
@@ -161,32 +162,46 @@ img {
 
 /*login Page*/
 .signup {
-  #name{
-    margin-top: 15px;
+  form{
+    margin: 0 auto;
+    width: 25%;
+    input{
+      margin-top: 15px;
+      -webkit-box-shadow: 2px 3px 6px 0px rgba(223,172,18,1);
+      -moz-box-shadow: 2px 3px 6px 0px rgba(223,172,18,1);
+      box-shadow: 2px 3px 6px 0px rgba(223,172,18,1);
+      &:focus{
+        border-color: rgba(223,172,18,0.8);
+        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.075);
+      }
+    }
   }
-  padding-left: 450px;
-  padding-top: 70px;
-}
-#email {
-  margin-top: 15px;
-}
-#username {
-  margin-top: 15px;
 }
 
-#password{
-  margin-top: 15px;
-}
+
+
+
 
 .submit-button {
-  margin-left: 45px;
-    margin-top: 15px;
-    margin-bottom: 45px;
-
+  width: 100%;
+  margin-top: 15px;
+  background-color: rgba(223,172,18,0.8);
+  color: black;
 }
+
 .signin-button {
-  margin-left: 54px;
-    margin-top: 15px;
+  width: 100%;
+  margin-top: 15px;
+  background-color: rgba(223,172,18,0.8);
+  color: black;
+}
+.option h3 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  letter-spacing: 5px;
+}
+.option-1 {
+  font-family: 'Open Sans Condensed', sans-serif;
+  letter-spacing: 5px;
 }
 // #signin-username {
 //   margin-top: 15px;
@@ -196,13 +211,22 @@ img {
 }
 
 .signin {
-  padding-right: 445px;
-  padding-top: 70px;
+  form{
+    margin: 0 auto;
+    width: 25%;
+    input{
+      -webkit-box-shadow: 2px 3px 6px 0px rgba(223,172,18,1);
+      -moz-box-shadow: 2px 3px 6px 0px rgba(223,172,18,1);
+      box-shadow: 2px 3px 6px 0px rgba(223,172,18,1);
+      margin-top:15px;
+    }
+  }
 }
 
 .header-content-login h3 {
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
+  letter-spacing: 3px;
   }
 
   .navbuttons-login {
@@ -220,6 +244,7 @@ img {
       padding: 3px 40px 3px 40px;
       font-family: 'Open Sans Condensed', sans-serif;
       font-size: 15px;
+      letter-spacing: 3px;
     }
     #login{
       border-right: solid #dfac12;
@@ -253,13 +278,13 @@ img {
   list-style: none;
   text-align: center;
   padding: 0;
-
   li{
     display: inline-block;
     // border-left: solid #dfac12;
     padding: 3px 20px 3px 20px;
     font-size: 15px;
     font-family: 'Open Sans Condensed', sans-serif;
+    letter-spacing: 3px;
 
   }
 }
@@ -269,8 +294,15 @@ img {
 
 
 .submit-button-1 {
-  margin-left: 450px;
-    margin-top: 80px;
+  margin-left: 424px;
+  margin-top: 15px;
+  margin-bottom: 45px;
+  padding-left: 175px;
+  padding-right: 175px;
+  letter-spacing: 3px;
+  font-family: 'Open Sans Condensed', sans-serif;
+
+
 
 }
 .signin-button-1 {
@@ -298,19 +330,10 @@ img {
 
 }
 
-.form-control {
- border: solid 2px #dfac12;
- color: #dfac12;
- float: left;
 
- // text-align: right;
- // margin-right: 15px;
- // width: 100px;
-
-}
 
 .floristform{
-  #name {
+  #description {
     margin-top: 15px;
   }
 }
@@ -336,6 +359,7 @@ img {
 .galleryheader h1 {
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
+  letter-spacing: 5px;
 }
 
 
@@ -352,6 +376,7 @@ img {
       text-align: center;
       border: 1px solid #dfac12;
       padding: 15px 0 15px 0;
+      letter-spacing: 5px;
       img{
         height:300px;
         width: 300px;
@@ -392,8 +417,6 @@ img {
 }
 
 .shopping-cart {
-  margin-left: 150px;
-  margin-right: 150px;
 }
 
 h3 {
@@ -405,8 +428,12 @@ h3 {
 }
 
 .carts-page h3 {
-  margin-left: 155px;
+  margin-left: 121px;
   font-family: 'Open Sans Condensed', sans-serif;
+  margin: 30px 0 15px 5px;
+  letter-spacing: 5px;
+  font-size: 40px;
+
 
 }
 
@@ -420,8 +447,18 @@ h3 {
 
 .createproductspage {
   h3{
-    margin-left: 155px;
+    margin: 30px 0 15px 5px;
+    letter-spacing: 5px;
+    font-size: 40px;
+    font-family: 'Open Sans Condensed', sans-serif;
   }
-  margin-left: 150px;
-  margin-right: 150px;
+}
+
+.midsection{
+    padding: 0 0 30px 0;
+    border-bottom: 5px solid orange;
+    margin-bottom: 10px;
+  a{
+    text-align: center;
+  }
 }
