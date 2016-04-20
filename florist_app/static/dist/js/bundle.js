@@ -22,9 +22,28 @@ var CartComponent = React.createClass({displayName: "CartComponent",
     this.cart.fetch().done(function(products){
       console.log(products);
       self.setState({'products': products});
+
+      // configure the stripe button script tag
+      var stripeButton = document.createElement('script');
+      stripeButton.src = "https://checkout.stripe.com/checkout.js";
+      stripeButton.setAttribute("class", "stripe-button");
+      stripeButton.setAttribute("data-key", "pk_test_knjiOyi3uHqK8Ae8eOtS6QRa");
+      stripeButton.setAttribute("data-amount", _.reduce(products, function(memo, product){
+          return memo + (product.arrangement_price * 100);
+      }, 0));
+      stripeButton.setAttribute('data-name', "La Belle Fleur");
+      stripeButton.setAttribute('data-description', "$$$$ money please $$$$");
+      stripeButton.setAttribute('data-image', "https://s-media-cache-ak0.pinimg.com/originals/2f/c2/c9/2fc2c92e864119ceca47ff4c574b84b6.jpg");
+      stripeButton.setAttribute('data-locale', "auto");
+
+      $('#payment-button').html(stripeButton);
     });
 },
+redirectSuccess: function(event){
+    event.preventDefault();
 
+    Backbone.history.navigate('', {trigger: true});
+},
 removeItem: function(item){
   console.log(item);
   var key = item.id;
@@ -92,14 +111,20 @@ removeItem: function(item){
                   products
                 )
               ), 
+
             React.createElement("div", {className: "midsection"}, 
               React.createElement("p", null, "Total Cart Price:  $ ", runningTotal), 
               React.createElement("a", {href: "#gallery", className: "col-xs-12"}, "Continue Shopping")
-            )
-          ), 
-          React.createElement(Footer, null)
+            ), 
+            React.createElement("div", {className: "payment"}, 
+              React.createElement("form", {onSubmit: this.redirectSuccess, action: "/charge/", method: "POST", id: "payment-button"}), 
+              React.createElement("div", {className: "yellowborder"})
+            ), 
+            React.createElement(Footer, null)
+          )
         )
       )
+
 
     )
   }

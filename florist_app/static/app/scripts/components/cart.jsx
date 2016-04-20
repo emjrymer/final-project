@@ -109,18 +109,20 @@ removeItem: function(item){
                   {products}
                 </tbody>
               </table>
+
             <div className='midsection'>
               <p>Total Cart Price:  $ {runningTotal}</p>
               <a href='#gallery' className='col-xs-12'>Continue Shopping</a>
             </div>
             <div className="payment">
-                <form onSubmit={this.redirectSuccess} action="/charge/" method="POST" id="payment-button"/>
-                <div className="yellowborder"></div>
+              <form onSubmit={this.redirectSuccess} action="/charge/" method="POST" id="payment-button"/>
+              <div className="yellowborder"></div>
             </div>
             <Footer/>
           </div>
         </div>
       </div>
+
 
     )
   }
