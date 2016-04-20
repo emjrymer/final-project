@@ -30,5 +30,5 @@ urlpatterns = [
     #arrangements/items
     url(r'^api/arrangements/$', ArrangementListCreateAPIView.as_view(), name='arrangement_list_create_api_view'),
     url(r'^api/arrangements/(?P<pk>\d+)/$', ArrangementRetrieveUpdateDestroyAPIView.as_view()),
-    url(r'^api/arrangementdetail/(?P<pk>\d+)/$', ArrangementListAPIView.as_view(), name='individual_arrangement_detail_view'),
+    url(r'^api/arrangementsByUser/$', ArrangementListAPIView.as_view(), name='individual_arrangements_by_enjoyer_detail_view'),
 ]

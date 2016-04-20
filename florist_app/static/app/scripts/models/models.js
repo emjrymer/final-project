@@ -17,7 +17,16 @@ var Arrangement = Backbone.Model.extend({
 
 var ArrangementCollection = Backbone.Collection.extend({
   model: Arrangement,
-  url: '/api/arrangements/'
+  initialize: function(opts){
+    this.extraParams = false;
+  },
+  url: function(){
+    var extraParams = "";
+    if (this.byUser){
+        extraParams = "ByUser";
+    }
+    return '/api/arrangements' + extraParams + "/";
+  }
 })
 
 var Cart = Backbone.Model.extend({

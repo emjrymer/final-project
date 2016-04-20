@@ -83,6 +83,7 @@ var Router = Backbone.Router.extend({
   arrangements: function(){
         ReactDOM.unmountComponentAtNode(appContainer);
         var arrangementCollection = new ArrangementCollection();
+        arrangementCollection.byUser = true;
         arrangementCollection.fetch().then(function(response){
         ReactDOM.render(
         React.createElement(CreateDataComponent, {collection: response}),

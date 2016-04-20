@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.template.context import RequestContext
 # rest_framework imports
 from rest_framework import generics
-from rest_framework.authentication import BasicAuthentication
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view
 # florist_app imports
@@ -91,13 +91,12 @@ class ArrangementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIV
 
 ####### Maybe this can be for the #arrangements view ########
 class ArrangementListAPIView(generics.ListAPIView):
-    authentication_classes = (BasicAuthentication,)
+    serializer_class = ArrangementSerializer
+    authentication_classes = (SessionAuthentication,)
     permission_classes = (IsAuthenticated, )
 
-    def get(self, *args, **kwargs):
-        arrangement_list = Arrangement.objects.filter(posting_user_id=self.kwargs.get('pk'))
-        serializer = ArrangementSerializer(arrangement)
-        return JsonResponse(serializer.data)
+    def get_queryset(self):
+        return Arrangement.objects.filter(posting_user_id=self.request.user.id)
 ############################################################
 
 
@@ -106,7 +105,7 @@ class CartListCreateAPIView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return Cart.objects.filter(buyer_id=self.request.user)
+        return Cart.objects.filter(buyer=self.request.user)
 
     def create(self, request, *args, **kwargs):
         request.data['buyer'] = request.user.pk
@@ -115,11 +114,11 @@ class CartListCreateAPIView(generics.ListCreateAPIView):
 
 class CartRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CartSerializer
-    authentication_classes = (BasicAuthentication,)
+    authentication_classes = (SessionAuthentication,)
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
-        return Cart.objects.filter(buyer_id=self.request.user)
+        return Cart.objects.filter(buyer=self.request.user)
 
 
 class EnjoyerListCreateAPIView(generics.ListCreateAPIView):
