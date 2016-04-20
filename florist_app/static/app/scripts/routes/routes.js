@@ -31,6 +31,7 @@ var Router = Backbone.Router.extend({
     "detailview" : "detailview",
     "*notFound": "notfound"
   },
+
   index: function(){
     ReactDOM.unmountComponentAtNode(appContainer);
 

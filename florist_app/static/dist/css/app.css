@@ -5881,7 +5881,8 @@ img {
   border-bottom: 4px solid #dfac12;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
-  height: 300px; }
+  height: 300px;
+  letter-spacing: 3px; }
   .image-1 img {
     margin-top: 20px;
     height: 72px;
@@ -5901,7 +5902,8 @@ img {
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   border-bottom: 4px solid #dfac12;
-  height: 300px; }
+  height: 300px;
+  letter-spacing: 3px; }
   .image-2 img {
     margin-top: 20px;
     height: 72px;
@@ -5922,7 +5924,8 @@ img {
   border-bottom: 4px solid #dfac12;
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
-  height: 300px; }
+  height: 300px;
+  letter-spacing: 3px; }
   .image-3 img {
     margin-top: 20px;
     height: 72px;
@@ -6032,11 +6035,10 @@ img {
 
 /*dashboard page*/
 .submit-button-1 {
-  margin-left: 424px;
+  width: 291px;
   margin-top: 15px;
-  margin-bottom: 45px;
-  padding-left: 175px;
-  padding-right: 175px;
+  background-color: rgba(223, 172, 18, 0.8);
+  color: black;
   letter-spacing: 3px;
   font-family: 'Open Sans Condensed', sans-serif; }
 
@@ -6045,13 +6047,19 @@ img {
   margin-top: 80px; }
 
 .flowerPic {
-  padding-left: 370px;
-  padding-top: 50px; }
+  width: 291px; }
 
-.dashboard {
-  margin-top: 80px;
-  margin-left: 250px;
-  margin-right: 250px; }
+.form-signup {
+  margin: 0 auto;
+  width: 25%; }
+  .form-signup input {
+    margin-top: 15px;
+    -webkit-box-shadow: 2px 3px 6px 0px #dfac12;
+    -moz-box-shadow: 2px 3px 6px 0px #dfac12;
+    box-shadow: 2px 3px 6px 0px #dfac12; }
+    .form-signup input:focus {
+      border-color: rgba(223, 172, 18, 0.8);
+      box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.075); }
 
 .social_media_links {
   height: 100px;
@@ -6062,10 +6070,6 @@ img {
 
 .floristform #price {
   margin-top: 15px; }
-
-.floristform {
-  margin-left: 110px;
-  padding-right: 235px; }
 
 /* gallery */
 .imageboard {
@@ -6148,5 +6152,19 @@ h3 {
   margin-bottom: 10px; }
   .midsection a {
     text-align: center; }
+
+.dashboardDialogue {
+  text-align: center;
+  margin-top: 15px; }
+  .dashboardDialogue a {
+    text-decoration: none;
+    color: black;
+    font-size: 40px;
+    letter-spacing: 3px;
+    font-family: 'Open Sans Condensed', sans-serif; }
+  .dashboardDialogue p {
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: bold; }
 
 /*# sourceMappingURL=app.css.map */

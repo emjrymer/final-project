@@ -93,7 +93,8 @@ img {
   h1{
     font-size: 25px;
     color: #dfac12;
-  }
+
+}
   background-image: url("../images/brightyellowflowers.jpg");
   background-position: 30%;
   background-size: cover;
@@ -103,6 +104,7 @@ img {
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   height: 300px;
+  letter-spacing: 3px;
 
 
 }
@@ -128,6 +130,8 @@ img {
   font-family: 'Open Sans Condensed', sans-serif;
   border-bottom: 4px solid #dfac12;
   height: 300px;
+  letter-spacing: 3px;
+
 }
 
 .image-2:hover{
@@ -153,6 +157,8 @@ img {
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   height: 300px;
+  letter-spacing: 3px;
+  
 
 }
 
@@ -252,6 +258,7 @@ img {
   }
 
 
+
 .footer {
   border-bottom: 2px solid #dfac12;
 }
@@ -294,11 +301,10 @@ img {
 
 
 .submit-button-1 {
-  margin-left: 424px;
+  width:291px;
   margin-top: 15px;
-  margin-bottom: 45px;
-  padding-left: 175px;
-  padding-right: 175px;
+  background-color: rgba(223,172,18,0.8);
+  color: black;
   letter-spacing: 3px;
   font-family: 'Open Sans Condensed', sans-serif;
 
@@ -312,17 +318,28 @@ img {
 
 
 .flowerPic {
-  padding-left: 370px;
-  padding-top: 50px;
+  width: 291px;
+  // width: 25%;
+  // margin: 0 auto;
 }
 
 
-.dashboard {
-  margin-top: 80px;
-  margin-left: 250px;
-  margin-right: 250px;
+.form-signup {
+   margin: 0 auto;
+    width: 25%;
+    input{
+      margin-top: 15px;
+      -webkit-box-shadow: 2px 3px 6px 0px rgba(223,172,18,1);
+      -moz-box-shadow: 2px 3px 6px 0px rgba(223,172,18,1);
+      box-shadow: 2px 3px 6px 0px rgba(223,172,18,1);
+      &:focus{
+        border-color: rgba(223,172,18,0.8);
+        box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.075);
+      }
+    }
 
 }
+
 
 .social_media_links {
   height: 100px;
@@ -344,8 +361,7 @@ img {
   }
 }
 .floristform{
-  margin-left: 110px;
-  padding-right: 235px;
+
 }
 
 /* gallery */
@@ -416,8 +432,8 @@ img {
   }
 }
 
-.shopping-cart {
-}
+// .shopping-cart {
+// }
 
 h3 {
   font-size: 36px;
@@ -460,4 +476,22 @@ h3 {
   a{
     text-align: center;
   }
+}
+
+.dashboardDialogue{
+  text-align: center;
+  margin-top: 15px;
+ a {
+  text-decoration: none;
+  color: black;
+  font-size: 40px;
+  letter-spacing: 3px;
+  font-family: 'Open Sans Condensed', sans-serif;
+
+ }
+ p{
+   text-align: center;
+   letter-spacing: 3px;
+   font-weight: bold;
+ }
 }

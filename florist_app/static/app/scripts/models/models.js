@@ -44,7 +44,9 @@ var Bouquet = Backbone.Model.extend({
   // urlRoot: '/api/arrangements/'+ bouquetId + '/'
 })
 
-
+var Payment = Backbone.Model.extend({
+  urlRoot: '/api/charge/'
+})
 
 module.exports = {
   "Login": Login,
@@ -53,5 +55,6 @@ module.exports = {
   'ArrangementCollection': ArrangementCollection,
   "Cart": Cart,
   "CartCollection": CartCollection,
+  "Payment" : Payment,
   "Bouquet" : Bouquet
 }

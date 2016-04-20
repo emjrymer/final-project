@@ -12,6 +12,22 @@ var Footer = require('./../components/footer.jsx');
 
 
 var HeaderComponent = React.createClass({
+
+  componentDidMount: function(){
+    // var status;
+    if(localStorage.getItem('loggedin') === 'true') {
+      console.log(localStorage.getItem('loggedin'));
+      // status = 'logout'
+      $('#login').html('<a href="#loginpage">log out</a>')
+    } else {
+      console.log(localStorage.getItem('loggedin'));
+      console.log('not logged');
+      // status = 'login'
+      $('#login').html('<a href="#loginpage">log in</a>')
+    };
+  },
+
+
   render: function(){
     return (
       <div className='container-fluid'>
@@ -20,7 +36,7 @@ var HeaderComponent = React.createClass({
              <li><a href="#gallery">bouquets</a></li>
              <li><a href="#">home</a></li>
              <li><a href="#cart">cart</a></li>
-             <li id="login"><a href="#loginpage">login</a></li>
+             <li id="login"></li>
            </ul>
            <div className="header">
              <h1>La Belle Fluer</h1>

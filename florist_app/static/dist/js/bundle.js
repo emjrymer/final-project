@@ -207,7 +207,7 @@ var DashBoard = React.createClass({displayName: "DashBoard",
 
         React.createElement("div", {className: "row header-content-login"}, 
           React.createElement(NavBar, null), 
-            React.createElement("h3", null, "dashboard"), 
+            React.createElement("h3", null, " update your dashboard?"), 
 
          React.createElement("div", {className: "row"}, 
 
@@ -219,6 +219,10 @@ var DashBoard = React.createClass({displayName: "DashBoard",
                 React.createElement("input", {id: "description", type: "text", name: "price", className: "form-control", placeholder: "description", defaultValue: description}), 
                 imageField, 
                 React.createElement("button", {type: "submit", className: "btn btn-default submit-button-1"}, "submit")
+            ), 
+            React.createElement("div", {className: "col-sm-12 dashboardDialogue"}, 
+               React.createElement("p", null, "OR"), 
+              React.createElement("a", {href: "#gallery"}, "start shopping now!")
             )
           )
         ), 
@@ -498,6 +502,22 @@ var Footer = require('./../components/footer.jsx');
 
 
 var HeaderComponent = React.createClass({displayName: "HeaderComponent",
+
+  componentDidMount: function(){
+    // var status;
+    if(localStorage.getItem('loggedin') === 'true') {
+      console.log(localStorage.getItem('loggedin'));
+      // status = 'logout'
+      $('#login').html('<a href="#loginpage">log out</a>')
+    } else {
+      console.log(localStorage.getItem('loggedin'));
+      console.log('not logged');
+      // status = 'login'
+      $('#login').html('<a href="#loginpage">log in</a>')
+    };
+  },
+
+
   render: function(){
     return (
       React.createElement("div", {className: "container-fluid"}, 
@@ -506,7 +526,7 @@ var HeaderComponent = React.createClass({displayName: "HeaderComponent",
              React.createElement("li", null, React.createElement("a", {href: "#gallery"}, "bouquets")), 
              React.createElement("li", null, React.createElement("a", {href: "#"}, "home")), 
              React.createElement("li", null, React.createElement("a", {href: "#cart"}, "cart")), 
-             React.createElement("li", {id: "login"}, React.createElement("a", {href: "#loginpage"}, "login"))
+             React.createElement("li", {id: "login"})
            ), 
            React.createElement("div", {className: "header"}, 
              React.createElement("h1", null, "La Belle Fluer"), 
@@ -581,23 +601,28 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
   handleSignIn: function(event) {
     event.preventDefault();
-    console.log('handleSignIn');
+    if(localStorage.getItem('loggedin') === 'false'){
+      console.log('logging in');
+      localStorage.setItem('loggedin', true);
+      console.log(this.localStorage);
+      var login = new models.Login();
+      login.set({
+        'username': $('#signin-username').val(),
+        'password': $('#signin-password').val()
+      });
 
-    var login = new models.Login();
-    login.set({
-      'username': $('#signin-username').val(),
-      'password': $('#signin-password').val()
-    });
-
-    login.save(null, {
-        success: function(results){
-          console.log(results);
-          Backbone.history.navigate('dashboard', {trigger: true});
-        },
-        error: function(model, err){
-          console.log(err);
-        }
-    });
+      login.save(null, {
+          success: function(results){
+            console.log('hello world');
+            Backbone.history.navigate('dashboard', {trigger: true});
+            localStorage.setItem('loggedin',true);
+            location.reload();
+          },
+          error: function(model, err){
+            console.log(err);
+          }
+      });
+    }
   },
   render: function(){
     console.log('login page!');
@@ -645,7 +670,33 @@ var Backbone = require('backbone');
 var models = require('../models/models');
 
 
+
 var NavBar = React.createClass({displayName: "NavBar",
+
+  componentDidMount: function(){
+    console.log('working');
+    // var status;
+    if(localStorage.getItem('loggedin') === 'true') {
+      console.log(localStorage.getItem('loggedin'));
+      // status = 'logout'
+      $('#login').html('<a href="#">log out</a>')
+    } else {
+      console.log(localStorage.getItem('loggedin'));
+      console.log('not logged');
+      // status = 'login'
+      $('#login').html('<a href="#">log in</a>');
+    };
+  },
+
+  logOut: function(){
+    if(localStorage.getItem('loggedin') === 'true'){
+      localStorage.setItem('loggedin', false);
+      Backbone.history.navigate('', {trigger: true});
+    }
+
+  },
+
+
   render: function(){
     return (
       React.createElement("div", null, 
@@ -653,7 +704,7 @@ var NavBar = React.createClass({displayName: "NavBar",
           React.createElement("li", null, React.createElement("a", {href: "#gallery"}, "bouquets")), 
           React.createElement("li", null, React.createElement("a", {href: "#"}, "home")), 
           React.createElement("li", null, React.createElement("a", {href: "#cart"}, "cart")), 
-          React.createElement("li", {id: "login"}, React.createElement("a", {href: "#loginpage"}, "login"))
+          React.createElement("li", {onClick: this.logOut, id: "login"})
         )
       )
     );
@@ -729,7 +780,16 @@ var Arrangement = Backbone.Model.extend({
 
 var ArrangementCollection = Backbone.Collection.extend({
   model: Arrangement,
-  url: '/api/arrangements/'
+  initialize: function(opts){
+    this.extraParams = false;
+  },
+  url: function(){
+    var extraParams = "";
+    if (this.byUser){
+        extraParams = "ByUser";
+    }
+    return '/api/arrangements' + extraParams + "/";
+  }
 })
 
 var Cart = Backbone.Model.extend({
@@ -747,7 +807,9 @@ var Bouquet = Backbone.Model.extend({
   // urlRoot: '/api/arrangements/'+ bouquetId + '/'
 })
 
-
+var Payment = Backbone.Model.extend({
+  urlRoot: '/api/charge/'
+})
 
 module.exports = {
   "Login": Login,
@@ -756,6 +818,7 @@ module.exports = {
   'ArrangementCollection': ArrangementCollection,
   "Cart": Cart,
   "CartCollection": CartCollection,
+  "Payment" : Payment,
   "Bouquet" : Bouquet
 }
 
@@ -794,6 +857,7 @@ var Router = Backbone.Router.extend({
     "detailview" : "detailview",
     "*notFound": "notfound"
   },
+
   index: function(){
     ReactDOM.unmountComponentAtNode(appContainer);
 
@@ -846,6 +910,7 @@ var Router = Backbone.Router.extend({
   arrangements: function(){
         ReactDOM.unmountComponentAtNode(appContainer);
         var arrangementCollection = new ArrangementCollection();
+        arrangementCollection.byUser = true;
         arrangementCollection.fetch().then(function(response){
         ReactDOM.render(
         React.createElement(CreateDataComponent, {collection: response}),

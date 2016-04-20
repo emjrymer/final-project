@@ -4,7 +4,33 @@ var Backbone = require('backbone');
 var models = require('../models/models');
 
 
+
 var NavBar = React.createClass({
+
+  componentDidMount: function(){
+    console.log('working');
+    // var status;
+    if(localStorage.getItem('loggedin') === 'true') {
+      console.log(localStorage.getItem('loggedin'));
+      // status = 'logout'
+      $('#login').html('<a href="#">log out</a>')
+    } else {
+      console.log(localStorage.getItem('loggedin'));
+      console.log('not logged');
+      // status = 'login'
+      $('#login').html('<a href="#">log in</a>');
+    };
+  },
+
+  logOut: function(){
+    if(localStorage.getItem('loggedin') === 'true'){
+      localStorage.setItem('loggedin', false);
+      Backbone.history.navigate('', {trigger: true});
+    }
+
+  },
+
+
   render: function(){
     return (
       <div>
@@ -12,7 +38,7 @@ var NavBar = React.createClass({
           <li><a href="#gallery">bouquets</a></li>
           <li><a href="#">home</a></li>
           <li><a href="#cart">cart</a></li>
-          <li id="login"><a href="#loginpage">login</a></li>
+          <li onClick={this.logOut} id="login"></li>
         </ul>
       </div>
     );

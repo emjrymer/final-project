@@ -70,7 +70,7 @@ var DashBoard = React.createClass({
 
         <div className="row header-content-login">
           <NavBar/>
-            <h3>dashboard</h3>
+            <h3> update your dashboard?</h3>
 
          <div className="row">
 
@@ -83,6 +83,10 @@ var DashBoard = React.createClass({
                 {imageField}
                 <button type='submit' className='btn btn-default submit-button-1'>submit</button>
             </form>
+            <div className='col-sm-12 dashboardDialogue'>
+               <p>OR</p>
+              <a href="#gallery">start shopping now!</a>
+            </div>
           </div>
         </div>
         <div className='yellowborder'></div>

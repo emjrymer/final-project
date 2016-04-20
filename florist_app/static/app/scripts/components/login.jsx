@@ -32,23 +32,28 @@ var LoginPage = React.createClass({
 
   handleSignIn: function(event) {
     event.preventDefault();
-    console.log('handleSignIn');
+    if(localStorage.getItem('loggedin') === 'false'){
+      console.log('logging in');
+      localStorage.setItem('loggedin', true);
+      console.log(this.localStorage);
+      var login = new models.Login();
+      login.set({
+        'username': $('#signin-username').val(),
+        'password': $('#signin-password').val()
+      });
 
-    var login = new models.Login();
-    login.set({
-      'username': $('#signin-username').val(),
-      'password': $('#signin-password').val()
-    });
-
-    login.save(null, {
-        success: function(results){
-          console.log(results);
-          Backbone.history.navigate('dashboard', {trigger: true});
-        },
-        error: function(model, err){
-          console.log(err);
-        }
-    });
+      login.save(null, {
+          success: function(results){
+            console.log('hello world');
+            Backbone.history.navigate('dashboard', {trigger: true});
+            localStorage.setItem('loggedin',true);
+            location.reload();
+          },
+          error: function(model, err){
+            console.log(err);
+          }
+      });
+    }
   },
   render: function(){
     console.log('login page!');
