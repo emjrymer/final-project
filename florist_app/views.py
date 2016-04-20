@@ -91,6 +91,9 @@ class ArrangementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIV
     def get_queryset(self):
         return Arrangement.objects.filter(posting_user_id=self.request.user.id)
 
+    def create(self, request, *args, **kwargs):
+        request.data['posting_user'] = request.user.pk
+        return super().create(request, *args, **kwargs)
 
 ################ #arrangements view #######################
 class ArrangementListAPIView(generics.ListAPIView):
@@ -105,7 +108,7 @@ class ArrangementListAPIView(generics.ListAPIView):
 
 class CartListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = CartSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
     def get_queryset(self):
         return Cart.objects.filter(buyer=self.request.user, paid=False)
