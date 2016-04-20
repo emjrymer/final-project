@@ -24,6 +24,7 @@ class Cart(models.Model):
     notes = models.TextField(blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
     arrangement = models.ForeignKey(Arrangement)
+    paid = models.BooleanField(default=False)
 
     def __str__(self):
         return self.arrangement.name

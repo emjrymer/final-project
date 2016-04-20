@@ -46,7 +46,7 @@ var Bouquet = Backbone.Model.extend({
 
 var Payment = Backbone.Model.extend({
   urlRoot: '/api/charge/'
-})
+
 
 module.exports = {
   "Login": Login,

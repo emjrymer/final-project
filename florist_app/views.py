@@ -8,9 +8,12 @@ from django.http import JsonResponse
 from django.template.context import RequestContext
 # rest_framework imports
 from rest_framework import generics
+from rest_framework import views
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 # florist_app imports
 from florist_app.models import Arrangement, Cart, Enjoyer
 from florist_app.serializers import UserSerializer, ArrangementSerializer, CartSerializer, EnjoyerSerializer
@@ -89,7 +92,7 @@ class ArrangementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIV
         return Arrangement.objects.filter(posting_user_id=self.request.user.id)
 
 
-####### Maybe this can be for the #arrangements view ########
+################ #arrangements view #######################
 class ArrangementListAPIView(generics.ListAPIView):
     serializer_class = ArrangementSerializer
     authentication_classes = (SessionAuthentication,)
@@ -105,7 +108,7 @@ class CartListCreateAPIView(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return Cart.objects.filter(buyer=self.request.user)
+        return Cart.objects.filter(buyer=self.request.user, paid=False)
 
     def create(self, request, *args, **kwargs):
         request.data['buyer'] = request.user.pk
@@ -142,14 +145,14 @@ class EnjoyerSpecificArrangementListAPIView(generics.ListAPIView):
 
 
 ################# stripe integration #####################
-class Charge(View):
+class Charge(views.APIView):
 
     def post(self, request):
         stripe.api_key = 'sk_test_XeHx9P8aspTb67eQiiMZx6w1'
-        amount = 1000
+        amount = request.data["amount"]
         customer = stripe.Customer.create(
-            email=request.POST["stripeEmail"],
-            card=request.POST['stripeToken']
+            email=request.data["stripeEmail"],
+            card=request.data['stripeToken']
         )
         charge = stripe.Charge.create(
             customer=customer.id,
@@ -157,4 +160,5 @@ class Charge(View):
             currency="usd",
             description="Unlimited Questions"
         )
-        return render(request, 'about.html')
+        Cart.objects.filter(buyer=self.request.user, paid=False).update(paid=True)
+        return Response({"success": True})

@@ -8,24 +8,13 @@ var ModelArrangement = require('../models/models.js').ArrangementCollection;
 var Footer = require('./../components/footer.jsx');
 
 
-var arrangementCollection = new ModelArrangement();
-
-
-
-
-
 var CreateDataComponent = React.createClass({
   mixins:[Backbone.React.Component.Mixin],
   getInitialState: function(){
-    return {'products': []};
-  },
-  componentDidMount: function(){
-    arrangementCollection.fetch();
+    return {'products': this.props.collection};
   },
   render: function(){
-    console.log('arra collec: ', arrangementCollection.models);
-
-    var productRows = this.props.collection.map(function(product){
+    var productRows = this.state.products.map(function(product){
       return (
         <tr key={product.id}>
           <td>{product.name}</td>

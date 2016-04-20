@@ -5,66 +5,32 @@ var models = require('../models/models');
 var NavBar  = require('./../components/nav.jsx');
 var Footer = require('./../components/footer.jsx');
 var CartCollection = require('../models/models.js').CartCollection;
+var Payment = require('../models/models.js').Payment;
 var CartDelete = require('../models/models.js').CartDelete;
+var StripeCheckout = require('react-stripe-checkout');
 var _ = require('underscore');
 
 
 var CartComponent = React.createClass({
   getInitialState: function(){
-    return {'products': []};
+    return {'products': [], stripeTotal: 0, runningTotal: 0};
 },
 componentDidMount: function(){
     var self = this;
     this.cart = new models.CartCollection();
 
     this.cart.fetch().done(function(products){
-      console.log(products);
+        self.calcTotal(products);
       self.setState({'products': products});
     });
 },
-componentDidUpdate: function(){
-    var self = this;
-    this.cart = new models.CartCollection();
-
-    this.cart.fetch().done(function(products){
-      console.log(products);
-      self.setState({'products': products});
-
-      // configure the stripe button script tag
-      var stripeButton = document.createElement('script');
-      stripeButton.src = "https://checkout.stripe.com/checkout.js";
-      stripeButton.setAttribute("class", "stripe-button");
-      stripeButton.setAttribute("data-key", "pk_test_knjiOyi3uHqK8Ae8eOtS6QRa");
-      stripeButton.setAttribute("data-amount", _.reduce(products, function(memo, product){
-          return memo + (product.arrangement_price * 100);
-      }, 0));
-      stripeButton.setAttribute('data-name', "La Belle Fleur");
-      stripeButton.setAttribute('data-description', "$$$$ money please $$$$");
-      stripeButton.setAttribute('data-image', "https://s-media-cache-ak0.pinimg.com/originals/2f/c2/c9/2fc2c92e864119ceca47ff4c574b84b6.jpg");
-      stripeButton.setAttribute('data-locale', "auto");
-
-      $('#payment-button').html(stripeButton);
-
-  $.ajax({
-    url: '/charge/',
-    type: 'POST',
-    success: function(data){
-        console.log("charged");
-        Backbone.history.navigate('', {trigger: true});
-    },
-    error: function(){
-      alert('failure, no charge made');
-    }
-
-  });
-});
-},
-redirectSuccess: function(event){
-    event.preventDefault();
-
-    //can we empty the cart here?
-
-    Backbone.history.navigate('', {trigger: true});
+calcTotal: function(products){
+    var runningTotal = 0;
+    products.forEach(function(product){
+        runningTotal += product.arrangement_price;
+    })
+    var stripeTotal = runningTotal * 100;
+    this.setState({runningTotal: runningTotal, stripeTotal: stripeTotal})
 },
 removeItem: function(item){
   console.log(item);
@@ -88,13 +54,20 @@ removeItem: function(item){
   });
   var items = self.state.products;
   var newProducts = _.without(items, _.findWhere(items, {id: item.id}));
+  self.calcTotal(newProducts);
+
 
   self.setState({'products': newProducts});
   // // var products = this.cart;
   // products.remove(model);
 
 },
-
+onToken: function(token){
+    var payment = new Payment();
+    payment.save({stripeEmail: token.email, stripeToken: token.id, amount: this.state.stripeTotal}, function(payment){
+        this.setState({products: []})
+    });
+},
     render: function(){
       var self = this;
       var products = this.state.products.map(function(indivCart){
@@ -108,12 +81,6 @@ removeItem: function(item){
             </tr>
         )
       });
-
-      var runningTotal = 0;
-      this.state.products.forEach(function(product){
-          runningTotal += product.arrangement_price;
-      })
-
       return (
         <div>
           <div className="carts-page col-sm-10 col-sm-offset-1">
@@ -135,11 +102,15 @@ removeItem: function(item){
               </table>
 
             <div className='midsection'>
-              <p>Total Cart Price:  $ {runningTotal}</p>
+              <p>Total Cart Price:  $ {this.state.runningTotal}</p>
               <a href='#gallery' className='col-xs-12'>Continue Shopping</a>
             </div>
             <div className="payment">
-              <a onClick={this.redirectSuccess}id="payment-button">Pay</a>
+                  <StripeCheckout
+                      name="La Belle Fleur"
+                      token={this.onToken}
+                      amount={this.state.stripeTotal}
+                      stripeKey="pk_test_knjiOyi3uHqK8Ae8eOtS6QRa" />
               <div className="yellowborder"></div>
             </div>
             <Footer/>
