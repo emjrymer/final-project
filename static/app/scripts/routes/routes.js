@@ -6,15 +6,16 @@ require('backbone-react-component');
 
 var models = require('./../models/models');
 
-var ImageComponent = require('./../components/imageboard.jsx');
+var ImageComponent = require('./../components/gallery.jsx');
 var LoginPage = require('./../components/login.jsx');
 var HeaderComponent = require('./../components/homepage.jsx');
 var DashBoard = require('./../components/dashboard.jsx');
-var ImageComponent = require('./../components/imageboard.jsx');
+var ImageComponent = require('./../components/gallery.jsx');
 var CreateDataComponent = require('./../components/data.jsx');
 var appContainer = document.getElementById('app');
-var ModelArrangement = require('../models/models').ArrangementCollection;
-var GalleryComponent = require('./../components/imageboard.jsx');
+var ArrangementCollection = require('../models/models').ArrangementCollection;
+var Arrangement = require('../models/models').Arrangement;
+var GalleryComponent = require('./../components/gallery.jsx');
 var CartComponent = require('./../components/cart.jsx');
 var DetailViewComponent = require('./../components/detailview.jsx');
 var notfound = require('./../components/notfound.jsx');
@@ -23,12 +24,14 @@ var Router = Backbone.Router.extend({
     '':'index',
     'loginpage':'loginpage',
     'dashboard': 'dashboard',
+    'dashboard/:productId/': 'dashboardEdit',
     'arrangements' : 'arrangements',
     "gallery": "gallery",
     "cart": "cart",
     "detailview" : "detailview",
     "*notFound": "notfound"
   },
+
   index: function(){
     ReactDOM.unmountComponentAtNode(appContainer);
 
@@ -60,7 +63,17 @@ var Router = Backbone.Router.extend({
       appContainer
     );
   },
-  gallery: function(){
+  dashboardEdit: function(arrangementId){
+    ReactDOM.unmountComponentAtNode(appContainer);
+    var arrangementModel = new Arrangement({id: arrangementId});
+    arrangementModel.fetch().then(function(arrangement){
+      ReactDOM.render(
+        React.createElement(DashBoard, {model: arrangement}),
+        appContainer
+      );
+    })
+  },
+  gallery: function() {
     ReactDOM.unmountComponentAtNode(appContainer);
 
     ReactDOM.render(
@@ -70,7 +83,8 @@ var Router = Backbone.Router.extend({
   },
   arrangements: function(){
         ReactDOM.unmountComponentAtNode(appContainer);
-        var arrangementCollection = new ModelArrangement();
+        var arrangementCollection = new ArrangementCollection();
+        arrangementCollection.byUser = true;
         arrangementCollection.fetch().then(function(response){
         ReactDOM.render(
         React.createElement(CreateDataComponent, {collection: response}),

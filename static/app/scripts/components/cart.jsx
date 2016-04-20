@@ -3,88 +3,121 @@ var ReactDOM = require('react-dom');
 var Backbone = require('backbone');
 var models = require('../models/models');
 var NavBar  = require('./../components/nav.jsx');
+var Footer = require('./../components/footer.jsx');
 var CartCollection = require('../models/models.js').CartCollection;
+var Payment = require('../models/models.js').Payment;
+var CartDelete = require('../models/models.js').CartDelete;
+var StripeCheckout = require('react-stripe-checkout');
+var _ = require('underscore');
 
 
 var CartComponent = React.createClass({
   getInitialState: function(){
-    return {'products': []};
-  },
-  componentDidMount: function(){
+    return {'products': [], stripeTotal: 0, runningTotal: 0};
+},
+componentDidMount: function(){
     var self = this;
-    var cart = new models.CartCollection();
-    console.log(cart);
-    cart.fetch().done(function(products){
-      console.log(products);
-      self.setState({ 'products': products});
+    this.cart = new models.CartCollection();
+
+    this.cart.fetch().done(function(products){
+        self.calcTotal(products);
+      self.setState({'products': products});
     });
 },
+calcTotal: function(products){
+    var runningTotal = 0;
+    products.forEach(function(product){
+        runningTotal += product.arrangement_price;
+    })
+    var stripeTotal = runningTotal * 100;
+    this.setState({runningTotal: runningTotal, stripeTotal: stripeTotal})
+},
+removeItem: function(item){
+  console.log(item);
+  var key = item.id;
+  var self = this;
+  // console.log('key', key);
+  // var objectId = key;
+  // console.log(key);
+  // key = key.toString();
+  // // CartDelete.set(key);
+  // // CartDelete.save();
+  // //
+  //
+  $.ajax({
+    url: '/api/carts/' + key + "/",
+    type: 'DELETE',
+    success: function(msg){
+      console.log('worked!');
+    }
 
+  });
+  var items = self.state.products;
+  var newProducts = _.without(items, _.findWhere(items, {id: item.id}));
+  self.calcTotal(newProducts);
+
+
+  self.setState({'products': newProducts});
+  // // var products = this.cart;
+  // products.remove(model);
+
+},
+onToken: function(token){
+    var payment = new Payment();
+    payment.save({stripeEmail: token.email, stripeToken: token.id, amount: this.state.stripeTotal}, function(payment){
+        this.setState({products: []})
+    });
+},
     render: function(){
+      var self = this;
       var products = this.state.products.map(function(indivCart){
-        console.log(indivCart);
         var imgUrl= indivCart.arrangement_photo;
         return(
             <tr key={indivCart.id}>
               <td>{indivCart.arrangement_name}</td>
               <td>$ {indivCart.arrangement_price}</td>
               <td className="add-image"><img src={imgUrl} /></td>
-              <td><a href={"#carts/" + indivCart.id + "/"}>Remove</a></td>
+              <td onClick={self.removeItem.bind(self,indivCart)}>Remove</td>
             </tr>
         )
       });
-
-
-
-
       return (
-          <div className="createproductspage">
+        <div>
+          <div className="carts-page col-sm-10 col-sm-offset-1">
               <NavBar/>
-            <h3>Checkout</h3>
-            <table className="table">
-              <thead>
-                <tr>
-                  <td>Name</td>
-                  <td>Price</td>
-                  <td>Photo</td>
-                  <td>Actions</td>
-                </tr>
-              </thead>
-              <tbody>
-                {products}
-              </tbody>
-            </table>
-            <p>Total Cart Price:  $ ______</p>
-            <div>
-                <form action="" method="POST" id="payment-form" onSubmit={ this.handleSubmit }>
-                      <span className="payment-errors"></span>
+            <h3>checkout</h3>
+            <div className="shopping-cart col-sm-10 col-sm-offset-1">
+              <table className="table table-hover">
+                <thead>
+                  <tr>
+                    <td>Name</td>
+                    <td>Price</td>
+                    <td>Photo</td>
+                    <td>Actions</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products}
+                </tbody>
+              </table>
 
-                      <div className="form-row">
-                        <label>
-                          <span>Card Number</span>
-                          <input type="text" size="20" data-stripe="number"/>
-                        </label>
-                      </div>
-
-                      <div className="form-row">
-                        <label>
-                          <span>CVC</span>
-                          <input type="text" size="4" data-stripe="cvc"/>
-                        </label>
-                      </div>
-
-                      <div className="form-row">
-                        <label>
-                          <span>Expiration (MM/YYYY)</span>
-                          <input type="text" size="2" data-stripe="exp-month"/>
-                        </label>
-                        <span> / </span>
-                        <input type="text" size="4" data-stripe="exp-year"/>
-                      </div>
-                      <button type="submit">Submit Payment</button>
-                </form>
-                </div>
+            <div className='midsection'>
+              <p>Total Cart Price:  $ {this.state.runningTotal}</p>
+              <a href='#gallery' className='col-xs-12'>Continue Shopping</a>
+            </div>
+            <div className="payment">
+                  <StripeCheckout
+                      name="La Belle Fleur"
+                      token={this.onToken}
+                      amount={this.state.stripeTotal}
+                      stripeKey="pk_test_knjiOyi3uHqK8Ae8eOtS6QRa" />
+              <div className="yellowborder"></div>
+            </div>
+            <Footer/>
           </div>
+        </div>
+      </div>
+
 
     )
   }

@@ -5,42 +5,33 @@ var Backbone = require('backbone');
 var models = require('../models/models.js');
 var NavBar  = require('./../components/nav.jsx');
 var ModelArrangement = require('../models/models.js').ArrangementCollection;
-
-var arrangementCollection = new ModelArrangement();
-
-
-
+var Footer = require('./../components/footer.jsx');
 
 
 var CreateDataComponent = React.createClass({
   mixins:[Backbone.React.Component.Mixin],
   getInitialState: function(){
-    return {'products': []};
-  },
-  componentDidMount: function(){
-    arrangementCollection.fetch();
+    return {'products': this.props.collection};
   },
   render: function(){
-    console.log('arra collec: ', arrangementCollection.models);
-
-    var productRows = this.props.collection.map(function(product){
+    var productRows = this.state.products.map(function(product){
       return (
         <tr key={product.id}>
           <td>{product.name}</td>
           <td>$ {product.price}</td>
           <td>{product.description}</td>
           <td><img src={product.photo}/></td>
-          <td><a href={"#arrangements/" + product.id + "/"}>Edit</a></td>
+          <td><a href={"#dashboard/" + product.id + "/"}>Edit</a></td>
         </tr>
       )
     });
 
     console.log("arrangements!");
     return(
-      <div className="createproductspage">
+      <div className="createproductspage col-sm-10 col-sm-offset-1">
           <NavBar/>
-        <h3>Current Products</h3>
-        <a href="#dashboard" className="add-button">Add</a>
+        <h3>current products</h3>
+        <div className='current-products'>
           <table className="table">
             <thead>
               <tr>
@@ -55,6 +46,14 @@ var CreateDataComponent = React.createClass({
               {productRows}
             </tbody>
           </table>
+        </div>
+        <a href="#dashboard" className="add-button">add item</a>
+
+      <div className='yellowborder'>
+
+    </div>
+
+  <Footer/>
 
 
 

@@ -17,7 +17,16 @@ var Arrangement = Backbone.Model.extend({
 
 var ArrangementCollection = Backbone.Collection.extend({
   model: Arrangement,
-  url: '/api/arrangements/'
+  initialize: function(opts){
+    this.extraParams = false;
+  },
+  url: function(){
+    var extraParams = "";
+    if (this.byUser){
+        extraParams = "ByUser";
+    }
+    return '/api/arrangements' + extraParams + "/";
+  }
 })
 
 var Cart = Backbone.Model.extend({
@@ -28,8 +37,15 @@ var Cart = Backbone.Model.extend({
 var CartCollection = Backbone.Collection.extend({
   model: Cart,
   url: '/api/carts/'
+});
+
+
+var Bouquet = Backbone.Model.extend({
+  // urlRoot: '/api/arrangements/'+ bouquetId + '/'
 })
 
+var Payment = Backbone.Model.extend({
+  urlRoot: '/api/charge/'
 
 
 module.exports = {
@@ -38,5 +54,7 @@ module.exports = {
   "Arrangement" : Arrangement,
   'ArrangementCollection': ArrangementCollection,
   "Cart": Cart,
-  "CartCollection": CartCollection
+  "CartCollection": CartCollection,
+  "Payment" : Payment,
+  "Bouquet" : Bouquet
 }
