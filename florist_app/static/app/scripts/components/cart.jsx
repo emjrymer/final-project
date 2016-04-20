@@ -12,8 +12,17 @@ var _ = require('underscore');
 var CartComponent = React.createClass({
   getInitialState: function(){
     return {'products': []};
-  },
-  componentDidMount: function(){
+},
+componentDidMount: function(){
+    var self = this;
+    this.cart = new models.CartCollection();
+
+    this.cart.fetch().done(function(products){
+      console.log(products);
+      self.setState({'products': products});
+    });
+},
+componentDidUpdate: function(){
     var self = this;
     this.cart = new models.CartCollection();
 
@@ -35,10 +44,25 @@ var CartComponent = React.createClass({
       stripeButton.setAttribute('data-locale', "auto");
 
       $('#payment-button').html(stripeButton);
-    });
+
+  $.ajax({
+    url: '/charge/',
+    type: 'POST',
+    success: function(data){
+        console.log("charged");
+        Backbone.history.navigate('', {trigger: true});
+    },
+    error: function(){
+      alert('failure, no charge made');
+    }
+
+  });
+});
 },
 redirectSuccess: function(event){
     event.preventDefault();
+
+    //can we empty the cart here?
 
     Backbone.history.navigate('', {trigger: true});
 },
@@ -115,7 +139,7 @@ removeItem: function(item){
               <a href='#gallery' className='col-xs-12'>Continue Shopping</a>
             </div>
             <div className="payment">
-              <form onSubmit={this.redirectSuccess} action="/charge/" method="POST" id="payment-button"/>
+              <a onClick={this.redirectSuccess}id="payment-button">Pay</a>
               <div className="yellowborder"></div>
             </div>
             <Footer/>
