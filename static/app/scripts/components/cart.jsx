@@ -65,8 +65,8 @@ removeItem: function(item){
 onToken: function(token){
     var self = this;
     var payment = new Payment();
-    payment.save({stripeEmail: token.email, stripeToken: token.id, amount: this.state.stripeTotal}, function(payment){
-        Backbone.history.navigate('', {trigger: true});
+    payment.save({stripeEmail: token.email, stripeToken: token.id, amount: this.state.stripeTotal}).then( function(payment){
+        self.setState({products: []});
     });
 },
     render: function(){
@@ -106,7 +106,7 @@ onToken: function(token){
 
             <div className='midsection col-sm-10'>
               <p>Total Cart Price:  $ {this.state.runningTotal}</p>
-              <a href='#gallery' className='col-xs-12 col-md-6'>Continue Shopping</a>
+              <a href='#gallery' className='col-xs-12 col-md-6'><i className="fa fa-shopping-basket" aria-hidden="true"></i></a>
             </div>
             <div className="payment">
                   <StripeCheckout
