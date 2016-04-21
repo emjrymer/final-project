@@ -43,22 +43,16 @@ var HeaderComponent = React.createClass({
            </div>
          </div>
          <div className="row">
-           <div className="col-xs-4 image-1">
+           <div className="col-xs-12 col-md-4 image-1">
                <div>
-                 <h1>Flower Pic 1</h1>
                  <p>“Let us dance in the sun, wearing wild flowers in our hair...” ― Susan Polis Schutz</p>
                </div>
            </div>
-           <div className="col-xs-4 image-2">
-               <div>
-                 <h1>Flower Pic 2</h1>
-                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-               </div>
+           <div className="col-xs-12 col-md-4 image-2">
            </div>
-           <div className="col-xs-4 image-3">
+           <div className="col-xs-12 col-md-4 image-3">
              <div>
-               <h1>Flower Pic 3</h1>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+               <p>“The earth laughs in flowers.” ― Ralph Waldo Emerson</p>
              </div>
            </div>
            <Footer/>

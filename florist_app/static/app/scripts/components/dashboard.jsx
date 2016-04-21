@@ -70,7 +70,7 @@ var DashBoard = React.createClass({
 
         <div className="row header-content-login">
           <NavBar/>
-            <h3> update your dashboard?</h3>
+            <h3> update your imageboard?</h3>
 
          <div className="row">
 

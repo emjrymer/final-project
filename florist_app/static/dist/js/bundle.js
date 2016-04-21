@@ -105,7 +105,7 @@ onToken: function(token){
 
             React.createElement("div", {className: "midsection"}, 
               React.createElement("p", null, "Total Cart Price:  $ ", this.state.runningTotal), 
-              React.createElement("a", {href: "#gallery", className: "col-xs-12"}, "Continue Shopping")
+              React.createElement("a", {href: "#gallery"}, "Continue Shopping")
             ), 
             React.createElement("div", {className: "payment"}, 
                   React.createElement(StripeCheckout, {
@@ -202,7 +202,7 @@ var DashBoard = React.createClass({displayName: "DashBoard",
 
         React.createElement("div", {className: "row header-content-login"}, 
           React.createElement(NavBar, null), 
-            React.createElement("h3", null, " update your dashboard?"), 
+            React.createElement("h3", null, " update your imageboard?"), 
 
          React.createElement("div", {className: "row"}, 
 
@@ -520,22 +520,16 @@ var HeaderComponent = React.createClass({displayName: "HeaderComponent",
            )
          ), 
          React.createElement("div", {className: "row"}, 
-           React.createElement("div", {className: "col-xs-4 image-1"}, 
+           React.createElement("div", {className: "col-xs-12 col-md-4 image-1"}, 
                React.createElement("div", null, 
-                 React.createElement("h1", null, "Flower Pic 1"), 
                  React.createElement("p", null, "“Let us dance in the sun, wearing wild flowers in our hair...” ― Susan Polis Schutz")
                )
            ), 
-           React.createElement("div", {className: "col-xs-4 image-2"}, 
-               React.createElement("div", null, 
-                 React.createElement("h1", null, "Flower Pic 2"), 
-                 React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-               )
+           React.createElement("div", {className: "col-xs-12 col-md-4 image-2"}
            ), 
-           React.createElement("div", {className: "col-xs-4 image-3"}, 
+           React.createElement("div", {className: "col-xs-12 col-md-4 image-3"}, 
              React.createElement("div", null, 
-               React.createElement("h1", null, "Flower Pic 3"), 
-               React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+               React.createElement("p", null, "“The earth laughs in flowers.” ― Ralph Waldo Emerson")
              )
            ), 
            React.createElement(Footer, null)
@@ -665,12 +659,12 @@ var NavBar = React.createClass({displayName: "NavBar",
     if(localStorage.getItem('loggedin') === 'true') {
       console.log(localStorage.getItem('loggedin'));
       // status = 'logout'
-      $('#login').html('<a href="#">log out</a>')
+      $('#login').html('<a href="#loginpage">log out</a>')
     } else {
       console.log(localStorage.getItem('loggedin'));
       console.log('not logged');
       // status = 'login'
-      $('#login').html('<a href="#">log in</a>');
+      $('#login').html('<a href="#loginpage">log in</a>');
     };
   },
 

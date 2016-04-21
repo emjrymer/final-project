@@ -103,7 +103,7 @@ onToken: function(token){
 
             <div className='midsection'>
               <p>Total Cart Price:  $ {this.state.runningTotal}</p>
-              <a href='#gallery' className='col-xs-12'>Continue Shopping</a>
+              <a href='#gallery'>Continue Shopping</a>
             </div>
             <div className="payment">
                   <StripeCheckout

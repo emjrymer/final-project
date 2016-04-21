@@ -13,12 +13,12 @@ var NavBar = React.createClass({
     if(localStorage.getItem('loggedin') === 'true') {
       console.log(localStorage.getItem('loggedin'));
       // status = 'logout'
-      $('#login').html('<a href="#">log out</a>')
+      $('#login').html('<a href="#loginpage">log out</a>')
     } else {
       console.log(localStorage.getItem('loggedin'));
       console.log('not logged');
       // status = 'login'
-      $('#login').html('<a href="#">log in</a>');
+      $('#login').html('<a href="#loginpage">log in</a>');
     };
   },
 
