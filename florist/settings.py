@@ -148,8 +148,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')'''
 
 # AWS Credentials
-AWS_ACCESS_KEY_ID = 'AKIAJCZDVCGOXA2FV7NQ'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_KEY")
 
 # AWS s3 Config
 AWS_STORAGE_BUCKET_NAME = 'florist-app'
