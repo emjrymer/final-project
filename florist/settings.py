@@ -148,15 +148,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')'''
 
 # AWS Credentials
-AWS_ACCESS_KEY_ID = 'AKIAIHL44SIDRFKDH3ZA'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = 'AKIAJCZDVCGOXA2FV7NQ'
+AWS_SECRET_ACCESS_KEY = '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'
 
 # AWS s3 Config
 AWS_STORAGE_BUCKET_NAME = 'florist-app'
 AWS_S3_CUSTOM_DOMAIN = '{}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
 AWS_QUERYSTRING_AUTH = False
 
-# Static Files Config
+# Static Files Config]
 STATICFILES_LOCATION = 'static'
 MEDIAFILES_LOCATION = 'media'
 if os.environ.get('DEPLOYED'):
