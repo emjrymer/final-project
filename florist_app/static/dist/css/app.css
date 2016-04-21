@@ -6218,7 +6218,15 @@ img {
   padding: 0 0 30px 0;
   margin-bottom: 10px; }
   .midsection a {
-    text-align: center; }
+    text-align: center;
+    width: 15px; }
+  .midsection i {
+    color: black;
+    font-size: 25px;
+    border: 1px solid black;
+    padding: 6px 8px 6px 8px;
+    border-radius: 25px;
+    margin-left: 358px; }
 
 .dashboardDialogue {
   text-align: center;

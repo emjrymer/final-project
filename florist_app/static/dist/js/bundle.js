@@ -108,7 +108,7 @@ onToken: function(token){
 
             React.createElement("div", {className: "midsection col-sm-10"}, 
               React.createElement("p", null, "Total Cart Price:  $ ", this.state.runningTotal), 
-              React.createElement("a", {href: "#gallery", className: "col-xs-12 col-md-6"}, "Continue Shopping")
+              React.createElement("a", {href: "#gallery", className: "col-xs-12 col-md-6"}, React.createElement("i", {className: "fa fa-shopping-basket", "aria-hidden": "true"}))
             ), 
             React.createElement("div", {className: "payment"}, 
                   React.createElement(StripeCheckout, {
@@ -380,9 +380,9 @@ var Footer = React.createClass({displayName: "Footer",
     return (
       React.createElement("div", {className: "row"}, 
         React.createElement("ul", {className: "navbuttons-login-1 col-md-12"}, 
-          React.createElement("li", null, React.createElement("a", {href: "https://www.facebook.com/"}, "facebook")), 
-          React.createElement("li", null, React.createElement("a", {href: "https://twitter.com/"}, "twitter")), 
-          React.createElement("li", null, React.createElement("a", {href: "https://www.instagram.com/"}, "instagram"))
+          React.createElement("li", null, React.createElement("a", {target: "_blank", href: "https://www.facebook.com/"}, "facebook")), 
+          React.createElement("li", null, React.createElement("a", {target: "_blank", href: "https://twitter.com/"}, "twitter")), 
+          React.createElement("li", null, React.createElement("a", {target: "_blank", href: "https://www.instagram.com/"}, "instagram"))
         )
     )
     );
