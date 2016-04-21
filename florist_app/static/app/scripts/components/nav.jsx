@@ -34,11 +34,11 @@ var NavBar = React.createClass({
   render: function(){
     return (
       <div>
-        <ul className='navbuttons-login'>
-          <li><a href="#gallery">bouquets</a></li>
-          <li><a href="#">home</a></li>
-          <li><a href="#cart">cart</a></li>
-          <li onClick={this.logOut} id="login"></li>
+        <ul className='navbuttons-login col-md-6 col-md-offset-3'>
+          <li className='col-xs-12 col-md-3'><a href="#">home</a></li>
+          <li className='col-xs-12 col-md-3'><a href="#gallery">bouquets</a></li>
+          <li className='col-xs-12 col-md-3'><a href="#cart">cart</a></li>
+          <li onClick={this.logOut} className='col-xs-12 col-md-3' id="login"></li>
         </ul>
       </div>
     );
