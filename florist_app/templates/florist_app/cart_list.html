@@ -6,11 +6,18 @@
 
 <div class='header h3'>previous orders</div>
 <div>
+    {% if previous_orders %}
     <ul>
         {% for order in previous_orders %}
-        <li>{{order}} - created {{order.time_created}}</li>
+        <li>{{order}} - created {{order.time_created.hours}}</li>
         {% endfor %}
     </ul>
+    {% else %}
+    <p>
+        You have no previous orders.
+    </p>
+    <a href="/#gallery">Check out the gallery</a>
+    {% endif %}
 </div>
 </div>
 <div class="footer"/>

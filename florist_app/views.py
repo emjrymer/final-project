@@ -1,19 +1,18 @@
 # all the django imports
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import TemplateView, DetailView, View, ListView
-from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.shortcuts import render_to_response, redirect, render
 from django.template.context import RequestContext
-from django.shortcuts import render
+from django.views.generic import TemplateView, DetailView, View, ListView
 
 # rest_framework imports
 from rest_framework import generics
 from rest_framework import views
 from rest_framework.authentication import BasicAuthentication, SessionAuthentication
-from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
 # florist_app imports
