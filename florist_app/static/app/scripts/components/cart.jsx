@@ -63,9 +63,10 @@ removeItem: function(item){
 
 },
 onToken: function(token){
+    var self = this;
     var payment = new Payment();
     payment.save({stripeEmail: token.email, stripeToken: token.id, amount: this.state.stripeTotal}, function(payment){
-        this.setState({products: []})
+        Backbone.history.navigate('', {trigger: true});
     });
 },
     render: function(){
@@ -77,12 +78,14 @@ onToken: function(token){
               <td>{indivCart.arrangement_name}</td>
               <td>$ {indivCart.arrangement_price}</td>
               <td className="add-image"><img src={imgUrl} /></td>
-              <td onClick={self.removeItem.bind(self,indivCart)}>Remove</td>
+              <td onClick={self.removeItem.bind(self,indivCart)}>
+                <i className="fa fa-times" aria-hidden="true"></i>
+              </td>
             </tr>
         )
       });
       return (
-        <div>
+        <div className="row">
           <div className="carts-page col-sm-10 col-sm-offset-1">
               <NavBar/>
             <h3>checkout</h3>
@@ -101,9 +104,9 @@ onToken: function(token){
                 </tbody>
               </table>
 
-            <div className='midsection'>
+            <div className='midsection col-sm-10'>
               <p>Total Cart Price:  $ {this.state.runningTotal}</p>
-              <a href='#gallery'>Continue Shopping</a>
+              <a href='#gallery' className='col-xs-12 col-md-6'>Continue Shopping</a>
             </div>
             <div className="payment">
                   <StripeCheckout
@@ -111,11 +114,10 @@ onToken: function(token){
                       token={this.onToken}
                       amount={this.state.stripeTotal}
                       stripeKey="pk_test_knjiOyi3uHqK8Ae8eOtS6QRa" />
-              <div className="yellowborder"></div>
             </div>
-            <Footer/>
           </div>
         </div>
+        <Footer/>
       </div>
 
 

@@ -21,43 +21,43 @@ var CreateDataComponent = React.createClass({
           <td>$ {product.price}</td>
           <td>{product.description}</td>
           <td><img src={product.photo}/></td>
-          <td><a href={"#dashboard/" + product.id + "/"}>Edit</a></td>
+          <td>
+            <a href={"#dashboard/" + product.id + "/"}>
+              <i className="fa fa-pencil" aria-hidden="true"></i>
+            </a>
+          </td>
         </tr>
       )
     });
 
     console.log("arrangements!");
     return(
-      <div className="createproductspage col-sm-10 col-sm-offset-1">
-          <NavBar/>
-        <h3>current products</h3>
-        <div className='current-products'>
-          <table className="table">
-            <thead>
-              <tr>
-                <td>Name</td>
-                <td>Price</td>
-                <td>Description</td>
-                <td className="add-image">Photo</td>
-                <td>Actions</td>
-              </tr>
-            </thead>
-            <tbody>
-              {productRows}
-            </tbody>
-          </table>
-        </div>
-        <a href="#dashboard" className="add-button">add item</a>
-
-      <div className='yellowborder'>
-
-    </div>
-
-  <Footer/>
-
-
-
-      </div>
+              <div>
+                <div className="createproductspage col-sm-10 col-sm-offset-1">
+                    <NavBar/>
+                  <h3>current products</h3>
+                  <div className='current-products'>
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <td>Name</td>
+                          <td>Price</td>
+                          <td>Description</td>
+                          <td className="add-image">Photo</td>
+                          <td>Actions</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {productRows}
+                      </tbody>
+                    </table>
+                  </div>
+                    <a href="#dashboard" className="add-button col-xs-12">
+                      <i className="fa fa-plus" aria-hidden="true"></i>
+                    </a>
+               </div>
+               <Footer/>
+             </div>
     );
   }
 });

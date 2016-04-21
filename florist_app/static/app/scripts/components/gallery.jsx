@@ -68,7 +68,6 @@ var GalleryComponent = React.createClass({
                   </div>
                 </div>
               </div>
-            <div className='yellowborder'></div>
             <Footer/>
             </div>
 
