@@ -7,6 +7,7 @@ florist_app/static/node_modules/
 florist_app/static/.tmp
 florist_app/static/.sass-cache
 node_modules/
+media/
 .tmp/
 .sass-cache/
 .DS_Store
