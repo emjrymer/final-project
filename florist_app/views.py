@@ -6,6 +6,8 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.template.context import RequestContext
+from django.shortcuts import render
+
 # rest_framework imports
 from rest_framework import generics
 from rest_framework import views
@@ -17,32 +19,23 @@ from rest_framework.response import Response
 # florist_app imports
 from florist_app.models import Arrangement, Cart, Enjoyer
 from florist_app.serializers import UserSerializer, ArrangementSerializer, CartSerializer, EnjoyerSerializer
+
 import stripe
-from django.shortcuts import render
 
+##### function based views #####
 
+# used for social login
 def login_view(request):
     return render_to_response('login.html', context=RequestContext(request))
 
-
-def home(request):
-   context = RequestContext(request,{'request': request,'user': request.user})
-   return render_to_response('home.html', context_instance=context)
-
-
-class AboutUs(TemplateView):
-    template_name = 'about.html'
-
-
-class PreviousOrdersByUser(DetailView):
-    model = Arrangement
-
-
-
+# used for social login
 def logout_view(request):
     auth_logout(request)
     return redirect('/')
 
+def home(request):
+    context = RequestContext(request,{'request': request,'user': request.user})
+    return render_to_response('home.html', context_instance=context)
 
 @api_view(['POST'])
 def api_login(request, *args, **kwargs):
@@ -67,16 +60,23 @@ def api_logout(request):
     logout(request)
     return JsonResponse({'user': serializer.data, 'logged_out': True})
 
+###### class based views #####
+class AboutUs(TemplateView):
+    template_name = 'about.html'
 
-#################  API Views  ####################
 
+class PreviousOrdersByUser(DetailView):
+    model = Arrangement
+
+
+###############################  API Views  ######################################
 
 class UserCreateAPIView(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = (AllowAny,)
 
 
-######## #gallery view permission_classes = (AllowAny, ) ########
+# #gallery view permission_classes = (AllowAny, )
 class ArrangementListCreateAPIView(generics.ListCreateAPIView):
     queryset = Arrangement.objects.all()
     serializer_class = ArrangementSerializer
@@ -85,7 +85,6 @@ class ArrangementListCreateAPIView(generics.ListCreateAPIView):
     def create(self, request, *args, **kwargs):
         request.data['posting_user'] = request.user.pk
         return super().create(request, *args, **kwargs)
-################################################################
 
 
 class ArrangementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
@@ -100,7 +99,7 @@ class ArrangementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIV
         request.data['posting_user'] = request.user.pk
         return super().create(request, *args, **kwargs)
 
-################ #arrangements view #######################
+# #arrangements view
 class ArrangementListAPIView(generics.ListAPIView):
     serializer_class = ArrangementSerializer
     authentication_classes = (SessionAuthentication,)
@@ -108,7 +107,6 @@ class ArrangementListAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         return Arrangement.objects.filter(posting_user_id=self.request.user.id)
-############################################################
 
 
 class CartListCreateAPIView(generics.ListCreateAPIView):

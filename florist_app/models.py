@@ -8,7 +8,7 @@ class Arrangement(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     price = models.FloatField()
-    photo = models.ImageField(upload_to='uploads', storage=MediaStorage, null=True, blank=True)
+    photo = models.ImageField(upload_to='uploads', storage=MediaStorage(), null=True, blank=True)
     rating = models.IntegerField(null=True)
     posting_user = models.ForeignKey('auth.User')
     time_created = models.DateTimeField(auto_now_add=True)
@@ -42,7 +42,6 @@ class Enjoyer(models.Model):
 
     def __str__(self):
         return self.user.username
-
 
 # method for creating buyer
 @receiver(post_save, sender='auth.User')
