@@ -75,7 +75,7 @@ img {
     text-align: left;
     font-size: 16px;
     margin-bottom: 30px;
-    margin-left: 160px;
+    margin-left: 75px;
   }
 
   .header h3 span {
@@ -89,10 +89,12 @@ img {
     margin-top: 20px;
     height:72px;
     width:77px;
+
   }
-  h1{
-    font-size: 25px;
-    color: #dfac12;
+  p{
+    font-size: 19px;
+    color: #FFF;
+    margin-top: 125px;
 
 }
   background-image: url("../images/brightyellowflowers.jpg");
@@ -105,9 +107,11 @@ img {
   font-family: 'Open Sans Condensed', sans-serif;
   height: 300px;
   letter-spacing: 3px;
-
+  color: #FFF;
 
 }
+
+
 .image-1:hover{
   transform:scale(1.3,1.3);
 }
@@ -118,11 +122,13 @@ img {
     height:72px;
     width:77px;
   }
-  h1{
-    font-size: 25px;
-    color: #dfac12;
+  p{
+    font-size: 19px;
+    color: #FFF;
+    margin-top: 10px;
+
   }
-  background-image: url("../images/middlebrightimage.jpg");
+  background-image: url("../images/newestmiddlepicture.jpg");
   background-position: 30%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -131,6 +137,7 @@ img {
   border-bottom: 4px solid #dfac12;
   height: 300px;
   letter-spacing: 3px;
+  color: #FFF;
 
 }
 
@@ -143,12 +150,15 @@ img {
     margin-top: 20px;
     height:72px;
     width:77px;
+    opacity: 0.15;
   }
-  h1{
-    font-size: 25px;
-    color: #dfac12;
+  p{
+    font-size: 19px;
+    color: #FFF;
+    margin-top: 125px;
+
   }
-  background-image: url("../images/brightyellow2.jpg");
+  background-image: url("../images/middlebrightimage.jpg");
   background-position: 30%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -158,7 +168,9 @@ img {
   font-family: 'Open Sans Condensed', sans-serif;
   height: 300px;
   letter-spacing: 3px;
-  
+  color: #FFF;
+
+
 
 }
 
@@ -192,18 +204,20 @@ img {
   width: 100%;
   margin-top: 15px;
   background-color: rgba(223,172,18,0.8);
-  color: black;
+  color: #FFF;
 }
 
 .signin-button {
   width: 100%;
   margin-top: 15px;
   background-color: rgba(223,172,18,0.8);
-  color: black;
+  color: #FFF;
 }
 .option h3 {
   font-family: 'Open Sans Condensed', sans-serif;
   letter-spacing: 5px;
+  font-size: 25px;
+  margin-left: 30px;
 }
 .option-1 {
   font-family: 'Open Sans Condensed', sans-serif;
@@ -233,6 +247,8 @@ img {
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   letter-spacing: 3px;
+  font-size: 25px;
+  margin-top: 58px;
   }
 
   .navbuttons-login {
@@ -247,7 +263,7 @@ img {
     li{
       display: inline-block;
       border-left: solid #dfac12;
-      padding: 3px 40px 3px 40px;
+      // padding: 3px 40px 3px 40px;
       font-family: 'Open Sans Condensed', sans-serif;
       font-size: 15px;
       letter-spacing: 3px;
@@ -301,10 +317,10 @@ img {
 
 
 .submit-button-1 {
-  width:291px;
+  width: 317px;
   margin-top: 15px;
   background-color: rgba(223,172,18,0.8);
-  color: black;
+  color: #FFF;
   letter-spacing: 3px;
   font-family: 'Open Sans Condensed', sans-serif;
 
@@ -318,7 +334,7 @@ img {
 
 
 .flowerPic {
-  width: 291px;
+  width: 317px;
   // width: 25%;
   // margin: 0 auto;
 }
@@ -376,6 +392,7 @@ img {
   text-align: center;
   font-family: 'Open Sans Condensed', sans-serif;
   letter-spacing: 5px;
+  margin-top: 58px;
 }
 
 
@@ -432,12 +449,7 @@ img {
   }
 }
 
-// .shopping-cart {
-// }
 
-h3 {
-  font-size: 36px;
-}
 
 .payment {
   margin-left: 45px;
@@ -446,24 +458,28 @@ h3 {
 .carts-page h3 {
   // margin-left: 121px;
   font-family: 'Open Sans Condensed', sans-serif;
-  margin: 30px 0 15px 5px;
+  text-align: left;
   letter-spacing: 5px;
   font-size: 40px;
+  margin-top: 78px;
+  margin-left: 104px;
 
 
 }
 
 .yellowborder {
   border-bottom: solid 5px #dfac12;
-  margin-right: 53px;
+  // margin-right: 53px;
   margin-bottom: 30px;
   margin-top: 20px;
-  margin-left: 53px;
+  // margin-left: 53px;
 }
 
 .createproductspage {
   h3{
-    margin: 30px 0 15px 5px;
+    // margin: 30px 0 15px 5px;
+    margin-top: 71px;
+    margin-bottom: 17px;
     letter-spacing: 5px;
     font-size: 40px;
     font-family: 'Open Sans Condensed', sans-serif;

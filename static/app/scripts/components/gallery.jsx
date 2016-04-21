@@ -49,7 +49,7 @@ var GalleryComponent = React.createClass({
     var productRows = this.state.products.map(function(product){
 
       return (
-              <div className="col-xs-4 image" key={product.id}>
+              <div className="col-xs-12 col-md-4 image" key={product.id}>
                 <img src={product.get("photo")} alt=""/>
                 <h1>{product.get("name")}</h1>
                 <p>{product.get("description")} - ${product.get("price")}</p>
@@ -62,7 +62,7 @@ var GalleryComponent = React.createClass({
               <div className="row galleryheader">
                   <NavBar/>
                   <h1>bouquets</h1>
-                <div className='col-xs-12'>
+                <div className=''>
                   <div className='row gallery-bouquets'>
                     {productRows}
                   </div>

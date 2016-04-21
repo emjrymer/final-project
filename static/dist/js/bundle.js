@@ -105,7 +105,7 @@ onToken: function(token){
 
             React.createElement("div", {className: "midsection"}, 
               React.createElement("p", null, "Total Cart Price:  $ ", this.state.runningTotal), 
-              React.createElement("a", {href: "#gallery", className: "col-xs-12"}, "Continue Shopping")
+              React.createElement("a", {href: "#gallery"}, "Continue Shopping")
             ), 
             React.createElement("div", {className: "payment"}, 
                   React.createElement(StripeCheckout, {
@@ -202,7 +202,7 @@ var DashBoard = React.createClass({displayName: "DashBoard",
 
         React.createElement("div", {className: "row header-content-login"}, 
           React.createElement(NavBar, null), 
-            React.createElement("h3", null, " update your dashboard?"), 
+            React.createElement("h3", null, " update your imageboard?"), 
 
          React.createElement("div", {className: "row"}, 
 
@@ -318,32 +318,33 @@ module.exports = CreateDataComponent;
 //
 //
 // var DetailViewComponent = React.createClass({
-//   getInitialState: function(){
-//     return { 'product': []};
-//   },
-//   componentWillMount: function(){
-//     var self = this;
-//     var product = new models.();
-//
-//     product.fetch(this.props.productId,{
-//     success: function(product){
-//     done(function(product){
-//     self.setState({ 'product': product});
-//   },
-//   error: function(error){
-//     alert("Error: " +  error.code + "" + error.message);
-//   }:
-//   },
+//   // getInitialState: function(){
+//   //   return { 'product': []};
+//   // },
+//   // componentWillMount: function(){
+//   //   var self = this;
+//   //   var product = new models.();
+//   //
+//   //   product.fetch(this.props.productId,{
+//   //   success: function(product){
+//   //   done(function(product){
+//   //   self.setState({ 'product': product});
+//   // },
+//   // error: function(error){
+//   //   alert("Error: " +  error.code + "" + error.message);
+//   // }:
+//   // },
 //   render: function(){
 //     var
 //     return (
 //       <div>
 //         <div className="detailpage">
+//           <NavBar/>
 //         <div className="row">
-//           <div className="col-xs-6">
+//           <div className="col-xs-12 col-md-6">
 //             <img src={product.get("photo")} className="detail-img" alt=""/>
 //           </div>
-//             <div className="col-xs-6">
+//             <div className="col-xs-12 col-md-6">
 //               <h3 className="floral-name" key={product.id}>{product.get('name')</h3>
 //               <span className="price">${product.get('price')}</span>
 //               <p className="floral-description">{product.get('description')}</p>
@@ -353,6 +354,8 @@ module.exports = CreateDataComponent;
 //               <input type="text" className="form-control size-input" placeholder=""/>
 //               <a href="#" className="add-to-cart">Add to Cart</a>
 //             </div>
+//             <div className="yellowborder"></div>
+//           <Footer/>
 //          </div>
 //         </div>
 //       </div>
@@ -441,7 +444,7 @@ var GalleryComponent = React.createClass({displayName: "GalleryComponent",
     var productRows = this.state.products.map(function(product){
 
       return (
-              React.createElement("div", {className: "col-xs-4 image", key: product.id}, 
+              React.createElement("div", {className: "col-xs-12 col-md-4 image", key: product.id}, 
                 React.createElement("img", {src: product.get("photo"), alt: ""}), 
                 React.createElement("h1", null, product.get("name")), 
                 React.createElement("p", null, product.get("description"), " - $", product.get("price")), 
@@ -454,7 +457,7 @@ var GalleryComponent = React.createClass({displayName: "GalleryComponent",
               React.createElement("div", {className: "row galleryheader"}, 
                   React.createElement(NavBar, null), 
                   React.createElement("h1", null, "bouquets"), 
-                React.createElement("div", {className: "col-xs-12"}, 
+                React.createElement("div", {className: ""}, 
                   React.createElement("div", {className: "row gallery-bouquets"}, 
                     productRows
                   )
@@ -501,39 +504,32 @@ var HeaderComponent = React.createClass({displayName: "HeaderComponent",
     };
   },
 
-
   render: function(){
     return (
       React.createElement("div", {className: "container-fluid"}, 
          React.createElement("div", {className: "row header-content"}, 
-           React.createElement("ul", {className: "navbuttons"}, 
-             React.createElement("li", null, React.createElement("a", {href: "#gallery"}, "bouquets")), 
-             React.createElement("li", null, React.createElement("a", {href: "#"}, "home")), 
-             React.createElement("li", null, React.createElement("a", {href: "#cart"}, "cart")), 
-             React.createElement("li", {id: "login"})
+           React.createElement("ul", {className: "navbuttons col-md-6 col-md-offset-3"}, 
+             React.createElement("li", {className: "col-xs-12 col-md-3"}, React.createElement("a", {href: ""}, "home")), 
+             React.createElement("li", {className: "col-xs-12 col-md-3"}, React.createElement("a", {href: "#gallery"}, "bouquets")), 
+             React.createElement("li", {className: "col-xs-12 col-md-3"}, React.createElement("a", {href: "#cart"}, "cart")), 
+             React.createElement("li", {className: "col-xs-12 col-md-3", id: "login"})
            ), 
-           React.createElement("div", {className: "header"}, 
+           React.createElement("div", {className: "header row"}, 
              React.createElement("h1", null, "La Belle Fluer"), 
-             React.createElement("h3", null, "I must have flowers always, and always!", React.createElement("span", null, "-Claude Monet"))
+             React.createElement("h3", null, "I must have flowers always, and always.", React.createElement("span", null, "-Claude Monet"))
            )
          ), 
          React.createElement("div", {className: "row"}, 
-           React.createElement("div", {className: "col-xs-4 image-1"}, 
+           React.createElement("div", {className: "col-xs-12 col-md-4 image-1"}, 
                React.createElement("div", null, 
-                 React.createElement("h1", null, "Flower Pic 1"), 
-                 React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+                 React.createElement("p", null, "“Let us dance in the sun, wearing wild flowers in our hair...” ― Susan Polis Schutz")
                )
            ), 
-           React.createElement("div", {className: "col-xs-4 image-2"}, 
-               React.createElement("div", null, 
-                 React.createElement("h1", null, "Flower Pic 2"), 
-                 React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
-               )
+           React.createElement("div", {className: "col-xs-12 col-md-4 image-2"}
            ), 
-           React.createElement("div", {className: "col-xs-4 image-3"}, 
+           React.createElement("div", {className: "col-xs-12 col-md-4 image-3"}, 
              React.createElement("div", null, 
-               React.createElement("h1", null, "Flower Pic 3"), 
-               React.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+               React.createElement("p", null, "“The earth laughs in flowers.” ― Ralph Waldo Emerson")
              )
            ), 
            React.createElement(Footer, null)
@@ -663,12 +659,12 @@ var NavBar = React.createClass({displayName: "NavBar",
     if(localStorage.getItem('loggedin') === 'true') {
       console.log(localStorage.getItem('loggedin'));
       // status = 'logout'
-      $('#login').html('<a href="#">log out</a>')
+      $('#login').html('<a href="#loginpage">log out</a>')
     } else {
       console.log(localStorage.getItem('loggedin'));
       console.log('not logged');
       // status = 'login'
-      $('#login').html('<a href="#">log in</a>');
+      $('#login').html('<a href="#loginpage">log in</a>');
     };
   },
 
@@ -684,11 +680,11 @@ var NavBar = React.createClass({displayName: "NavBar",
   render: function(){
     return (
       React.createElement("div", null, 
-        React.createElement("ul", {className: "navbuttons-login"}, 
-          React.createElement("li", null, React.createElement("a", {href: "#gallery"}, "bouquets")), 
-          React.createElement("li", null, React.createElement("a", {href: "#"}, "home")), 
-          React.createElement("li", null, React.createElement("a", {href: "#cart"}, "cart")), 
-          React.createElement("li", {onClick: this.logOut, id: "login"})
+        React.createElement("ul", {className: "navbuttons-login col-md-6 col-md-offset-3"}, 
+          React.createElement("li", {className: "col-xs-12 col-md-3"}, React.createElement("a", {href: "#"}, "home")), 
+          React.createElement("li", {className: "col-xs-12 col-md-3"}, React.createElement("a", {href: "#gallery"}, "bouquets")), 
+          React.createElement("li", {className: "col-xs-12 col-md-3"}, React.createElement("a", {href: "#cart"}, "cart")), 
+          React.createElement("li", {onClick: this.logOut, className: "col-xs-12 col-md-3", id: "login"})
         )
       )
     );
