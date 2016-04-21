@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %} Previous Orders {% endblock %}
+
+{% block content %}
+<div class="header-content">
+
+<div class='header h3'>previous orders</div>
+<div>
+    <ul>
+        {% for order in previous_orders %}
+        <div class='navbuttons li'>{{order}} - created {{order.time_created}}</div>
+        {% endfor %}
+    </ul>
+</div>
+</div>
+<div class="footer"/>
+
+
+{% endblock %}

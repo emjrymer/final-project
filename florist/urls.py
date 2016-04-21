@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^about_us/$', AboutUs.as_view(), name='about_us_view'),
     url(r'^api/charge/$', Charge.as_view(), name='charge_view'),
+    url(r'^orders/$', PreviousOrdersByUser.as_view(), name="previous_orders_by_user"),
 #    url(r'^login/$', auth_views.login_social, name="login_view"),
     url('', include('social.apps.django_app.urls', namespace='social')),
     url('', include('django.contrib.auth.urls', namespace='auth')),
@@ -25,7 +26,6 @@ urlpatterns = [
     url(r'^api/enjoyers/$', EnjoyerListCreateAPIView.as_view(), name='enjoyer_list_create_api_view'),
     url(r'^api/enjoyers/(?P<pk>\d+)/$', EnjoyerRetrieveUpdateDestroyAPIView.as_view()),
     url(r'^api/enjoyer/(?P<pk>\d+)/arrangements/$', EnjoyerSpecificArrangementListAPIView.as_view(), name='enjoyer_specific_arrangement_list_api_view'),
-    url(r'^orders/$', PreviousOrdersByUser.as_view(), name="previous_orders_by_user"),
     # cart/art
     url(r'^api/carts/$', CartListCreateAPIView.as_view(), name='cart_list_create_api_view'),
     url(r'^api/carts/(?P<pk>\d+)/$', CartRetrieveUpdateDestroyAPIView.as_view()),

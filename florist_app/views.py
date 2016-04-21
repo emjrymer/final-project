@@ -1,6 +1,6 @@
 # all the django imports
 from django.contrib.auth import authenticate, login, logout
-from django.views.generic import TemplateView, DetailView, View
+from django.views.generic import TemplateView, DetailView, View, ListView
 from django.shortcuts import render_to_response, redirect
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
@@ -65,8 +65,13 @@ class AboutUs(TemplateView):
     template_name = 'about.html'
 
 
-class PreviousOrdersByUser(DetailView):
-    model = Arrangement
+class PreviousOrdersByUser(ListView):
+    model = Cart
+
+    def get_context_data(self, **kwargs):
+        context = super(PreviousOrdersByUser, self).get_context_data(**kwargs)
+        context['previous_orders'] = Cart.objects.filter(buyer_id=self.request.user.id, paid=True)
+        return context
 
 
 ###############################  API Views  ######################################
