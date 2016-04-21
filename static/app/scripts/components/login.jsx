@@ -22,7 +22,7 @@ var LoginPage = React.createClass({
       user.save(null, {
           success: function(results){
             console.log(results);
-            Backbone.history.navigate('dashboard', {trigger: true});
+            Backbone.history.navigate('arrangements', {trigger: true});
           },
           error: function(model, err){
             console.log(err);
@@ -45,7 +45,7 @@ var LoginPage = React.createClass({
       login.save(null, {
           success: function(results){
             console.log('hello world');
-            Backbone.history.navigate('dashboard', {trigger: true});
+            Backbone.history.navigate('arrangements', {trigger: true});
             localStorage.setItem('loggedin',true);
             location.reload();
           },
@@ -83,7 +83,6 @@ var LoginPage = React.createClass({
            </form>
           </div>
        </div>
-       <div className="yellowborder"></div>
      <Footer/>
     </div>
 

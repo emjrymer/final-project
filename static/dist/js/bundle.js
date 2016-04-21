@@ -65,9 +65,10 @@ removeItem: function(item){
 
 },
 onToken: function(token){
+    var self = this;
     var payment = new Payment();
     payment.save({stripeEmail: token.email, stripeToken: token.id, amount: this.state.stripeTotal}, function(payment){
-        this.setState({products: []})
+        Backbone.history.navigate('', {trigger: true});
     });
 },
     render: function(){
@@ -79,12 +80,14 @@ onToken: function(token){
               React.createElement("td", null, indivCart.arrangement_name), 
               React.createElement("td", null, "$ ", indivCart.arrangement_price), 
               React.createElement("td", {className: "add-image"}, React.createElement("img", {src: imgUrl})), 
-              React.createElement("td", {onClick: self.removeItem.bind(self,indivCart)}, "Remove")
+              React.createElement("td", {onClick: self.removeItem.bind(self,indivCart)}, 
+                React.createElement("i", {className: "fa fa-times", "aria-hidden": "true"})
+              )
             )
         )
       });
       return (
-        React.createElement("div", null, 
+        React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "carts-page col-sm-10 col-sm-offset-1"}, 
               React.createElement(NavBar, null), 
             React.createElement("h3", null, "checkout"), 
@@ -103,21 +106,20 @@ onToken: function(token){
                 )
               ), 
 
-            React.createElement("div", {className: "midsection"}, 
+            React.createElement("div", {className: "midsection col-sm-10"}, 
               React.createElement("p", null, "Total Cart Price:  $ ", this.state.runningTotal), 
-              React.createElement("a", {href: "#gallery"}, "Continue Shopping")
+              React.createElement("a", {href: "#gallery", className: "col-xs-12 col-md-6"}, "Continue Shopping")
             ), 
             React.createElement("div", {className: "payment"}, 
                   React.createElement(StripeCheckout, {
                       name: "La Belle Fleur", 
                       token: this.onToken, 
                       amount: this.state.stripeTotal, 
-                      stripeKey: "pk_test_knjiOyi3uHqK8Ae8eOtS6QRa"}), 
-              React.createElement("div", {className: "yellowborder"})
-            ), 
-            React.createElement(Footer, null)
+                      stripeKey: "pk_test_knjiOyi3uHqK8Ae8eOtS6QRa"})
+            )
           )
-        )
+        ), 
+        React.createElement(Footer, null)
       )
 
 
@@ -221,7 +223,6 @@ var DashBoard = React.createClass({displayName: "DashBoard",
             )
           )
         ), 
-        React.createElement("div", {className: "yellowborder"}), 
         React.createElement(Footer, null)
 
      )
@@ -266,43 +267,43 @@ var CreateDataComponent = React.createClass({displayName: "CreateDataComponent",
           React.createElement("td", null, "$ ", product.price), 
           React.createElement("td", null, product.description), 
           React.createElement("td", null, React.createElement("img", {src: product.photo})), 
-          React.createElement("td", null, React.createElement("a", {href: "#dashboard/" + product.id + "/"}, "Edit"))
+          React.createElement("td", null, 
+            React.createElement("a", {href: "#dashboard/" + product.id + "/"}, 
+              React.createElement("i", {className: "fa fa-pencil", "aria-hidden": "true"})
+            )
+          )
         )
       )
     });
 
     console.log("arrangements!");
     return(
-      React.createElement("div", {className: "createproductspage col-sm-10 col-sm-offset-1"}, 
-          React.createElement(NavBar, null), 
-        React.createElement("h3", null, "current products"), 
-        React.createElement("div", {className: "current-products"}, 
-          React.createElement("table", {className: "table"}, 
-            React.createElement("thead", null, 
-              React.createElement("tr", null, 
-                React.createElement("td", null, "Name"), 
-                React.createElement("td", null, "Price"), 
-                React.createElement("td", null, "Description"), 
-                React.createElement("td", {className: "add-image"}, "Photo"), 
-                React.createElement("td", null, "Actions")
-              )
-            ), 
-            React.createElement("tbody", null, 
-              productRows
-            )
-          )
-        ), 
-        React.createElement("a", {href: "#dashboard", className: "add-button"}, "add item"), 
-
-      React.createElement("div", {className: "yellowborder"}
-
-    ), 
-
-  React.createElement(Footer, null)
-
-
-
-      )
+              React.createElement("div", null, 
+                React.createElement("div", {className: "createproductspage col-sm-10 col-sm-offset-1"}, 
+                    React.createElement(NavBar, null), 
+                  React.createElement("h3", null, "current products"), 
+                  React.createElement("div", {className: "current-products"}, 
+                    React.createElement("table", {className: "table"}, 
+                      React.createElement("thead", null, 
+                        React.createElement("tr", null, 
+                          React.createElement("td", null, "Name"), 
+                          React.createElement("td", null, "Price"), 
+                          React.createElement("td", null, "Description"), 
+                          React.createElement("td", {className: "add-image"}, "Photo"), 
+                          React.createElement("td", null, "Actions")
+                        )
+                      ), 
+                      React.createElement("tbody", null, 
+                        productRows
+                      )
+                    )
+                  ), 
+                    React.createElement("a", {href: "#dashboard", className: "add-button col-xs-12"}, 
+                      React.createElement("i", {className: "fa fa-plus", "aria-hidden": "true"})
+                    )
+               ), 
+               React.createElement(Footer, null)
+             )
     );
   }
 });
@@ -463,7 +464,6 @@ var GalleryComponent = React.createClass({displayName: "GalleryComponent",
                   )
                 )
               ), 
-            React.createElement("div", {className: "yellowborder"}), 
             React.createElement(Footer, null)
             )
 
@@ -571,7 +571,7 @@ var LoginPage = React.createClass({displayName: "LoginPage",
       user.save(null, {
           success: function(results){
             console.log(results);
-            Backbone.history.navigate('dashboard', {trigger: true});
+            Backbone.history.navigate('arrangements', {trigger: true});
           },
           error: function(model, err){
             console.log(err);
@@ -594,7 +594,7 @@ var LoginPage = React.createClass({displayName: "LoginPage",
       login.save(null, {
           success: function(results){
             console.log('hello world');
-            Backbone.history.navigate('dashboard', {trigger: true});
+            Backbone.history.navigate('arrangements', {trigger: true});
             localStorage.setItem('loggedin',true);
             location.reload();
           },
@@ -632,7 +632,6 @@ var LoginPage = React.createClass({displayName: "LoginPage",
            )
           )
        ), 
-       React.createElement("div", {className: "yellowborder"}), 
      React.createElement(Footer, null)
     )
 
