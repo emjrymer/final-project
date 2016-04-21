@@ -65,8 +65,8 @@ removeItem: function(item){
 onToken: function(token){
     var self = this;
     var payment = new Payment();
-    payment.save({stripeEmail: token.email, stripeToken: token.id, amount: this.state.stripeTotal}, function(payment){
-        Backbone.history.navigate('', {trigger: true});
+    payment.save({stripeEmail: token.email, stripeToken: token.id, amount: this.state.stripeTotal}).then( function(payment){
+        self.setState({products: []});
     });
 },
     render: function(){
