@@ -9,7 +9,7 @@
     {% if previous_orders %}
     <ul>
         {% for order in previous_orders %}
-        <li>{{order}} - created {{order.time_created.hours}}</li>
+        <li>{{order}} - created {{order.time_created}}</li>
         {% endfor %}
     </ul>
     {% else %}
