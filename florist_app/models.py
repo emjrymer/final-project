@@ -39,7 +39,6 @@ class Enjoyer(models.Model):
     rating = models.IntegerField(null=True)
     order_history = models.ManyToManyField(Cart)
 
-
     def __str__(self):
         return self.user.username
 

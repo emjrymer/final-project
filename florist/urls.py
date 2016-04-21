@@ -5,7 +5,7 @@ from django.contrib.auth import views as auth_views
 from florist_app.views import ArrangementListAPIView, AboutUs, EnjoyerSpecificArrangementListAPIView, api_login, \
     api_logout, UserCreateAPIView, ArrangementListCreateAPIView, ArrangementRetrieveUpdateDestroyAPIView, \
     EnjoyerListCreateAPIView, EnjoyerRetrieveUpdateDestroyAPIView, CartListCreateAPIView, CartRetrieveUpdateDestroyAPIView, \
-    Charge
+    Charge, PreviousOrdersByUser
 
 
 urlpatterns = [
@@ -21,10 +21,12 @@ urlpatterns = [
     url(r'^signup/$', UserCreateAPIView.as_view(), name='user_create_api_view'),
     url(r'^api/login/$', api_login, name='enjoyer_api_login_view'),
     url(r'^api/logout/$', api_logout, name='enjoyer_api_logout_view'),
+    #  enjoyers/users
     url(r'^api/enjoyers/$', EnjoyerListCreateAPIView.as_view(), name='enjoyer_list_create_api_view'),
     url(r'^api/enjoyers/(?P<pk>\d+)/$', EnjoyerRetrieveUpdateDestroyAPIView.as_view()),
     url(r'^api/enjoyer/(?P<pk>\d+)/arrangements/$', EnjoyerSpecificArrangementListAPIView.as_view(), name='enjoyer_specific_arrangement_list_api_view'),
-    # cart/Cart
+    url(r'^orders/$', PreviousOrdersByUser.as_view(), name="previous_orders_by_user"),
+    # cart/art
     url(r'^api/carts/$', CartListCreateAPIView.as_view(), name='cart_list_create_api_view'),
     url(r'^api/carts/(?P<pk>\d+)/$', CartRetrieveUpdateDestroyAPIView.as_view()),
     #arrangements/items

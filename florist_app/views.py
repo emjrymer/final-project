@@ -34,6 +34,11 @@ class AboutUs(TemplateView):
     template_name = 'about.html'
 
 
+class PreviousOrdersByUser(DetailView):
+    model = Arrangement
+
+
+
 def logout_view(request):
     auth_logout(request)
     return redirect('/')
@@ -85,7 +90,7 @@ class ArrangementListCreateAPIView(generics.ListCreateAPIView):
 
 class ArrangementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ArrangementSerializer
-    authentication_classes = (BasicAuthentication,)
+    authentication_classes = (SessionAuthentication,)
     permission_classes = (IsAuthenticated, )
 
     def get_queryset(self):
