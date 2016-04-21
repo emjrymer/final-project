@@ -1,13 +1,14 @@
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from florist.custom_storages import MediaStorage
 
 
 class Arrangement(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(blank=True)
     price = models.FloatField()
-    photo = models.ImageField(upload_to='uploads', null=True, blank=True)
+    photo = models.ImageField(upload_to='uploads', storage=MediaStorage, null=True, blank=True)
     rating = models.IntegerField(null=True)
     posting_user = models.ForeignKey('auth.User')
     time_created = models.DateTimeField(auto_now_add=True)

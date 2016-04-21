@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'florist_app',
     'social.apps.django_app.default',
+    'storages',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -141,8 +142,27 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-STATIC_URL = '/static/'
+'''STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')'''
+
+# AWS Credentials
+AWS_ACCESS_KEY_ID = 'AKIAIHL44SIDRFKDH3ZA'
+AWS_SECRET_ACCESS_KEY = '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'
+
+# AWS s3 Config
+AWS_STORAGE_BUCKET_NAME = 'florist-app'
+AWS_S3_CUSTOM_DOMAIN = '{}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
+AWS_QUERYSTRING_AUTH = False
+
+# Static Files Config
+STATICFILES_LOCATION = 'static'
+STATIC_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+STATICFILES_STORAGE = 'florist.custom_storages.StaticStorage'
+
+# Media Files Config
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = "https://{}/{}/".format(AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'florist.custom_storages.MediaStorage'
