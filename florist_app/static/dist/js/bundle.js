@@ -65,11 +65,16 @@ removeItem: function(item){
 
 },
 onToken: function(token){
+  $(".checkout").slideToggle(500);
     var self = this;
     var payment = new Payment();
     payment.save({stripeEmail: token.email, stripeToken: token.id, amount: this.state.stripeTotal}).then( function(payment){
         self.setState({products: []});
+
     });
+    setTimeout(function(){
+     $(".checkout").slideToggle(500);
+   }, 5000);
 },
     render: function(){
       var self = this;
@@ -108,7 +113,9 @@ onToken: function(token){
 
             React.createElement("div", {className: "midsection col-sm-10"}, 
               React.createElement("p", null, "Total Cart Price:  $ ", this.state.runningTotal), 
-              React.createElement("a", {href: "#gallery", className: "col-xs-12 col-md-6"}, React.createElement("i", {className: "fa fa-shopping-basket", "aria-hidden": "true"}))
+              React.createElement("a", {href: "#gallery", className: "col-xs-12 col-md-6"}, 
+                React.createElement("i", {className: "fa fa-shopping-basket", "aria-hidden": "true"})
+              )
             ), 
             React.createElement("div", {className: "payment"}, 
                   React.createElement(StripeCheckout, {
@@ -116,11 +123,12 @@ onToken: function(token){
                       token: this.onToken, 
                       amount: this.state.stripeTotal, 
                       stripeKey: "pk_test_knjiOyi3uHqK8Ae8eOtS6QRa"})
-            )
+            ), 
+            React.createElement("div", {className: "alert alert-success checkout", style: {"display": "none"}, role: "alert"}, "Thank you for your order!")
           )
         ), 
-        React.createElement(Footer, null)
-      )
+      React.createElement(Footer, null)
+    )
 
 
     )

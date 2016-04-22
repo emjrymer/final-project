@@ -6228,6 +6228,11 @@ img {
     border-radius: 25px;
     margin-left: 358px; }
 
+.checkout {
+  width: 100%;
+  text-align: center;
+  float: right; }
+
 .dashboardDialogue {
   text-align: center;
   margin-top: 15px; }
