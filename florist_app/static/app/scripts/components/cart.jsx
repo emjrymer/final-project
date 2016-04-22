@@ -62,18 +62,18 @@ removeItem: function(item){
   // products.remove(model);
 
 },
-onToken: function(token){
-  $(".checkout").slideToggle(500);
+onToken: function(token, shippingAddress){
+    $(".checkout").slideToggle(500);
     var self = this;
     var payment = new Payment();
-    payment.save({stripeEmail: token.email, stripeToken: token.id, amount: this.state.stripeTotal}).then( function(payment){
+    payment.save({stripeEmail: token.email, stripeToken: token.id, amount: this.state.stripeTotal}, function(payment){
         self.setState({products: []});
 
     });
     setTimeout(function(){
-     $(".checkout").slideToggle(500);
-   }, 5000);
-},
+      $(".checkout").slideToggle(500);
+    }, 5000);
+  },
     render: function(){
       var self = this;
       var products = this.state.products.map(function(indivCart){
@@ -116,17 +116,18 @@ onToken: function(token){
               </a>
             </div>
             <div className="payment">
-                  <StripeCheckout
-                      name="La Belle Fleur"
-                      token={this.onToken}
-                      amount={this.state.stripeTotal}
-                      stripeKey="pk_test_knjiOyi3uHqK8Ae8eOtS6QRa" />
+                <StripeCheckout
+                    name="La Belle Fleur"
+                    token={this.onToken}
+                    amount={this.state.stripeTotal}
+                    shippingAddress={true}
+                    stripeKey="pk_test_knjiOyi3uHqK8Ae8eOtS6QRa" />
             </div>
             <div className="alert alert-success checkout" style={{"display": "none"}}  role="alert">Thank you for your order!</div>
           </div>
-        </div>
-      <Footer/>
-    </div>
+         </div>
+        <Footer/>
+      </div>
 
 
     )
