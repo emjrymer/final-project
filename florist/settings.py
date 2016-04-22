@@ -101,7 +101,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'florist_db',
         'USER': 'florist_user',
-        'PASSWORD': 'Pyth0n4Lyfe',#os.environ.get("PASSWORD"),
+        'PASSWORD': os.environ.get("PASSWORD"),
         'HOST': 'florist-instance.cjitpzkmbx9x.us-east-1.rds.amazonaws.com',
     }
 }
