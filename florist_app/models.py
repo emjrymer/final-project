@@ -47,6 +47,7 @@ class Enjoyer(models.Model):
 @receiver(post_save, sender='auth.User')
 def create_buyer_for_cart(sender, **kwargs):
     user_instance = kwargs.get('instance')
+    print(user_instance)
     if kwargs.get('created'):
         if request.user == "Anomyous":
            print(request.user)
