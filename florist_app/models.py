@@ -21,7 +21,7 @@ class Arrangement(models.Model):
 
 
 class Cart(models.Model):
-    buyer = models.ForeignKey('auth.User', null=True, blank=True)
+    buyer = models.ForeignKey('auth.User', default=1)
     notes = models.TextField(blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
     arrangement = models.ForeignKey(Arrangement)
