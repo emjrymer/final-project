@@ -21,7 +21,7 @@ class Arrangement(models.Model):
 
 
 class Cart(models.Model):
-    buyer = models.ForeignKey('auth.User', default=1)
+    buyer = models.ForeignKey("auth.User", default=1)
     notes = models.TextField(blank=True)
     time_created = models.DateTimeField(auto_now_add=True)
     arrangement = models.ForeignKey(Arrangement)
@@ -45,7 +45,11 @@ class Enjoyer(models.Model):
 
 # method for creating buyer
 @receiver(post_save, sender='auth.User')
-def create_enjoyer(sender, **kwargs):
+def create_buyer_for_cart(sender, **kwargs):
     user_instance = kwargs.get('instance')
     if kwargs.get('created'):
-       Enjoyer.objects.create(user=user_instance)
+        if request.user == "Anomyous":
+           print(request.user)
+           print("not logged in")
+        else:
+           print("logged in")
